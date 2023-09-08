@@ -1,3 +1,5 @@
-### Hi there 👋
+### Hi there, I'm Daniil 👋
 
-I love studing
+I love play computer games
+
+
