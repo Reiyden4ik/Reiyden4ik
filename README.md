@@ -1,6 +1,4 @@
 ### Hi there, I'm Daniil 👋
-
-I love play computer games
-Be my friend, you don't regret)
-
+I always come back
 ~The man who sold the world~
+♪♫♪♫♪♫♪♫♪♫♪♫
