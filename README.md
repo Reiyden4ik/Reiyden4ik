@@ -1,5 +1,5 @@
 ### Hi there, I'm Daniil 👋
 
-I love play computer games
+~I love play computer games
 
 
