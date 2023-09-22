@@ -25,6 +25,7 @@ if a==0 and b!=0 and c==0:
 
 if a!=0 and b!=0 and c==0:
   print('x1 = 0, x2 = ', -b/a)
+  print('D = ', b*b)
 
 if a!=0 and b!=0 and c!=0:
   if D < 0:
@@ -39,3 +40,13 @@ if a!=0 and b!=0 and c!=0:
     print('Корни уравнения x1, x2 соответственно равны ', x, y)
     print("Дискриминант равен = ", D)
 #Решение задачи на имена овец
+
+n = int(input('Введите число: '))  
+if n%10== 1:  
+    print(n,"овца")  
+elif (n%10==2 or n%10==3 or n%10==4):  
+    print(n,"овцы")  
+else:  
+    print(n,'овец')  
+#домашнее задание N2
+
