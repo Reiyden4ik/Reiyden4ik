@@ -36,9 +36,9 @@ if n < 100:
 print(k)
 
 #2 Из домашнего задания
-for i in range(1, 10):
-  for j in range(1, 10):
-    print(i, '*', j, '=', i*j, sep='')
+s1=int(input()
+for i in range(1, s1+1):
+     print(*range(i, i*s1+1, i), sep='\t')
 
 #3 Задание про алфавит
 
