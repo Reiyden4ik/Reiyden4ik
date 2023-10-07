@@ -39,3 +39,30 @@ for i in range(len(a)):
   if a[i]<15:
     k = a[i]*2
     print(k)
+
+#1 Д/з
+s = str(input())
+s = s.lower()
+mx=1
+c=1
+for i in range(len(s)-1):
+    if s[i]=='н' and s[i+1]=='н':
+        c+=1
+        if c>mx:
+            mx=c
+    else:
+        c=1
+mx = max(c, mx)
+print(mx)
+s = s.replace('.', '!')
+print(s)
+
+#2 Д/з
+s = str(input())
+for i in range(len(s)):
+    if s[i] == "(":
+        while s[i+1]!=")":
+            print(s[i+1])
+            i+=1
+#3 Д/з
+print(*[s for s in input().split() if s[0] == 'а' or s[-1] == 'я'])
