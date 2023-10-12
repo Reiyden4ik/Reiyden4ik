@@ -4,6 +4,6 @@
 
 ~The man who sold the world~
 
-###**IS BACK**
+**IS BACK**
 
 ♪♫♪♫♪♫♪♫♪♫♪♫
