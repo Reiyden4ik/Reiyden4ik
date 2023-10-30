@@ -30,9 +30,7 @@ print(lw('/workspaces/Reiyden4ik/files/article.txt'))
 import re
 
 nameFile = input("Введите название поста: \n")
-forbidden_symbols = "\\|/*<>?:"
-pattern = '[{0}]'.format(forbidden_symbols)
-if not(re.search(pattern, nameFile)):
+if nameFile:
     file = open("/workspaces/Reiyden4ik/files/" + nameFile + ".txt", "w")
     while True:
         wr = input('Write: ')
@@ -40,5 +38,3 @@ if not(re.search(pattern, nameFile)):
         if not wr:
             break
     file.close()
-else:
-    print('Введите корректное название файла.')
