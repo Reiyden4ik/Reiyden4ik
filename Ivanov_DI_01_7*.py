@@ -18,7 +18,7 @@ def lw(file):
         if len(sw) == 1:
             return sw[0]
         return sw
-print(lw('/workspaces/Reiyden4ik/files/article.txt'))
+print(lw('C:/Users/maksim/Downloads/Ivanov_DI_01_7.py'))
 
 
 #Составьте программу - простейший редактор текстовых файлов. 
