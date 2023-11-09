@@ -8,3 +8,4 @@ if re.fullmatch(pattern1, string):
 elif re.fullmatch(pattern2, string):
     print("Такси Марсель")
 else: print("Введите правильно")
+
