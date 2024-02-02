@@ -5,4 +5,4 @@ class Person:
   print('If you want to change your data, let is go:')
   Person.Age = int(input())
   Person.Sex = str(input())
-  Preson.name = str(input())
+  Person.name = str(input())
