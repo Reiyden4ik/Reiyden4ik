@@ -8,3 +8,4 @@ class Person:
 pr = Person()
 pr.set_parameters(170, 72)
 print('lol')
+print('hey')
