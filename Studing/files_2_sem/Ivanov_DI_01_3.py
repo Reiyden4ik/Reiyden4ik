@@ -29,5 +29,5 @@ class TriangleChecker:
 
     def get_value(self):
         return self.__x, self.__y, self.__z
-trian = TriangleChecker(20, 2, 3)
+trian = TriangleChecker(0, 0, 0)
 trian.is_triangle(20, 20, 30)
