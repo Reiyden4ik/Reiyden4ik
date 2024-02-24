@@ -1,3 +1,2 @@
-print('hello SOVYONOK')
-print('I am the PIONEER')
-print('Everlasting summer is the best game')
+print("Will you marry me?")
+print("I'm the Pioneer from the Sovyonok")
