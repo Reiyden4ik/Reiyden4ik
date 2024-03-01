@@ -8,7 +8,7 @@
 – Жаль, но из этого треугольник не сделать.
 '''
 class TriangleChecker:
-    def __init__(self, x=0, y=0, z=0):
+    def __init__(self, x, y, z):
         self.__x = x
         self.__y = y
         self.__z = z
@@ -29,5 +29,5 @@ class TriangleChecker:
 
     def get_value(self):
         return self.__x, self.__y, self.__z
-trian = TriangleChecker(0, 0, 0)
-trian.is_triangle(20, 20, 30)
+trian = TriangleChecker(1, 2, 3)
+trian.is_triangle(int(input()), int(input()), int(input()))
