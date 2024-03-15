@@ -1,3 +1,4 @@
+#pip3 install pygame
 import pygame
 import random
 import copy
