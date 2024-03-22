@@ -16,6 +16,6 @@ class ixina:
 
 @Derivate
 def expanenta(x):
-    return math.exp(x^a)
+    return math.exp(x)
 
 print(expanenta(0))
