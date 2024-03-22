@@ -14,7 +14,7 @@ class Window:
         self._screen_y = screen_y
 
     _X_max = 11
-    _Y_max = 21 
+    _Y_max = 21
 
     _screen_x = 300 
     _screen_y = 600 
