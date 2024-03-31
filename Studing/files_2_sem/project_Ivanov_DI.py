@@ -1,7 +1,7 @@
 from random import randrange as rand
 import pygame, sys
 
-
+pygame.display.set_caption("Tetris")
 cell_size = 18
 cols =      10
 rows =      22
