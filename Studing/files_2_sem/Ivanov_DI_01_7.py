@@ -12,9 +12,8 @@ class Ratiofraction:
         return self.rum == other.rum and self.den == other.den
     def __hash__(self):
         return hash((self.rum, self.den))
-rt1 = Ratiofraction(int(input()), int(input()))
-rt2 = Ratiofraction(int(input()), int(input()))
-if rt1.rum == rt1.den:
-    print('1')
-else:
-    print(rt1.rum, '/', rt1.den)
+rt1 = Ratiofraction(int(input('Числитель 1 дроби')), int(input('Знаменатель 1 дроби')))
+rt2 = Ratiofraction(int(input('Числитель 2 дроби')), int(input('Знаменатель 2 дроби')))
+if rt1.rum == rt1.den and rt2.rum == rt2.den:
+    print('1 = 1', 'they both equal')
+
