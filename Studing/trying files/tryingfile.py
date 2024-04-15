@@ -26,8 +26,6 @@ class Calculator:
     def get_value(self):
         return self.value
 
-
-# Example usage:
 calculator = Calculator()
 print('Введите +, -, *, /')
 c = input()
