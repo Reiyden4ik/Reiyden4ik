@@ -9,25 +9,32 @@
 '''
 class TriangleChecker:
     def __init__(self, x, y, z):
-        self.__x = x
-        self.__y = y
-        self.__z = z
+        self.x = x
+        self.y = y
+        self.z = z
 
-    def is_triangle(self, x, y, z):
-        if type(x) in (int, float) and type(y) in (int, float) and type(z) in (int, float):
-            self.__x = x
-            self.__y = y
-            self.__z = z
-        else:
+    def is_triangle(self):
+        if not (isinstance(self.x, (int, float)) and isinstance(self.y, (int, float)) and isinstance(self.z, (int, float))):
             raise ValueError("Нужно вводить только числа!")
-        if x+y>z and x+z>y and z+y>x:
-            print('Ура, можно построить треугольник!')
-        elif x<0 or y<0 or z<0: 
-            print('С отрицательными числами ничего не выйдет!')
-        else:
-            print('Жаль, но из этого треугольник не сделать.')
+        if self.x <= 0 or self.y <= 0 or self.z <= 0:
+            return False
+        if self.x + self.y <= self.z or self.x + self.z <= self.y or self.y + self.z <= self.x:
+            return False
+        return True
 
-    def get_value(self):
-        return self.__x, self.__y, self.__z
+    def get_values(self):
+        return self.x, self.y, self.z
+
 trian = TriangleChecker(1, 2, 3)
-trian.is_triangle(int(input()), int(input()), int(input()))
+try:
+    trian.x = int(input())
+    trian.y = int(input())
+    trian.z = int(input())
+except ValueError as e:
+    print(e)
+    exit()
+
+if trian.is_triangle():
+    print('Ура, можно построить треугольник!')
+else:
+    print('Жаль, но из этого треугольник не сделать.')
