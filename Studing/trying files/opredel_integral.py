@@ -1,13 +1,14 @@
 from sympy import symbols, integrate
-
+import math
 # Define the variable
 x = symbols('x')
+t = symbols('t')
 
 # Define the function
-f = (1+x**3)
+f = (math.cos(t*t))
 
 # Find the integral
-F = integrate(f, x)
+F = integrate(f, t)
 
 # define the limits of integration
 a = float(input())
