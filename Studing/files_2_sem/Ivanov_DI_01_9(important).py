@@ -1,63 +1,29 @@
-SALARY = int(input())
-
 class Person:
-    def init(self, name, phone, age):
-        self._name = name
-        self._phone = phone
-        self._age = age
-        self._salary = SALARY
 
-
-    def _set_salary(self, salary):
+    def init(self, name, phone, holiday=None, salary = None):
+        self.name = name
+        self.phone = phone
         self._salary = salary
+ 
+    @protected
+    def set_salary(self, salary):
+        self._salary = salary * self.k
 
-
-    def _get_salary(self):
-        return self._salary
-
-
-    def change_name(self, new_name):
-        self._name = new_name
-
-
-    def change_salary(self, new_salary):
-        self._set_salary(new_salary)
-
-
-    def change_phone(self, new_phone):
-        self._phone = new_phone
-
-    def change_age(self, new_age):
-        self._age = new_age
-
-    def get_age(self):
-        return self._age
+    @protected
+    def get_salary(self):
+        print(self._salary)
 
 class Manager(Person):
-    def init(self, name, age, phone):
-        super().init(name, age, phone)
-        self._set_salary(int(SALARY * 1))
 
-
+    def init(self, name, phone, rank, k = 1, salary=None):
+        super().init(name, phone, salary)
+        self.rank = rank 
+        self.k = k
+        
+    
 class Programmer(Person):
-    def init(self, name, age, phone):
-        super().init(name, age, phone)
-        self._set_salary(int(SALARY * 1.2))
 
-
-manager = Manager('', "", 12)
-programmer = Programmer('', "", 12)
-
-
-manager.change_name("John")
-manager.change_salary(int(SALARY * 1))
-manager.change_phone("123-456-7890")
-programmer.change_name("Jane")
-programmer.change_salary(int(SALARY * 1.2))
-programmer.change_phone("987-654-3210")
-manager.change_age(31)
-programmer.change_age(26)
-
-
-print(f"Manager: {manager._name}, Number phone: {manager._phone}, Age: {manager.get_age()}, Salary: {manager._get_salary()}")
-print(f"Programmer:. {programmer._name}, Number phone: {programmer._phone}, Age: {programmer.get_age()}, Salary: {programmer._get_salary()}")
+    def init(self, name, phone, rank, k = 1.2, salary=None):
+        super().init(name, phone, salary)
+        self.rank = rank
+        self.k = k
