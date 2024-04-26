@@ -61,5 +61,3 @@ programmer.change_age(26)
 
 print(f"Manager: {manager._name}, Number phone: {manager._phone}, Age: {manager.get_age()}, Salary: {manager._get_salary()}")
 print(f"Programmer:. {programmer._name}, Number phone: {programmer._phone}, Age: {programmer.get_age()}, Salary: {programmer._get_salary()}")
-
-Не уверен, что это то, что нужно, честно
