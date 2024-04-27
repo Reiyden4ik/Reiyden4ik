@@ -6,7 +6,7 @@ app = Flask(__name__)
 def home():
     return "Серега, ты лучший ♥"
 
-@app.route('/api', methods=['GET'])
+@app.route('/api/data', methods=['GET'])
 def get_data():
     data = {
         'fuck this all'
@@ -17,4 +17,4 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 #http://localhost:5000
-#http://localhost:5000/api
+#http://localhost:5000/api/data
