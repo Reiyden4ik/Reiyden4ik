@@ -9,3 +9,6 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello from Flask!'
 
+@app.route('/test')
+def test():
+    return 'PIONEER!'
