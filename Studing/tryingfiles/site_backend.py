@@ -9,3 +9,4 @@ def hello_world():
 @app.route('/test')
 def test():
     return 'PIONEER!'
+print('hi')
