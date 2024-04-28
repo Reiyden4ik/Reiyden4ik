@@ -9,3 +9,6 @@ def hello_world():
 @app.route('/test')
 def test():
     return 'PIONEER!'
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
