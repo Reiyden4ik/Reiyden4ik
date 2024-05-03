@@ -1,58 +1,44 @@
 SALARY = 40000
 
+import collections
+
 class Person:
-    def init(self, name, phone, age):
-        self._name = name
-        self._phone = phone
-        self._age = age
-        self._salary = SALARY
+    __slots__ = ['_attributes']
 
-    def _set_salary(self, salary):
-        self._salary = salary
+    def __init__(self, name, phone, age):
+        self._attributes = collections.namedtuple('Attributes', ['name', 'phone', 'age', 'salary'])(name, phone, age, SALARY)
 
-    def _get_salary(self):
-        return self._salary
-
-    def change_name(self, new_name):
-        self._name = new_name
-
-    def change_salary(self, new_salary):
-        self._set_salary(new_salary)
-
-    def change_phone(self, new_phone):
-        self._phone = new_phone
-
-    def change_age(self, new_age):
-        self._age = new_age
-
-    def get_age(self):
-        return self._age
+    def change(self, attr, new_val):
+        attrs = self._attributes._asdict()
+        attrs[attr] = new_val
+        self._attributes = collections.namedtuple('Attributes', attrs.keys())(*attrs.values())
+        return getattr(self._attributes, attr)
 
 class Manager(Person):
-    def init(self, name, age, phone):
-        super().init(name, age, phone)
-        self._set_salary(int(SALARY * 1))
+    __slots__ = []
 
+    def __init__(self, name, age, phone):
+        super().__init__(name, age, phone)
+        self.change('salary', float(SALARY * 1))
 
 class Programmer(Person):
-    def init(self, name, age, phone):
-        super().init(name, age, phone)
-        self._set_salary(int(SALARY * 1.2))
+    __slots__ = []
 
+    def __init__(self, name, age, phone):
+        super().__init__(name, age, phone)
+        self.change('salary', float(SALARY * 1.2))
 
-manager = Manager('John', "23", '123123123')
-programmer = Programmer('John', "23", '123123123')
+manager = Manager('John', 23, '123123123')
+programmer = Programmer('John', 23, '123123123')
 
+manager.change('name', "Jack")
+manager.change('salary', float(SALARY * 1))
+manager.change('phone', "123-456-789")
+programmer.change('name', "Zane")
+programmer.change('salary', float(SALARY * 1.2))
+programmer.change('phone', "987-654-321")
+manager.change('age', 32)
+programmer.change('age', 28)
 
-manager.change_name("John")
-manager.change_salary(int(SALARY * 1))
-manager.change_phone("123-456-7890")
-programmer.change_name("Jane")
-programmer.change_salary(int(SALARY * 1.2))
-programmer.change_phone("987-654-3210")
-manager.change_age(31)
-programmer.change_age(26)
-
-
-print(f"Manager: {manager._name}, Number phone: {manager._phone}, Age: {manager.get_age()}, Salary: {manager._get_salary()}")
-print(f"Programmer:. {programmer._name}, Number phone: {programmer._phone}, Age: {programmer.get_age()}, Salary: {programmer._get_salary()}")
+print(f"Manager: {manager._attributes.name}, Number phone: {manager._attributes.phone}, Age: {manager._attributes.age}, Salary: {manager._attributes.salary}")
+print(f"Programmer: {programmer._attributes.name}, Number phone: {programmer._attributes.phone}, Age: {programmer._attributes.age}, Salary: {programmer._attributes.salary}")
