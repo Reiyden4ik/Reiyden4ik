@@ -19,23 +19,23 @@ class Manager(Person):
 
     def __init__(self, name, age, phone):
         super().__init__(name, age, phone)
-        self.change('salary', float(SALARY * 1))
+        self.change('salary', int(SALARY * 1))
 
 class Programmer(Person):
     __slots__ = []
 
     def __init__(self, name, age, phone):
         super().__init__(name, age, phone)
-        self.change('salary', float(SALARY * 1.2))
+        self.change('salary', int(SALARY * 1.2))
 
 manager = Manager('John', 23, '123123123')
 programmer = Programmer('John', 23, '123123123')
 
 manager.change('name', "Jack")
-manager.change('salary', float(SALARY * 1))
+manager.change('salary', int(SALARY * 1))
 manager.change('phone', "123-456-789")
 programmer.change('name', "Zane")
-programmer.change('salary', float(SALARY * 1.2))
+programmer.change('salary', int(SALARY * 1.2))
 programmer.change('phone', "987-654-321")
 manager.change('age', 32)
 programmer.change('age', 28)
