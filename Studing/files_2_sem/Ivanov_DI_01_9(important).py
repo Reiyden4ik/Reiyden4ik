@@ -1,4 +1,4 @@
-SALARY = int(input())
+SALARY = 40000
 
 class Person:
     def init(self, name, phone, age):
