@@ -7,22 +7,17 @@ class Person:
         self._age = age
         self._salary = SALARY
 
-
     def _set_salary(self, salary):
         self._salary = salary
-
 
     def _get_salary(self):
         return self._salary
 
-
     def change_name(self, new_name):
         self._name = new_name
 
-
     def change_salary(self, new_salary):
         self._set_salary(new_salary)
-
 
     def change_phone(self, new_phone):
         self._phone = new_phone
@@ -45,8 +40,8 @@ class Programmer(Person):
         self._set_salary(int(SALARY * 1.2))
 
 
-manager = Manager('', "", 12)
-programmer = Programmer('', "", 12)
+manager = Manager('John', "23", '123123123')
+programmer = Programmer('John', "23", '123123123')
 
 
 manager.change_name("John")
