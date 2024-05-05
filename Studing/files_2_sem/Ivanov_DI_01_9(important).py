@@ -1,4 +1,4 @@
-SALARY = 40000
+SALARY = int(input())
 
 import collections
 
