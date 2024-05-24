@@ -1,4 +1,3 @@
-#https://github.com/Reiyden4ik
 #Решение квадратного уравнения
 import math
 a = float(input("Введите страший коэффициент а "))
