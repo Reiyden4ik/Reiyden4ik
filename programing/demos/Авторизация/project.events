@@ -1,0 +1,3 @@
+a:2:{s:8:"authform";a:1:{s:7:"button2";N;}s:8:"mainform";a:3:{s:11:"formprotect";a:1:{s:6:"onshow";s:93:"// Здесь можно поменять код
+$self->key = '123456';
+// или подготовить форму перед открытием";}s:8:"--fmedit";a:1:{s:8:"oncreate";s:33:"c("formProtect")->key = "321321";";}s:7:"button1";a:1:{s:7:"onclick";s:29:"c("formProtect")->showAuth();";}}}

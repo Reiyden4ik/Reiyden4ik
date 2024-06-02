@@ -1,0 +1,661 @@
+object fmNewProject: fmNewProject
+  Left = 10
+  Top = 10
+  HelpType = htKeyword
+  HelpKeyword = 
+    'AAAAAhQCEQVDTEFTUxEFVEZvcm0RBlBBUkFNUxQFEQhhdmlzaWJsZQURAXgGChEB' +
+    'eQYKEQF3CAIIEQFoCAH4'
+  BorderIcons = []
+  BorderStyle = bsNone
+  Caption = '{ Project }'
+  ClientHeight = 504
+  ClientWidth = 520
+  Color = 3157293
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  Visible = False
+  DesignSize = (
+    520
+    504)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object shape2: TShape
+    Left = 0
+    Top = 0
+    Width = 520
+    Height = 504
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVFNoYXBlEQZQQVJBTVMUCBEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQGIAAAAAAAARAWgMQFoAAAAAAAARBnBhcmVudBcFVEZvcm0UBhEK' +
+      'Y2xhc3NfbmFtZQ4IEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMU' +
+      'Aw4JDgsRBHNlbGYKAKRtyBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250' +
+      'AA4MCgCstcAODRQCDgMFEQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQfU' +
+      '6OPz8OAyEQpicnVzaGNvbG9yCgAwLS0RCHBlbmNvbG9yCgAmJSU='
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Brush.Color = 3157293
+    Pen.Color = 2499877
+    ExplicitHeight = 288
+  end
+  object label2: TLabel
+    Left = 14
+    Top = 57
+    Width = 168
+    Height = 21
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUCREIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQFQAAAAAAAARAWgMQDgAAAAAAAARBnBhcmVudBcFVEZvcm0UBhEK' +
+      'Y2xhc3NfbmFtZQ4IEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMU' +
+      'Aw4JDgsRBHNlbGYKBoRysBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250' +
+      'FwVURm9udBQDDgwKAfK1wA4NFAARDQAqAGNsYXNzX25hbWURB19PYmplY3QODAoB' +
+      '8rXADg0UAg4DBREKcG9zaXRpb25leBEKcG9EZXNpZ25lZBEEdGV4dBEGTGFiZWwz' +
+      'EQlmb250Y29sb3IKAK2trREBeQZBEQF4BhY='
+    AutoSize = False
+    Caption = #1057#1086#1079#1076#1072#1090#1100' '#1085#1086#1074#1099#1081' '#1087#1088#1086#1077#1082#1090
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = 11382189
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+  end
+  object label1: TLabel
+    Left = 12
+    Top = 12
+    Width = 130
+    Height = 37
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUCREIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQFQAAAAAAAARAWgMQDgAAAAAAAARBnBhcmVudBcFVEZvcm0UBhEK' +
+      'Y2xhc3NfbmFtZQ4IEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMU' +
+      'Aw4JDgsRBHNlbGYKBoRysBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250' +
+      'FwVURm9udBQDDgwKAfK1wA4NFAARDQAqAGNsYXNzX25hbWURB19PYmplY3QODAoB' +
+      '8rXADg0UAg4DBREKcG9zaXRpb25leBEKcG9EZXNpZ25lZBEEdGV4dBEGTGFiZWwz' +
+      'EQlmb250Y29sb3IKAP///xEBeQYUEQF4BhQ='
+    AutoSize = False
+    Caption = '{ Project }'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWhite
+    Font.Height = -27
+    Font.Name = 'Segoe UI Semilight'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+  end
+  object bDlgBack: TShape
+    Left = 480
+    Top = 347
+    Width = 28
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVFNoYXBlEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcRAjI4EQFoEQIyNhEGcGFyZW50FwVURm9ybRQGEQpjbGFzc19uYW1l' +
+      'DgoRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgsODREEc2Vs' +
+      'ZgoGhHKwEQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQXBVRGb250FAMO' +
+      'DgoB8rXADg8UABENACoAY2xhc3NfbmFtZREHX09iamVjdA4OCgHytcAODxQCDgMF' +
+      'EQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQZTaGFwZTERCmJydXNoY29s' +
+      'b3IKADAtLREIcGVuY29sb3IKAGNiYhEBeQaLEQF4CAGA'
+    Brush.Color = 3157293
+    Pen.Color = 6513250
+  end
+  object btn_dlg: TLabel
+    Left = 480
+    Top = 347
+    Width = 28
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUCREIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcRAjI4EQFoEQIyNhEGcGFyZW50FwVURm9ybRQGEQpjbGFzc19uYW1l' +
+      'DgoRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgsODREEc2Vs' +
+      'ZgoGhHKwEQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQXBVRGb250FAMO' +
+      'DgoB8rXADg8UABENACoAY2xhc3NfbmFtZREHX09iamVjdA4OCgHytcAODxQCDgMF' +
+      'EQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQZMYWJlbDIRCWZvbnRjb2xv' +
+      'cgoAs7OuEQF5BpMRAXgIAYA='
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '...'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = 11776942
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+  end
+  object pathBack: TShape
+    Left = 14
+    Top = 347
+    Width = 458
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVFNoYXBlEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcRAzM1NBEBaBECMjYRBnBhcmVudBcFVEZvcm0UBhEKY2xhc3NfbmFt' +
+      'ZQ4KEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMUAw4LDg0RBHNl' +
+      'bGYKBoRysBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250FwVURm9udBQD' +
+      'Dg4KAfK1wA4PFAARDQAqAGNsYXNzX25hbWURB19PYmplY3QODgoB8rXADg8UAg4D' +
+      'BREKcG9zaXRpb25leBEKcG9EZXNpZ25lZBEEdGV4dBEGU2hhcGU2EQpicnVzaGNv' +
+      'bG9yCgBGNDQRCHBlbmNvbG9yCgBIRUURAXgGFhEBeQaL'
+    Brush.Color = 4600884
+    Pen.Color = 4736325
+  end
+  object label3: TLabel
+    Left = 14
+    Top = 326
+    Width = 328
+    Height = 16
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUCREIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQFQAAAAAAAARAWgMQDgAAAAAAAARBnBhcmVudBcFVEZvcm0UBhEK' +
+      'Y2xhc3NfbmFtZQ4IEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMU' +
+      'Aw4JDgsRBHNlbGYKBocmgBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250' +
+      'AA4MCgCrNpAODRQCDgMFEQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQbS' +
+      '5erx8jMRAXgGFhEBeQZ2EQlmb250Y29sb3IKAP///w=='
+    AutoSize = False
+    Caption = '{Path to file project *.msppr}'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWhite
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object label4: TLabel
+    Left = 32
+    Top = 384
+    Width = 320
+    Height = 16
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUCREIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQFQAAAAAAAARAWgMQDgAAAAAAAARBnBhcmVudBcFVEZvcm0UBhEK' +
+      'Y2xhc3NfbmFtZQ4IEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMU' +
+      'Aw4JDgsRBHNlbGYKBocmgBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250' +
+      'AA4MCgCrNpAODRQCDgMFEQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQbS' +
+      '5erx8jMRAXgGKBEBeREDMTYwEQlmb250Y29sb3IKALOzrg=='
+    AutoSize = False
+    Caption = '{Delete all files and folder in this path}'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = 11776942
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object label5: TLabel
+    Left = 32
+    Top = 409
+    Width = 320
+    Height = 16
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUCREIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQFQAAAAAAAARAWgMQDgAAAAAAAARBnBhcmVudBcFVEZvcm0UBhEK' +
+      'Y2xhc3NfbmFtZQ4IEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMU' +
+      'Aw4JDgsRBHNlbGYKBocmgBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250' +
+      'AA4MCgCrNpAODRQCDgMFEQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQbS' +
+      '5erx8jMRAXgGKBEBeREDMTg1EQlmb250Y29sb3IKALOzrg=='
+    AutoSize = False
+    Caption = '{Show on startup DevelStudio}'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = 11776942
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object shape1: TShape
+    Left = 0
+    Top = 448
+    Width = 520
+    Height = 56
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVFNoYXBlEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQGIAAAAAAAARAWgMQFoAAAAAAAARBnBhcmVudBcFVEZvcm0UBhEK' +
+      'Y2xhc3NfbmFtZQ4IEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMU' +
+      'Aw4JDgsRBHNlbGYKBocmgBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250' +
+      'AA4MCgCrNpAODRQCDgMFEQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQfU' +
+      '6OPz8OAxEQhwZW5jb2xvcgoAJiUlEQpicnVzaGNvbG9yCgAmJSURAXgGCBEBeREB' +
+      'MA=='
+    Anchors = [akLeft, akBottom]
+    Brush.Color = 2499877
+    Pen.Color = 2499877
+    ExplicitTop = 232
+  end
+  object bDemosBack: TShape
+    Left = 12
+    Top = 464
+    Width = 144
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVFNoYXBlEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQGIAAAAAAAARAWgRAjI2EQZwYXJlbnQXBVRGb3JtFAYRCmNsYXNz' +
+      'X25hbWUOCREPACoAX2NvbnN0cmFpbnRzFxBUU2l6ZUNvbnN0cmFpbnRzFAMOCg4M' +
+      'EQRzZWxmCgaEcrARCAAqAHByb3BzFAARBwAqAGljb24AEQgAKgBfZm9udBcFVEZv' +
+      'bnQUAw4NCgHytcAODhQAEQ0AKgBjbGFzc19uYW1lEQdfT2JqZWN0Dg0KAfK1wA4O' +
+      'FAIOAwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQRBlNoYXBlMREKYnJ1' +
+      'c2hjb2xvcgoAJiUlEQhwZW5jb2xvcgoAY2JiEQF5EQEwEQF4BhQ='
+    Anchors = [akLeft, akBottom]
+    Brush.Color = 2499877
+    Pen.Color = 6513250
+    ExplicitTop = 248
+  end
+  object btn_demos: TLabel
+    Left = 12
+    Top = 464
+    Width = 144
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcMQFQAAAAAAAARAWgRAjI2EQZwYXJlbnQXBVRGb3JtFAYRCmNsYXNz' +
+      'X25hbWUOCREPACoAX2NvbnN0cmFpbnRzFxBUU2l6ZUNvbnN0cmFpbnRzFAMOCg4M' +
+      'EQRzZWxmCgaEcrARCAAqAHByb3BzFAARBwAqAGljb24AEQgAKgBfZm9udBcFVEZv' +
+      'bnQUAw4NCgHytcAODhQAEQ0AKgBjbGFzc19uYW1lEQdfT2JqZWN0Dg0KAfK1wA4O' +
+      'FAIOAwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQRBkxhYmVsMhEJZm9u' +
+      'dGNvbG9yCgCzs64RAXkRATARAXgGFBELbW9kYWxyZXN1bHQGAA=='
+    Alignment = taCenter
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = '{Demos projects}'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = 11776942
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    ExplicitTop = 248
+  end
+  object formclose: TMImage
+    Left = 489
+    Top = 1
+    Width = 30
+    Height = 25
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEHVE1JbWFnZREGUEFSQU1TFAgRCGF2aXNpYmxlBREIYWVu' +
+      'YWJsZWQFEQF3DEBiAAAAAAAAEQFoDEBaAAAAAAAAEQZwYXJlbnQXBVRGb3JtFAYR' +
+      'CmNsYXNzX25hbWUOCBEPACoAX2NvbnN0cmFpbnRzFxBUU2l6ZUNvbnN0cmFpbnRz' +
+      'FAMOCQ4LEQRzZWxmCgCkbcgRCAAqAHByb3BzFAARBwAqAGljb24AEQgAKgBfZm9u' +
+      'dAAODAoArLXADg0UAg4DBREKcG9zaXRpb25leBEKcG9EZXNpZ25lZBEEdGV4dBEM' +
+      'yOfu4fDg5uXt6OUxEQF4EQM0ODkRAXkRATE='
+    Anchors = [akLeft, akTop, akRight]
+    Picture.Data = {
+      0A54504E474F626A65637489504E470D0A1A0A0000000D494844520000001E00
+      0000190802000000A957094D000000017352474200AECE1CE90000000467414D
+      410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000
+      007A4944415478DA63D4D53560A00D601C357AD4E851A3A968745252425252E2
+      BC79F3E7CD5B805F901C57E7E7E78686864C9C3879F5EA35402E900D1401B281
+      22540810B8E9103631E6126B34DC742083487349301A12BE4006C12026CD6878
+      F842D8F070A7D468B4F44064F2206C346D131FD960D4E851A3F1030006EE5B94
+      E0E6E00E0000000049454E44AE426082}
+  end
+  object label6: TLabel
+    Left = 168
+    Top = 624
+    Width = 117
+    Height = 13
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUBhEIYXZpc2libGUEEQhhZW5h' +
+      'YmxlZAURBnBhcmVudBcFVEZvcm0UBhEKY2xhc3NfbmFtZQ4GEQ8AKgBfY29uc3Ry' +
+      'YWludHMXEFRTaXplQ29uc3RyYWludHMUAw4HDgkRBHNlbGYKBgfBgBEIACoAcHJv' +
+      'cHMUABEHACoAaWNvbgARCAAqAF9mb250AA4KCgCstcAOCxQCDgMFEQpwb3NpdGlv' +
+      'bmV4EQpwb0Rlc2lnbmVkEQR0ZXh0DREBeAYYEQF5BpA='
+    Anchors = [akRight, akBottom]
+    Caption = '{Open Last project:}'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitTop = 408
+  end
+  object shape3: TShape
+    Left = 338
+    Top = 464
+    Width = 80
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVFNoYXBlEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcRAjgwEQFoEQIyNhEGcGFyZW50FwVURm9ybRQGEQpjbGFzc19uYW1l' +
+      'DgoRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgsODREEc2Vs' +
+      'ZgoGhHKwEQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQXBVRGb250FAMO' +
+      'DgoB8rXADg8UABENACoAY2xhc3NfbmFtZREHX09iamVjdA4OCgHytcAODxQCDgMF' +
+      'EQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQZTaGFwZTERCmJydXNoY29s' +
+      'b3IKACYlJREIcGVuY29sb3IKAGNiYhEBeREDMjQ4EQF4EQMzNTQ='
+    Anchors = [akRight, akBottom]
+    Brush.Color = 2499877
+    Pen.Color = 6513250
+    ExplicitTop = 248
+  end
+  object shape4: TShape
+    Left = 428
+    Top = 464
+    Width = 80
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVFNoYXBlEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcRAjgwEQFoEQIyNhEGcGFyZW50FwVURm9ybRQGEQpjbGFzc19uYW1l' +
+      'DgoRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgsODREEc2Vs' +
+      'ZgoGhHKwEQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQXBVRGb250FAMO' +
+      'DgoB8rXADg8UABENACoAY2xhc3NfbmFtZREHX09iamVjdA4OCgHytcAODxQCDgMF' +
+      'EQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQZTaGFwZTERCmJydXNoY29s' +
+      'b3IKACYlJREIcGVuY29sb3IKAGNiYhEBeREDMjQ4EQF4EQM0Mjg='
+    Anchors = [akRight, akBottom]
+    Brush.Color = 2499877
+    Pen.Color = 6513250
+    ExplicitTop = 248
+  end
+  object buttonCreate: TLabel
+    Left = 428
+    Top = 464
+    Width = 80
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcRAjgwEQFoEQIyNhEGcGFyZW50FwVURm9ybRQGEQpjbGFzc19uYW1l' +
+      'DgoRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgsODREEc2Vs' +
+      'ZgoGhHKwEQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQXBVRGb250FAMO' +
+      'DgoB8rXADg8UABENACoAY2xhc3NfbmFtZREHX09iamVjdA4OCgHytcAODxQCDgMF' +
+      'EQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQZMYWJlbDIRCWZvbnRjb2xv' +
+      'cgoAs7OuEQF5EQMyNDgRAXgRAzQyOBELbW9kYWxyZXN1bHQGAA=='
+    Alignment = taCenter
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = '{ok}'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = 11776942
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    ExplicitTop = 248
+  end
+  object buttonClose: TLabel
+    Left = 338
+    Top = 464
+    Width = 80
+    Height = 26
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVExhYmVsEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcRAjgwEQFoEQIyNhEGcGFyZW50FwVURm9ybRQGEQpjbGFzc19uYW1l' +
+      'DgoRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgsODREEc2Vs' +
+      'ZgoGhHKwEQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQXBVRGb250FAMO' +
+      'DgoB8rXADg8UABENACoAY2xhc3NfbmFtZREHX09iamVjdA4OCgHytcAODxQCDgMF' +
+      'EQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0EQZMYWJlbDIRCWZvbnRjb2xv' +
+      'cgoAs7OuEQF5CAEAEQF4EQMzMzgRC21vZGFscmVzdWx0BgA='
+    Alignment = taCenter
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = '{cancel}'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = 11776942
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    ExplicitTop = 248
+  end
+  object shape5: TShape
+    Left = 14
+    Top = 90
+    Width = 494
+    Height = 224
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEGVFNoYXBlEQZQQVJBTVMUChEIYXZpc2libGUFEQhhZW5h' +
+      'YmxlZAURAXcRAzQ5NBEBaBEDMjI0EQZwYXJlbnQXBVRGb3JtFAYRCmNsYXNzX25h' +
+      'bWUOChEPACoAX2NvbnN0cmFpbnRzFxBUU2l6ZUNvbnN0cmFpbnRzFAMOCw4NEQRz' +
+      'ZWxmCgaEcrARCAAqAHByb3BzFAARBwAqAGljb24AEQgAKgBfZm9udBcFVEZvbnQU' +
+      'Aw4OCgHytcAODxQAEQ0AKgBjbGFzc19uYW1lEQdfT2JqZWN0Dg4KAfK1wA4PFAIO' +
+      'AwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQRBlNoYXBlMREKYnJ1c2hj' +
+      'b2xvcgoAJiUlEQhwZW5jb2xvcgoAY2JiEQF5EQI5MBEBeBECMTQ='
+    Brush.Color = 2499877
+    Pen.Color = 6513250
+  end
+  object appStandart: TMImage
+    Left = 19
+    Top = 95
+    Width = 48
+    Height = 48
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEHVE1JbWFnZREGUEFSQU1TFAgRCGF2aXNpYmxlBREIYWVu' +
+      'YWJsZWQFEQF3DEBiAAAAAAAAEQFoDEBaAAAAAAAAEQZwYXJlbnQXBVRGb3JtFAYR' +
+      'CmNsYXNzX25hbWUOCBEPACoAX2NvbnN0cmFpbnRzFxBUU2l6ZUNvbnN0cmFpbnRz' +
+      'FAMOCQ4LEQRzZWxmCgaL3HgRCAAqAHByb3BzFAARBwAqAGljb24AEQgAKgBfZm9u' +
+      'dAAODAoCMLJQDg0UAg4DBREKcG9zaXRpb25leBEKcG9EZXNpZ25lZBEEdGV4dBEM' +
+      'yOfu4fDg5uXt6OUxEQF4EQIxOREBeRECOTU='
+    Center = True
+    Picture.Data = {
+      0A54504E474F626A65637489504E470D0A1A0A0000000D494844520000003000
+      00003008060000005702F987000002AC4944415478DAED97BB8B135114C6F398
+      BC5F9B4413122424E4459A68B560E77F20D8E882363E580BC1624B3B41B01414
+      044BAD54B0D1C2C2C215140262319022445690486298643693C9E631938CDF8D
+      1116590D32E33CE01E0837378433DFEF9E73CF9C63B759DCEC460BA000460BA0
+      00460BA000460BA000460BF8EF00E3F1F8AADBEDDEB2DBF5679DCD66BB5EAFF7
+      B62A80F97C2E391C0E462B518BC542C03281CFC46ADF270BF6C7567B0E0B83FD
+      86A22836AC7FD5B81640215E343441108AED767B2F9FCF7F713A9D279ACD6612
+      A2C562B1D8C3A366D81F77B95C8942A1F06D29704DE87507180E87F97038BC27
+      49D212A0D168246559162B950A4F00EAF57ADCE7F3254AA552DB940070C7E173
+      005D19A20DA7DFB1FD4CA13479143E2DECDDBF52CC7400FF6A9A00701CB73518
+      0C3EEA291C11B065B3D9F75893AA0190B73B3808564F0012F86030F8140071D5
+      00C8D3CF70B4AF330029DDA73429A3FD7EFF643C1ED73502C4F02293F0127551
+      00B5002CCB32D56A55B62CC06834BA8C5C0E763A9D07B95C6E61390094E0CD50
+      2854435FF54614C52BD168F4ABA5005AAD9637954AF1888217156D7F3A9DDEF4
+      FBFD8F2D03400CBD4F8D6198CD954F1BFA9F1788C6762C16E32C018053BF0F31
+      370EFF46FAA0C964722D1008BC323D0006A38B184E9EFCE69B44E22D2EF7D94C
+      2623981A80E7F9522412691CEECD10957BDD6E7707E28FAC4CA602409FCF94CB
+      E5EF980162481D994C79A84A2C004EA7D3E903D30310C389BF84BB1AD6D768D4
+      7601E187C8471E8F67DB12001817FD181D97A78D3B711DC21F92EFB8C8E75156
+      9F991EE00881CF515ACF2122B73046DEB51C40AFD7DB4014AA48A7777F003437
+      C03AA300C450F214B4019FC021ACFBAFD606F167544F64A81077E0E882DEE289
+      E1E03EE08E5C52056076A300461B0530DA2880D146018C36CB03FC0011F1074F
+      EE68E5B20000000049454E44AE426082}
+  end
+  object appOZA: TMImage
+    Left = 20
+    Top = 146
+    Width = 48
+    Height = 48
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEHVE1JbWFnZREGUEFSQU1TFAgRCGF2aXNpYmxlBREIYWVu' +
+      'YWJsZWQFEQF3EQI0OBEBaAxAWgAAAAAAABEGcGFyZW50FwVURm9ybRQGEQpjbGFz' +
+      'c19uYW1lDgkRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgoO' +
+      'DBEEc2VsZgoGi9x4EQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQADg0K' +
+      'AjCyUA4OFAIOAwURCnBvc2l0aW9uZXgRCnBvRGVzaWduZWQRBHRleHQRDMjn7uHw' +
+      '4Obl7ejlMREBeBECMjARAXkRAzE0Ng=='
+    Center = True
+    Picture.Data = {
+      0A54504E474F626A65637489504E470D0A1A0A0000000D494844520000003000
+      00003008060000005702F987000004FD4944415478DAED987B4C5B5518C06929
+      E55D70A1746508A8CB18202AFC210A4B7C6C335BA2CEB8B9B92C922C9989469D
+      D1CC38E32B8B89AFE91FC44567B64492190C51D02CF1B9994CA78261131DFE31
+      9C0648DA514AADA594524A29FECED2BB34CBDADBDEF6EEB2A42721E7F69CEFDE
+      FBFDBED7F92EBAACAB7CE8B4562003A0B5021900AD15C80068AD80A6000E87A3
+      A8B4B474577676F6369D4ED7ACD7EB8D0B0B0BEEC5C5C59F98BB2726263EABA9
+      A9092E49809999993B7373738FA07CE5E5F681C80A87C367676767B7171717FF
+      BEA400FC7EFFBD7979793D58DD18BD8ED5FD4C413C51CA9EB4E6C653D7565656
+      FA9704C0E4E4E432C63F4249F15B583A140AF562E9B79C4EE7A9F9F9F92CABD5
+      BABAB0B0F05583C1B0152F788687872D0D0D0DAA8452D2008140E05942E75DE9
+      370A771A8DC69D9793F57ABDB732854D26D3293594570480C2DF63D9BBC535D6
+      0FBBDDEEEAB2B2329B5A0AA61D8070192371ABC435E1E1E0DAAA95F2E9000809
+      0F98CDE6F3F1EE999B9B3B866C4F7E7EFEC17872369BCD44B27B550520844E12
+      426BA27E7F4CA5F995B5B584D44AC1C8DF59D6BE1C1919E922A1AF2F29293917
+      01791E88B72F7DA6CBE55A469E1CA272DD969393B342550092782F49FC869C1C
+      008EC1C1C115F5F5F55B0A0A0ABAC59AC8194AF0C6E9E9E9DF3C1E4FA0AEAECE
+      C77533503D78B546ECF7F7F717B6B6B6065403A08C965346CF51464DF1E408B5
+      1358F32E3CB41BEF7448EB28293C64600E125667507C35962F92000706062C2D
+      2D2D2ED500C4080683C7506E9D0C402F329B391F5EE3D07B499C07C01C66AD1D
+      F8F288C2013C751C887540E409B8BEBEBEFCB6B6B6906A00535353B7D01A0C4A
+      276DAC816247B1FC2642663F21B207A04E94DF097C07F3EE88210E138E8F321F
+      626D1732E755CF0112713F07D71E393994F90B656AF1C06378E003ACEB67ED0B
+      AC7D3F1EB81032A20C03DAC1DAD3AC2DC743BD3C7BB3AA00BCE4672CDB2A2727
+      E29944BD41945A7266048F19E4EE01760709DFA52A00161BC35A5589C8121A07
+      0891A7983FC11B0FCB3CF76FBBDDDE505D5D9D54CFA4E420B3E3F28A44644552
+      62D5FB00F8933A3F20C224865C00B9B53480BF24AB8F12803F00B829517942C8
+      CBD9B19D4B1BDE10F57E65F43E96B701F808A17322595D1401F0B26EC2616B32
+      F7887C40D1EF80FF815C7888446D66CDC5B3F691279D9CD63E25CA2B02A00AED
+      4501D993586E500CBA78CE8E549F9334009F921B70F7D7A9BE18433C41797DFF
+      8A038C8F8F975B2C96714241AFF4A5E22B8E1EE8669ABC33571C400CDC6FE72C
+      B85889886F1727F47A92743956FD506AB7630DF19D3C343464696A6A4AB86548
+      37C0E7003C20FD26399D24B625B237C4DE8DF1EE47FE1BE437A6AABC6200CAE2
+      2B587B5F2200A20231E9A37B27E2FF453CF5BA660034681B68D02E26722C0011
+      EB7CB1B5B0B78A83EC8824EFF3F9EEA021FC5133804B13391600B1EEE4A3C6DA
+      D8D8D88EC73E126B1C6C41EEBF265DFF2752FC9F39141D43D1AA78005C1FA7D6
+      AF2764DE637E3222DB8FECEDE9503E55804F51748B0CC09B28FE02FB27A94C6B
+      226BEFB0F69CE600D1DFC6B100C8956DA3A3A3BDB5B5B5FF0270E11394A66D13
+      07E151CD0150E41E2AC9B7E29AB876A2A004701A00D1EB64D1E75C479E7838B0
+      FE135548542487C361ADA8A8706A0E40221699CDE6D328BE8AA6EC20DE783C62
+      F50745AF8457BE02F019B1460E74D04AB793D407587B395DCAA704B054460640
+      EB9101D07A6400B41E573DC0FFAE62CB4F4E85EE6D0000000049454E44AE4260
+      82}
+  end
+  object path: TMemo
+    Left = 16
+    Top = 352
+    Width = 452
+    Height = 18
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEFVE1lbW8RBlBBUkFNUxQJEQhhdmlzaWJsZQURCGFlbmFi' +
+      'bGVkBREBdxEDMzQ4EQFoEQIxOBEGcGFyZW50FwVURm9ybRQGEQpjbGFzc19uYW1l' +
+      'DgoRDwAqAF9jb25zdHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgsODREEc2Vs' +
+      'ZgoGhHKwEQgAKgBwcm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQXBVRGb250FAMO' +
+      'DgoB8rXADg8UABENACoAY2xhc3NfbmFtZREHX09iamVjdA4OCgHytcAODxQCDgMF' +
+      'EQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0DREJZm9udGNvbG9yCgCtra0R' +
+      'AXgGGBEBeQaQ'
+    TabStop = False
+    Alignment = taLeftJustify
+    BorderStyle = bsNone
+    Color = 4600884
+    Ctl3D = False
+    Font.Charset = ANSI_CHARSET
+    Font.Color = 11382189
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentCtl3D = False
+    ParentFont = False
+    TabOrder = 0
+    WantReturns = False
+    WordWrap = False
+    TabOnEnter = False
+  end
+  object c_alldelete: TCheckBox
+    Left = 14
+    Top = 384
+    Width = 159
+    Height = 17
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEJVENoZWNrQm94EQZQQVJBTVMUBhEIYXZpc2libGUFEQhh' +
+      'ZW5hYmxlZAURBnBhcmVudBcFVEZvcm0UBhEKY2xhc3NfbmFtZQ4GEQ8AKgBfY29u' +
+      'c3RyYWludHMXEFRTaXplQ29uc3RyYWludHMUAw4HDgkRBHNlbGYKAKRtyBEIACoA' +
+      'cHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250AA4KCgCstcAOCxQCDgMFEQpwb3Np' +
+      'dGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0DREBeBECMTQRAXkGUA=='
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 1
+  end
+  object startup: TCheckBox
+    Left = 14
+    Top = 409
+    Width = 17
+    Height = 17
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEJVENoZWNrQm94EQZQQVJBTVMUBhEIYXZpc2libGUFEQhh' +
+      'ZW5hYmxlZAURBnBhcmVudBcFVEZvcm0UBhEKY2xhc3NfbmFtZQ4GEQ8AKgBfY29u' +
+      'c3RyYWludHMXEFRTaXplQ29uc3RyYWludHMUAw4HDgkRBHNlbGYKAKRtyBEIACoA' +
+      'cHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250AA4KCgCstcAOCxQCDgMFEQpwb3Np' +
+      'dGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0DREBeBECMTQRAXkGaQ=='
+    Checked = True
+    State = cbChecked
+    TabOrder = 2
+  end
+  object lastProjects: TListBox
+    Left = 168
+    Top = 640
+    Width = 457
+    Height = 137
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEIVExpc3RCb3gRBlBBUkFNUxQGEQhhdmlzaWJsZQQRCGFl' +
+      'bmFibGVkBREGcGFyZW50FwVURm9ybRQGEQpjbGFzc19uYW1lDgYRDwAqAF9jb25z' +
+      'dHJhaW50cxcQVFNpemVDb25zdHJhaW50cxQDDgcOCREEc2VsZgoGB8GAEQgAKgBw' +
+      'cm9wcxQAEQcAKgBpY29uABEIACoAX2ZvbnQADgoKAKy1wA4LFAIOAwURCnBvc2l0' +
+      'aW9uZXgRCnBvRGVzaWduZWQRBHRleHQNEQF4BhgRAXkGoA=='
+    Style = lbOwnerDrawFixed
+    Anchors = [akRight, akBottom]
+    ItemHeight = 19
+    TabOrder = 3
+    Alignment = taLeftJustify
+    BorderSelected = True
+    TwoColor = clNone
+    TwoFontColor = clNone
+    MarginLeft = 2
+    ReadOnly = False
+    ExplicitTop = 424
+  end
+  object appType: TListBox
+    Left = 71
+    Top = 91
+    Width = 436
+    Height = 222
+    HelpType = htKeyword
+    HelpKeyword = 
+      'AAAAAhQCEQVDTEFTUxEIVExpc3RCb3gRBlBBUkFNUxQKEQhhdmlzaWJsZQURCGFl' +
+      'bmFibGVkBREBdxEDNDkyEQFoEQMyMjIRBnBhcmVudBcFVEZvcm0UBhEKY2xhc3Nf' +
+      'bmFtZQ4KEQ8AKgBfY29uc3RyYWludHMXEFRTaXplQ29uc3RyYWludHMUAw4LDg0R' +
+      'BHNlbGYKBovceBEIACoAcHJvcHMUABEHACoAaWNvbgARCAAqAF9mb250AA4OCgIw' +
+      'slAODxQCDgMFEQpwb3NpdGlvbmV4EQpwb0Rlc2lnbmVkEQR0ZXh0ESvR8uDt5ODw' +
+      '8u3u5SDv8Ojr7ubl7ejlDQrP8Ojr7ubl7ejlIG96U2NyaXB0EQlmb250Y29sb3IK' +
+      'AP///xEBeBECMTURAXkRAjkxEQlpdGVtaW5kZXgRATA='
+    TabStop = False
+    Style = lbOwnerDrawFixed
+    BorderStyle = bsNone
+    Color = 2499877
+    Ctl3D = True
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semilight'
+    Font.Style = []
+    ItemHeight = 52
+    Items.Strings = (
+      #1057#1090#1072#1085#1076#1072#1088#1090#1085#1086#1077' '#1087#1088#1080#1083#1086#1078#1077#1085#1080#1077
+      #1055#1088#1080#1083#1086#1078#1077#1085#1080#1077' ozScript')
+    ParentCtl3D = False
+    ParentFont = False
+    TabOrder = 4
+    Alignment = taLeftJustify
+    BorderSelected = True
+    TwoColor = clNone
+    TwoFontColor = clNone
+    MarginLeft = 4
+    ReadOnly = True
+  end
+end

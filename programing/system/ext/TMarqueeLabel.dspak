@@ -1,0 +1,5 @@
+[main]
+name=TMarqueeLabel
+ver=1.0
+author=Mr.Time
+desc=Бегащая строка в HTML <marquee></marquee>
