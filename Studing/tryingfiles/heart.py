@@ -11,7 +11,7 @@ def yt(t):
         math.cos(4*t)
 
 t = turtle.Turtle()
-t.speed(20)
+t.speed(0)
 turtle.colormode(255)
 turtle.Screen().bgcolor(0, 0, 0)
 for i in range(2550):
