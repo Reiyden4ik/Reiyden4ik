@@ -7,4 +7,4 @@ def running_text(text):
         time.sleep(0.2)
         text = text[1:]+text[0]
 
-running_text("I am good and I feeling alright") 
+running_text("I am good and I feeling alright ") 
