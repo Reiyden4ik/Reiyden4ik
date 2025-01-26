@@ -59,22 +59,16 @@ class DSApi {
         $type = strtolower($type);
         
         if ($class && $GLOBALS['__EVENTS_API_PRMS_CLASS'][$class][$type])
-            $result = '$'.implode(', $',$GLOBALS['__EVENTS_API_PRMS_CLASS'][$class][$type]);
+            return '$'.implode(', $',$GLOBALS['__EVENTS_API_PRMS_CLASS'][$class][$type]);
         elseif ($GLOBALS['__EVENTS_API_PRMS'][$type])
-            $result = '$'.implode(', $',$GLOBALS['__EVENTS_API_PRMS'][$type]);
+            return '$'.implode(', $',$GLOBALS['__EVENTS_API_PRMS'][$type]);
         else
-            $result = '$self';
-            
-        return str_replace('$&', '&$', $result);
+            return '$self';
     }
     
     static function callEvent($self, $params, $type){
         
         return __exEvents::callEventEx($self, $params, $type);
-    }
-    
-    static function callEventVars($self, &$params, $type){
-        return __exEvents::callEventVars($self, $params, $type);
     }
     
     // регистрирует мега глобальную переменную в DS, которую можно использовать без global
@@ -122,29 +116,41 @@ class DSApi {
         if ($info['i_max'] || !isset($info['i_max']))
             $icons[] = 'biMaximize';
         
-        $fmEdit->borderIcons = implode(',',$icons);
+        $fmEdit->borderIcons = implode(',',$icons);    
     }
     
     // регистрирует события для компонентов из конфига
     function initFormEx($fmEdit, $name){
         
         global $__config;
-        self::initForm($fmEdit, $__config['formsInfo'][strtolower($name)]);
+        self::initForm($fmEdit, $__config['formsInfo'][$name]);
+    }
+    
+    function initForThread(){
+        
+        if (!defined('THREAD_TIMER_TICK')){
+            
+            $TIM = new TTimerEx;
+            $TIM->interval = 30;
+            $TIM->repeat   = false;
+            $TIM->enable   = false;
+            define_ex('THREAD_TIMER_TICK', $TIM->self);
+        }
+        
+        v('__exEvents', $GLOBALS['__exEvents']);
+        //lockV('__exEvents');
+        Thread::addCode('$GLOBALS["__exEvents"] = v("__exEvents"); $GLOBALS["__incCode"] = v("__incCode");');
     }
     
     // нестандартная загрузка событий с классами TEvent
-    function initEvent($form, $form_name = false, $init_funcs = false){
+    function initEvent($form, $init_funcs = false){
         
         $form_event_load = false;
         $c = component_count($form->self);
-        
-        if ( !$form_name )
-            $form_name = $form->name;
-            
-        $form_name = strtolower($form_name);
+        $form_name = strtolower($form->name);
         $form_self = $form->self;
         
-        global $__config;        
+        global $__config;
         
         if (is_array(eventEngine::$DATA[$form_name])){
         foreach (eventEngine::$DATA[$form_name] as $obj=>$eventList){
@@ -166,15 +172,12 @@ class DSApi {
                     $el = $form->findComponent($obj);
                     $self = $el->self;
                 }
-                
                     $GLOBALS['__exEvents'][$self] = array('events'=>$eventList, 'obj_name'=>$obj_name);
                     foreach ((array)$eventList as $x=>$code){
                         
-                        
-                        //unset(eventEngine::$DATA[$form_name][$obj][$x]);
-                        if (method_exists('__exEvents',$x)){
+                        unset(eventEngine::$DATA[$form_name][$obj][$x]);
+                        if (method_exists('__exEvents',$x))
                             $el->$x = '__exEvents::'.$x;
-                        }
                         else {
                             $class = $el->className;
 							
@@ -190,11 +193,9 @@ class DSApi {
                                 $el->register();
                         }
                         
-                        if ($x =='oncreate'){
-                            if ( $GLOBALS['LOADER']->isStart )
-                                __exEvents::callCode($form->self, 'oncreate');
-                            else
-                                self::reg_startFunc('__exEvents::callCode('.$form->self.',"oncreate");');
+                        if ($x=='oncreate'){
+                            
+                            self::reg_startFunc('__exEvents::callCode('.$form->self.',"oncreate");');
                         }
                     }
                     

@@ -19,7 +19,7 @@ class TCategoryButtons extends TControl {
     }
     
     // TButtonItem
-    public function get_selectedItem(){
+    public function get_selectedItem($item){
         return _c(categorybtns_selected($this->self));
     }
     
@@ -27,12 +27,10 @@ class TCategoryButtons extends TControl {
         
         $sec = $this->categories->add();
         $sec->caption = $caption;
-        //$sec->color   = 0xD7D7D7;
-		$sec->color   = clWhite;
+        $sec->color   = 0xD7D7D7;
         
         $groups = $this->groups;
         $groups[$group] = $sec->self;
-        
         $this->groups = $groups;
     }
     
@@ -94,18 +92,11 @@ class TCategoryButtons extends TControl {
     }
     
     public function set_smallIcons($v){
-		/*
         if ($v){
             $this->buttonOptions = 'boGradientFill,boBoldCaptions,boUsePlusMinus,boCaptionOnlyBorder';
         } else {
             $this->buttonOptions = 'boShowCaptions,boFullSize,boGradientFill,boBoldCaptions,boUsePlusMinus,boCaptionOnlyBorder';
         }
-		*/
-		if ($v){ 
-			$this->buttonOptions = 'boBoldCaptions,boUsePlusMinus,boCaptionOnlyBorder'; 
-		} else { 
-			$this->buttonOptions = 'boShowCaptions,boFullSize,boBoldCaptions,boUsePlusMinus,boCaptionOnlyBorder'; 
-		}
     }
     
     public function get_smallIcons(){

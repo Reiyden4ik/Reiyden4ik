@@ -61,6 +61,9 @@ class Loader {
             bcompiler_load($file);
         else
             include $file;
+        
+        if ( fileExt($file)!='phpe2')
+            Thread::addFile($file);
     }
     
     static function model($file){

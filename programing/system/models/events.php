@@ -149,8 +149,6 @@ class myEvents {
             
             c('fmPHPEditor->btn_cancel')->enabled = true;
             c('fmPHPEditor')->event = $event;
-            
-            //myComplete::updateComponentList();
             if ($PHPEditor->showModal() == mrOk){
                 myComplete::saveCode();
                 $name = $myEvents->selObj instanceof TForm ? '--fmedit' : $myEvents->selObj->name;
@@ -257,13 +255,27 @@ class myEvents {
     
     function createButton($eventType, $form){
         
+        /*$btn = new TBitBtn($form);
+        $btn->caption = $eventType['CAPTION'];
+        $btn->cursor  = crHandPoint;
+        $btn->loadPicture(myImages::get24($eventType['ICON']));
+        $btn->event = $eventType;
+        
+        $btn->onClick   = 'myEvents::buttonClick';
+        $btn->onKeyDown = 'myEvents::formKeyDown';
+        
+        $btn->h = self::BUTTON_HEIGHT;
+        $btn->w = self::BUTTON_WIDTH;
+        
+        $btn->x = 0;
+        $btn->y = count($this->buttons) * (self::BUTTON_HEIGHT - 1);
+        
+        
+        $btn->parent = $form;*/
+        
         $btn = new TMenuItem( $form );
         $btn->caption = $eventType['CAPTION'];
-		
-		$pic = myImages::get24($eventType['ICON']);
-		if ( $pic )
-			$btn->loadPicture($pic);
-		
+        $btn->loadPicture(myImages::get24($eventType['ICON']));
         //$btn->event   = $eventType;
         $btn->onClick = 'myEvents::buttonClick';
         $form->addItem($btn);
@@ -323,22 +335,28 @@ class myEvents {
         $myEvents->clearForm();
         $this->selObj = $object;
         $class = rtii_class($object->self);
-	
+        
         global $componentEvents, $fmEdit;
         $edt_Events = c('edt_EventTypes->popupMenu');
-
+        
         if (!isset($myEvents->classes[$class])){
             
             if (isset($componentEvents[$class]))
+            
             foreach ($componentEvents[$class] as $event){
+                   
                 $myEvents->classes[$class][] = $this->createButton($event, $edt_Events);
             }
-
             
-           /* c('fmPropsAndEvents->it_editEvent',1)->onClick = 'myEvents::phpEditorShow';
+            c('fmPropsAndEvents->eventList',1)->onDblClick = 'myEvents::phpEditorShow';
+            c('fmPropsAndEvents->btn_editEvent',1)->onClick = 'myEvents::phpEditorShow';
+            c('fmPropsAndEvents->btn_delEvent',1)->onClick  = 'myEvents::deleteEvent';
+            c('fmPropsAndEvents->btn_changeEvent',1)->onClick = 'myEvents::changeEvent';
+            
+            c('fmPropsAndEvents->it_editEvent',1)->onClick = 'myEvents::phpEditorShow';
             c('fmPropsAndEvents->it_delEvent',1)->onClick = 'myEvents::deleteEvent';
             c('fmPropsAndEvents->it_changeEvent',1)->onClick = 'myEvents::changeEvent';
-            c('fmPropsAndEvents->it_addEvent',1)->onClick = 'myEvents::clickAddEvent';*/
+            c('fmPropsAndEvents->it_addEvent',1)->onClick = 'myEvents::clickAddEvent';
         } else {
             
             $myEvents->buttons =& $myEvents->classes[$class];

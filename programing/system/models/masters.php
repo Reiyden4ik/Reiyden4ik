@@ -37,9 +37,7 @@ class myMasters {
                 $it->loadPicture($dir.'/icon.gif');
             
             c('fmMain->it_Utils')->addItem($it);
-            $it->onClick = function() use ($code, $info){
-                call_user_func('master_'.$code.'::open', $info['MSP_PROJECT']);
-            };
+            $it->onClick = 'master_'.$code.'::open("'.$info['MSP_PROJECT'].'"); _empty';
         }
         
         if (file_exists($dir.'/class.php')){

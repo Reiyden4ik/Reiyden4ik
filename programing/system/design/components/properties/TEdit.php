@@ -2,39 +2,11 @@
 
 $result = array();
 
-$result[] = array(
-                  'CAPTION'=>t('Align'),
-                  'TYPE'=>'combo',
-                  'PROP'=>'align',
-                  'VALUES'=>array('alNone', 'alTop', 'alBottom', 'alLeft', 'alRight', 'alClient', 'alCustom'),
-                   'ADD_GROUP'=>true
-                  );
 
 $result[] = array(
                   'CAPTION'=>t('Text'),
                   'TYPE'=>'text',
                   'PROP'=>'text',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Text Hint'),
-                  'TYPE'=>'text',
-                  'PROP'=>'textHint',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Align'),
-                  'TYPE'=>'combo',
-                  'PROP'=>'alignment',
-                  'VALUES'=>array('taLeftJustify', 'taRightJustify', 'taCenter'),
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Margin Left'),
-                  'TYPE'=>'number',
-                  'PROP'=>'marginLeft'
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Margin Right'),
-                  'TYPE'=>'number',
-                  'PROP'=>'marginRight'
                   );
 $result[] = array(
                   'CAPTION'=>t('font'),
@@ -53,27 +25,10 @@ $result[] = array(
                   'PROP'=>'color',
                   );
 $result[] = array(
-                  'CAPTION'=>t('Color On Enter'),
-                  'TYPE'=>'color',
-                  'PROP'=>'colorOnEnter',
-                  );
-
-$result[] = array(
-                  'CAPTION'=>t('Font Color On Enter'),
-                  'TYPE'=>'color',
-                  'PROP'=>'fontColorOnEnter',
-                  );
-
-$result[] = array(
                   'CAPTION'=>t('Char Case'),
                   'TYPE'=>'combo',
                   'PROP'=>'charCase',
                   'VALUES'=>array('ecNormal', 'ecUpperCase', 'ecLowerCase'),
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Tab Enter'),
-                  'TYPE'=>'check',
-                  'PROP'=>'tabOnEnter',
                   );
 $result[] = array(
                   'CAPTION'=>t('Ctl3D'),
@@ -106,16 +61,6 @@ $result[] = array(
                   'CAPTION'=>t('Hint'),
                   'TYPE'=>'text',
                   'PROP'=>'hint',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Tab Order'),
-                  'TYPE'=>'number',
-                  'PROP'=>'tabOrder',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Tab Stop'),
-                  'TYPE'=>'check',
-                  'PROP'=>'tabStop',
                   );
 
 $result[] = array('CAPTION'=>t('selStart'), 'PROP'=>'selStart');

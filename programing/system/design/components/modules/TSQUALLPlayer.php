@@ -22,7 +22,6 @@ class TSQUALLPlayer extends __TNoVisual {
     public function __initComponentInfo(){
         
         parent::__initComponentInfo();
-        
         $md = new SQUALL_Player($this->parent);
         
         $md->apan       = $this->pan;
@@ -33,8 +32,6 @@ class TSQUALLPlayer extends __TNoVisual {
         $md->apositionPr = $this->positionPr;
         $md->onEndTrack = $this->onEndTrack;
         $md->onStartTrack = $this->onStartTrack;
-        
-        
         
         if ($this->playOnStart)
             $md->play();

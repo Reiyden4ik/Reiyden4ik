@@ -92,7 +92,7 @@ class mySyntaxCheck {
         if (!$prefix)
             $prefix = md5($projectFile);
         
-        $dir   = TEMP_DIR.'/devels3/syntaxcheck/'.$prefix.'/';
+        $dir   = TEMP_DIR.'/devels/syntaxcheck/'.$prefix.'/';
         $list  = myProject::getFormsObjects();
         $files = array();
         

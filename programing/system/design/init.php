@@ -33,15 +33,13 @@ $cfg_array = array(
 
 
 $dsg_cfg = new TConfigIni($cfg_array);
-$dsg_cfg->loadFromFile(DS_USERDIR .'config.ini');
+$dsg_cfg->loadFromFile(winLocalPath(CSIDL_PERSONAL).'/DevelStudio/config.ini');
 myVars::set($dsg_cfg, 'dsg_cfg');
 
     require 'design/dialogs.php';
 }
 
-
 require 'design/components.php';
-
 
 if (!EMULATE_DVS_EXE){  
     
@@ -59,7 +57,7 @@ if (!EMULATE_DVS_EXE){
     $_sc->popupMenu= c('fmMain->editorPopup');
     $_sc->onStartSizeMove = 'myDesign::startSizeMove';
     $_sc->OnDuringSizeMove = 'myDesign::duringSizeMove';
-	
+
     $myProperties = new myProperties;
 
     c('fmNewProject->startup')->checked = (int)$dsg_cfg->newProjectDialog->startup;
@@ -98,6 +96,5 @@ if (!EMULATE_DVS_EXE){
     c('fmPropsAndEvents->btn_addEvent')->onClick = 'myEvents::clickAddEvent';
 
     myComplete::init();
-	
 	setTimeout(5000, 'myBackup::updateSettings()');
 }

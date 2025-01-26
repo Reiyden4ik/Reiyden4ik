@@ -6,7 +6,7 @@ class myDebug {
       
     static function onExcept($handle,$arr){
         
-        
+       
         if ($arr['RECEIVER_HANDLE']){
             self::$receiver_handle = $arr['RECEIVER_HANDLE'];
             $debug_vars = (array)myProject::cfg('debug_vars');

@@ -55,7 +55,13 @@ $result[] = 'TSQUALLPlayer';
 $result[] = 'TWebBrowser';
 $result[] = 'TControlCanvas';
 $result[] = 'SQUALL_Player';
-$result[] = 'TChromium';
+$result[] = 'TsSkinManager';
+$result[] = 'TsSkinProvider';
+$result[] = 'TsBitBtn';
+$result[] = 'TsSpeedButton';
+$result[] = 'TsProgressBar';
+$result[] = 'TsTrackBar';
+$result[] = 'TsLabel';
 //$result[] = 'TSizeCtrl';
 
 return $result;

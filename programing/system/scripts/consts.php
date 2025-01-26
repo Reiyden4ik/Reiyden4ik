@@ -1,35 +1,32 @@
 <?
-      
+        
     myVars::set( c('fmMain->MainImages16'), '_IMAGES16' );
-    myVars::set( c('fmMain->MainImages24'), '_IMAGES24' ); 
-    myVars::set( c('fmMain->MainImages32'), '_IMAGES32' ); /*
-    myVars::set( c('fmMain->panelWindows'), 'panelWindows' ); 
-    myVars::set( c('fmMain->panelWindows'), 'panelWindows' ); */
-    myVars::set( c('fmMain->StatusBar'), 'StatusBar' ); 
+    myVars::set( c('fmMain->MainImages24'), '_IMAGES24' );
+    myVars::set( c('fmMain->MainImages32'), '_IMAGES32' );
+    myVars::set( c('fmMain->panelWindows'), 'panelWindows' );
+    myVars::set( c('fmMain->panelWindows'), 'panelWindows' );
+    myVars::set( c('fmMain->StatusBar'), 'StatusBar' );
     
     /* menus */
-	
     myVars::set( c('fmMain->editorPopup'), 'editorPopup' );
     styleMenu::add($GLOBALS['editorPopup']);
-
+    
     myVars::set( c('fmMain->MainMenu'), '_MENU' );
-   
+    
     global $_MENU; $_MENU->images = c('fmMain->MainImages16');
     
     styleMenu::add($_MENU);
     
-	
     myVars::set( c('fmMain->formsPopur'), 'formsPopur');
     styleMenu::add($GLOBALS['formsPopur']);
     
     styleMenu::add( c('edt_MenuEditor->popup') );
     styleMenu::add( c('fmPHPEditor->popup') );
-	
     styleMenu::add( c('fmPropsAndEvents->eventsPopup') );
     
     myVars::set( c('fmPHPEditor'), 'fmPHPEditor');
     myVars::set( c('fmFormList'), 'fmFormList');
-
+    
     myVars::set( c('fmObjectInspector->list'), 'inspectList');
     global $inspectList, $_IMAGES24;
     $inspectList->images = $_IMAGES24;
@@ -38,10 +35,11 @@
     
     //$_FORMS = array('Form1'); //название форм
     //mkdir(SYSTEM_DIR . '/project/',0777,true);
-    $projectFile = DS_USERDIR . 'Project/Project.msppr';
-
-    if (file_exists(DS_USERDIR . 'last.lst')){
-        $lastFiles = unserialize(file_get_contents(DS_USERDIR . 'last.lst'));
+    $projectFile = replaceSl(winLocalPath(CSIDL_PERSONAL)).'/DevelStudio/Project/Project.msppr';
+    
+    
+    if (file_exists(replaceSl(winLocalPath(CSIDL_PERSONAL).'/DevelStudio/last.lst'))){
+        $lastFiles = unserialize(file_get_contents(replaceSl(winLocalPath(CSIDL_PERSONAL).'/DevelStudio/last.lst')));
     } else
         $lastFiles = array();
     

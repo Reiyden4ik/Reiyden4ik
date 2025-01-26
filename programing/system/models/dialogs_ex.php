@@ -71,7 +71,7 @@ class TTextDialog extends TPanel {
         if ($val[strlen($val)-2] == chr(13) || $val[strlen($val)-2] == chr(10))
             $val[strlen($val)-2] = ' ';
         
-        return $val;
+        return trim($val);
     }
     
     function set_value($v){

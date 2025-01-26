@@ -9,11 +9,11 @@ class complete_Funcs {
     
     function initF(){
         
-        $engineDir = replaceSl( realpath(dirname(EXE_FILE)).'/core/' );
+        $engineDir = replaceSl( realpath(dirname(EXE_FILE)).'/engine_sdk/' );
         self::$sourceFiles[] = $engineDir . '/main/utils.php';
         self::$sourceFiles[] = $engineDir . '/main/messages.php';
         self::$sourceFiles[] = $engineDir . '/main/osapi.php';
-        self::$sourceFiles[] = $engineDir . '/main/threading.php';
+        self::$sourceFiles[] = $engineDir . '/main/threads.php';
         self::$sourceFiles[] = $engineDir . '/main/mci.php';
         self::$sourceFiles[] = $engineDir . '/main/synedit.php';
         self::$sourceFiles[] = $engineDir . '/main/registry.php';

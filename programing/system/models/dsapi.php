@@ -65,7 +65,7 @@ class CApi extends DSApi {
         }
         
         if (is_dir($dir.'/php_modules/')){
-            $result['php_modules'] = dir_copy($dir.'/php_modules/', DOC_ROOT.'/../ext/');
+            $result['php_modules'] = dir_copy($dir.'/php_modules/', DOC_ROOT.'/../php/modules/');
         }
         
         $ds_name = basenameNoExt($info['file']);
@@ -117,7 +117,7 @@ class CApi extends DSApi {
         
         if ($files['php_modules'])
         foreach ($files['php_modules'] as $file)
-            file_delete(DOC_ROOT.'/../ext/'.$file);
+            file_delete(DOC_ROOT.'/../php/modules/'.$file);
         
         if ($files['complete'])
         foreach ($files['complete'] as $file)

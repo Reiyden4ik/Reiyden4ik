@@ -19,10 +19,7 @@ $langs = findFiles(DOC_ROOT.'/lang/','lng',false,true);
     
     foreach ($infos as $id=>$info){
         
-        $item = menuItem($info['title'], true, false,
-                         function() use ($info){
-                            langSwitcher($info['lang']);
-                         },
+        $item = menuItem($info['title'], true, false,'langSwitcher(\''.addslashes($info['lang']).'\'); _empty',
                      false, DOC_ROOT.'/lang/'.$info['lang'].'/icon.png');
 
         c('fmMain->MainMenu',1)->addItem($item, c('fmMain->itLanguage',1));

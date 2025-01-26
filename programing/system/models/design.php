@@ -296,13 +296,14 @@ class myDesign {
             }
                         
             $class = $c['CLASS'];
-
+            
             $obj = new $class($fmEdit);
             
             if (($parent->self!=$fmEdit->self) && ($obj instanceof __TNoVisual)){
-          
+                
                 $x     += getAbsoluteX($parent->self, $fmEdit->self);
                 $y     += getAbsoluteY($parent->self, $fmEdit->self);
+                
                 $parent = $fmEdit;
             } else {
             
@@ -317,29 +318,33 @@ class myDesign {
             }
             
             $id = self::getNoExistsNameIndex($obj);
-            $obj->name = vsprintf($c['NAME'].'%s', $id);            
+            $obj->name = vsprintf($c['NAME'].'%s', $id);
+            
+            if ($obj instanceof __TNoVisual)
+                $obj->text = '';
+            else
+                $obj->text = vsprintf($c['CAPTION'].'%s', $id);
             
             foreach ((array)$c['PROPS'] as $prop=>$value){
                 $obj->$prop = $value;
             }
-         
+            
             $x = round($x / $_sc->gridSize) * $_sc->gridSize;
             $y = round($y / $_sc->gridSize) * $_sc->gridSize;
             
             if ($w < $_sc->gridSize * 3) $w = false;
             if ($h < $_sc->gridSize) $h = false;
-                     
+                        
             if ($w)
                 $w = $w + $w % $_sc->gridSize;
             if ($h)
                 $h = $h + $h % $_sc->gridSize;
             
-            
             $x -= $_sc->gridSize;
             $y -= $_sc->gridSize;
             $obj->left = $x;
             $obj->top  = $y;
-
+            
             if ($c['W'] && !$w){
                 //$w = $c['W'] * $_sc->gridSize;
                 $w = $c['W'] * 7;
@@ -351,7 +356,7 @@ class myDesign {
                 $h = $c['H'] * 7;
                 $h+= $h % $_sc->gridSize;
             }
-
+                
             if ($obj instanceof __TNoVisual){
                 
             } else {
@@ -360,13 +365,8 @@ class myDesign {
             }
             /////////////////
             
+            
             $obj->parent = $parent;
-            if ($obj instanceof __TNoVisual)
-                $obj->text = '';
-            else
-                $obj->text = vsprintf($c['CAPTION'].'%s', $id);
-            
-            
             $obj->winControl = $c['WINCONTROL'];
             
             if ($class == 'TPageControl'){
@@ -543,20 +543,14 @@ class myDesign {
         myVars::set(0, 'targetSelected');
         myInspect::selectObject(0);
         
-        
         if ($button == 1){
             $_componentPanel->unSelect();
             $selectedClass = false;
             myVars::set(true, 'popupShow');
             myVars::set(false, 'isMouseDown');
-            self::formProps(true);
-            $_sc->clearTargets();
-            return;
         } else {
             myVars::set(true, 'isMouseDown');
         }
-        
-       // c('fmMain')->text = $button;
         
         myInspect::selectFmEdit();
         if ($_designSel)
@@ -641,8 +635,8 @@ class myDesign {
         }
         
         if ($_designSel){
-            //$A =& $_designSel;
-            $_designSel->hide();
+            $A =& $_designSel;
+            $A->hide();
             
             $ax = myVars::get('_startX');
             $ay = myVars::get('_startY');
@@ -709,18 +703,15 @@ class myDesign {
     
     static function formProps($clear = false){
         global $myProperties,$myEvents,$fmEdit;
-		
         self::showPopup();
-       
+        
         if ($clear){
             $myProperties->selObj = false;
             $myEvents->selObj = false;
         }
         
         $myProperties->generate($fmEdit->self,c('fmPropsAndEvents->tabProps',1));
-
         $myEvents->_generate($fmEdit);
-
     }
     
     static function deleteObject($obj){
@@ -747,8 +738,8 @@ class myDesign {
     static function keyDelete(){
         
         myVars::set(0, 'popupShow');
-
-        //if (!self::canDoIt()) return;
+        
+        if (!self::canDoIt()) return;
         
         global $_sc, $fmEdit, $myInspect;
         $components = $_sc->targets_ex;
@@ -821,7 +812,6 @@ class myDesign {
         
         setEditorHotKeys();
         myProperties::unFocusPanel();
-
         c('fmMain->tmpEdit')->setFocus();
     }
     
@@ -880,7 +870,7 @@ class myDesign {
     static function keyPaste(){
         
         myVars::set(0, 'popupShow');
-        //if (!self::canDoIt()) return;
+        if (!self::canDoIt()) return;
         
         myVars::set(true, '__sizeAndMove');
         
@@ -940,7 +930,7 @@ class myDesign {
     static function keyCut(){
         
         myVars::set(0, 'popupShow');
-        //if (!self::canDoIt()) return;
+        if (!self::canDoIt()) return;
         
         global $_sc,$fmEdit;
         
@@ -1016,13 +1006,13 @@ class myDesign {
         $historyIndex = 0;
     }
     
-    static function objsInspectEdited($self, $item, &$s){
+    static function objsInspectEdited($self, $item, $s){
         
         
         global $fmEdit, $myInspect;
         
         if (!eregi('^[a-z]{1}[a-z0-9\_]*$',$s))
-                return $s = (_c($item)->caption);
+                return __setVarEx(_c($item)->caption);
         
         $obj = $myInspect->getObj(_c($item));
         $last = $obj->name;
@@ -1032,6 +1022,7 @@ class myDesign {
         if ($last==$obj->name){
             $s = $last;
         }
+        __setVarEx($s);
     }
     
     
@@ -1063,10 +1054,4 @@ class myDesign {
         c('fmMain->it_debuginfo')->checked = c('fmMain->pDebugWindow')->visible;
     }
     
-    
-    static function inspect($self){
-        
-        $form = c('fmInspect');
-        $form->show();
-    }
 }

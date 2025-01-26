@@ -1,12 +1,12 @@
 <?
 
 $result = array();
+
 $result[] = array(
                   'CAPTION'=>t('Align'),
                   'TYPE'=>'combo',
                   'PROP'=>'align',
                   'VALUES'=>array('alNone', 'alTop', 'alBottom', 'alLeft', 'alRight', 'alClient', 'alCustom'),
-                   'ADD_GROUP'=>true
                   );
 
 $result[] = array(

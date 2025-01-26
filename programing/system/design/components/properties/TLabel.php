@@ -3,14 +3,6 @@
 $result = array();
 
 $result[] = array(
-                  'CAPTION'=>t('Align'),
-                  'TYPE'=>'combo',
-                  'PROP'=>'align',
-                  'VALUES'=>array('alNone', 'alTop', 'alBottom', 'alLeft', 'alRight', 'alClient', 'alCustom'),
-                   'ADD_GROUP'=>true
-                  );
-
-$result[] = array(
                   'CAPTION'=>t('Text'),
                   'TYPE'=>'text',
                   'PROP'=>'caption',
@@ -63,24 +55,6 @@ $result[] = array(
                   'CAPTION'=>t('Word Wrap'),
                   'TYPE'=>'check',
                   'PROP'=>'wordWrap',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('modal_result'),
-                  'TYPE'=>'combo',
-                  'PROP'=>'modalResult',
-                  'VALUES'=>array(
-                                  mrNone=>'mrNone',
-                                  mrOk=>'mrOk',
-                                  mrCancel=>'mrCancel',
-                                  mrAbort=>'mrAbort',
-                                  mrRetry=>'mrRetry',
-                                  mrIgnore=>'mrIgnore',
-                                  mrYes=>'mrYes',
-                                  mrNo=>'mrNo',
-                                  mrAll=>'mrAll',
-                                  mrNoToAll=>'mrNoToAll',
-                                  mrYesToAll=>'mrYesToAll'
-                                  ),
                   );
 
 $result[] = array(

@@ -5,36 +5,6 @@ $result = array();
 
 
 $result[] = array(
-                  'CAPTION'=>t('getFont'),
-                  'PROP'=>'getFont',
-                  'INLINE'=>'TFont getFont ( int index )',
-                  );
-
-$result[] = array(
-                  'CAPTION'=>t('clearFont'),
-                  'PROP'=>'clearFont',
-                  'INLINE'=>'clearFont ( int index )',
-                  );
-
-$result[] = array(
-                  'CAPTION'=>t('getItemColor'),
-                  'PROP'=>'getItemColor',
-                  'INLINE'=>'int getItemColor ( int index )',
-                  );
-
-$result[] = array(
-                  'CAPTION'=>t('setItemColor'),
-                  'PROP'=>'setItemColor',
-                  'INLINE'=>'setItemColor ( int index, int color )',
-                  );
-
-$result[] = array(
-                  'CAPTION'=>t('clearItemColor'),
-                  'PROP'=>'clearItemColor',
-                  'INLINE'=>'clearItemColor ( int index )',
-                  );
-
-$result[] = array(
                   'CAPTION'=>t('setFocus'),
                   'PROP'=>'setFocus()',
                   'INLINE'=>'setFocus ( void )',

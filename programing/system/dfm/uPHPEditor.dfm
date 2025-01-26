@@ -103,9 +103,8 @@ object fmPHPEditor: TfmPHPEditor
       Gutter.Font.Style = []
       Gutter.ShowLineNumbers = True
       Highlighter = SynPHPSyn
-      Options = [eoAutoIndent, eoDragDropEditing, eoDropFiles, eoEnhanceEndKey, eoGroupUndo, eoHalfPageScroll, eoScrollPastEof, eoShowScrollHint, eoSmartTabDelete, eoTabsToSpaces, eoTrimTrailingSpaces]
+      Options = [eoAutoIndent, eoDragDropEditing, eoDropFiles, eoEnhanceEndKey, eoGroupUndo, eoHalfPageScroll, eoScrollPastEof, eoShowScrollHint, eoSmartTabDelete, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
       SelectedColor.Foreground = 11990266
-      TabWidth = 4
       WantTabs = True
     end
     object errPanel: TPanel
@@ -284,12 +283,11 @@ object fmPHPEditor: TfmPHPEditor
       719
       33)
     object btn_new: TSpeedButton
-      Left = 590
+      Left = 40
       Top = 4
       Width = 25
       Height = 25
       Hint = '{New}'
-      Anchors = [akTop, akRight]
       Flat = True
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
@@ -322,12 +320,11 @@ object fmPHPEditor: TfmPHPEditor
       ShowHint = True
     end
     object btn_open: TSpeedButton
-      Left = 618
+      Left = 68
       Top = 4
       Width = 25
       Height = 25
       Hint = '{Open file}'
-      Anchors = [akTop, akRight]
       Flat = True
       Glyph.Data = {
         66030000424D6603000000000000360000002800000010000000110000000100
@@ -362,12 +359,11 @@ object fmPHPEditor: TfmPHPEditor
       ShowHint = True
     end
     object btn_save: TSpeedButton
-      Left = 646
+      Left = 96
       Top = 4
       Width = 25
       Height = 25
       Hint = '{Save as...}'
-      Anchors = [akTop, akRight]
       Flat = True
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
@@ -408,14 +404,14 @@ object fmPHPEditor: TfmPHPEditor
       ShowHint = True
     end
     object Bevel1: TBevel
-      Left = 9
+      Left = 126
       Top = 7
       Width = 5
       Height = 20
       Shape = bsLeftLine
     end
     object btn_undo: TSpeedButton
-      Left = 20
+      Left = 132
       Top = 4
       Width = 25
       Height = 25
@@ -452,7 +448,7 @@ object fmPHPEditor: TfmPHPEditor
       ShowHint = True
     end
     object btn_redo: TSpeedButton
-      Left = 49
+      Left = 161
       Top = 4
       Width = 25
       Height = 25
@@ -488,8 +484,15 @@ object fmPHPEditor: TfmPHPEditor
       ParentShowHint = False
       ShowHint = True
     end
+    object Bevel2: TBevel
+      Left = 190
+      Top = 7
+      Width = 5
+      Height = 20
+      Shape = bsLeftLine
+    end
     object btn_find: TSpeedButton
-      Left = 84
+      Left = 196
       Top = 4
       Width = 25
       Height = 25
@@ -534,7 +537,7 @@ object fmPHPEditor: TfmPHPEditor
       ShowHint = True
     end
     object btn_replace: TSpeedButton
-      Left = 114
+      Left = 226
       Top = 4
       Width = 25
       Height = 25
@@ -570,6 +573,60 @@ object fmPHPEditor: TfmPHPEditor
       ParentShowHint = False
       ShowHint = True
       Visible = False
+    end
+    object Bevel3: TBevel
+      Left = 34
+      Top = 7
+      Width = 5
+      Height = 20
+      Shape = bsLeftLine
+    end
+    object btn_codemaster: TSpeedButton
+      Left = 5
+      Top = 4
+      Width = 25
+      Height = 25
+      Hint = '{Code Master}'
+      Caption = '??????????'
+      Enabled = False
+      Flat = True
+      Glyph.Data = {
+        26040000424D2604000000000000360000002800000012000000120000000100
+        180000000000F0030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFDEDEDEC8C8C8C8C8C8C8C8
+        C8C8C8C8C2C2C2C8C8C8C8C8C8C8C8C8C8C8C8C2C2C2C8C8C8C8C8C8C8C8C8C8
+        C8C8DEDEDEFFFFFF0000FFFFFFC8C8C8FCFCFCFCFCFCFCFCFCFCFCFC9E9E9EFB
+        FBFBFCFCFCFCFCFCFCFCFC9E9E9EFBFBFBFCFCFCFCFCFCFCFCFCC8C8C8FFFFFF
+        0000FFFFFFC8C8C8FCFCFCF0C18CEEB87AFCFCFC9E9E9EFBFBFB70A6FA5999FA
+        FCFCFC9E9E9EFBFBFB77E97577E875FCFCFCC8C8C8FFFFFF0000FFFFFFC8C8C8
+        FCFCFCF2DCC3EFD9C0FCFCFC9E9E9EFBFBFBB6D0F6B3CDF3FCFCFC9E9E9EFBFB
+        FBB8EEB7B5EBB4FCFCFCC8C8C8FFFFFF0000FFFFFFC8C8C8FCFCFCEDD7BEF9ED
+        DFFCFCFC9E9E9EFBFBFBB1CBF2D8E6FCFCFCFC9E9E9EFBFBFBB3E9B2DFF8DEFC
+        FCFCC8C8C8FFFFFF0000FFFFFFC8C8C8FCFCFCFCFCFCF8F8F8C8C8C8B0B0B0FC
+        FCFCFCFCFCF8F8F8C8C8C8B0B0B0FCFCFCFCFCFCF8F8F8C8C8C8DEDEDEFFFFFF
+        0000FFFFFFDEDEDEC8C8C8C8C8C8C8C8C8DEDEDEDEDEDEC8C8C8C8C8C8C8C8C8
+        DEDEDEDEDEDEC8C8C8C8C8C8C8C8C8DEDEDEFFFFFFFFFFFF0000FFFFFFFFFFFF
+        FFFFFFA3A3A3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFF6A6A6AFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFDADADAA5A5
+        A59797979191918F8F8FDEDEDED7D7D78B8B8B828282828282797979A8A8A8FF
+        FFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDEDEC8
+        C8C86E6E6E707070C8C8C8DEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8C8C8FCFCFCFCFCFCFCFCFC
+        FCFCFCC8C8C8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC8C8C8FCFCFCFBFBFBFAFAFAFCFCFCC8C8C8FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFC8C8C8FCFCFCF4F4F4EFEFEFFCFCFCC8C8C8FFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8C8C8FC
+        FCFCECECECFCFCFCFCFCFCC8C8C8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8C8C8FCFCFCFCFCFCF8F8F8
+        C8C8C8DEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFDEDEDEC8C8C8C8C8C8C8C8C8DEDEDEFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFF0000}
+      ParentShowHint = False
+      ShowHint = True
     end
     object btn_options: TSpeedButton
       Left = 688
@@ -616,26 +673,6 @@ object fmPHPEditor: TfmPHPEditor
       Height = 20
       Anchors = [akTop, akRight]
       Shape = bsLeftLine
-    end
-    object c_component: TComboBox
-      Left = 184
-      Top = 5
-      Width = 187
-      Height = 22
-      Style = csOwnerDrawFixed
-      ItemHeight = 16
-      TabOrder = 0
-      Visible = False
-    end
-    object c_event: TComboBox
-      Left = 377
-      Top = 5
-      Width = 170
-      Height = 22
-      Style = csOwnerDrawFixed
-      ItemHeight = 16
-      TabOrder = 1
-      Visible = False
     end
   end
   object Panel3: TPanel
@@ -708,12 +745,11 @@ object fmPHPEditor: TfmPHPEditor
     end
   end
   object SynPHPSyn: TSynPHPSyn
-    CommentAttri.Foreground = 8158332
-    KeyAttri.Foreground = 8404992
-    NumberAttri.Foreground = 11425536
+    CommentAttri.Foreground = clSilver
+    NumberAttri.Foreground = clBlue
     StringAttri.Foreground = 16512
-    SymbolAttri.Foreground = clRed
-    VariableAttri.Foreground = 32829
+    SymbolAttri.Foreground = 4194304
+    VariableAttri.Foreground = clGreen
     VariableAttri.Style = [fsBold]
     Left = 584
     Top = 192

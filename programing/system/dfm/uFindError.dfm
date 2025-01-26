@@ -269,6 +269,24 @@ object fmFindErrors: TfmFindErrors
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object err_msg: TLabel
+      Left = 8
+      Top = 72
+      Width = 425
+      Height = 57
+      Alignment = taCenter
+      Anchors = [akLeft, akTop, akRight]
+      AutoSize = False
+      Caption = 'error message'
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Layout = tlCenter
+      WordWrap = True
+    end
     object info: TLabel
       Left = 48
       Top = 176
@@ -432,17 +450,6 @@ object fmFindErrors: TfmFindErrors
       ModalResult = 1
       TabOrder = 3
       NumGlyphs = 2
-    end
-    object err_msg: TMemo
-      Left = 8
-      Top = 81
-      Width = 425
-      Height = 41
-      Alignment = taCenter
-      BorderStyle = bsNone
-      Lines.Strings = (
-        'err_msg')
-      TabOrder = 4
     end
   end
   object SynPHPSyn: TSynPHPSyn

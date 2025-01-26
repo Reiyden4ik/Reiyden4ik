@@ -25,9 +25,9 @@ $result[] = array(
                   );
 
 $result[] = array(
-                  'CAPTION'=>t('Synchronization'),
+                  'CAPTION'=>t('Call on start'),
                   'TYPE'=>'check',
-                  'PROP'=>'isSync',
+                  'PROP'=>'callOnStart',
                   );
 
 $result[] = array(

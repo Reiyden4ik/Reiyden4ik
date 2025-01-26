@@ -49,25 +49,12 @@ $result[] = array(
                   'PROP'=>'picture->isEmpty()',
                   'INLINE'=>'bool picture->isEmpty ( void )',
                   );
-$result[] = array(
-                  'CAPTION'=>t('Copy To Clipboard'),
-                  'PROP'=>'picture->copyToClipboard()',
-                  'INLINE'=>'picture->copyToClipboard ( void )',
-                  );
-
-$result[] = array(
-                  'CAPTION'=>t('Paste from Clipboard'),
-                  'PROP'=>'picture->pasteFromClipboard()',
-                  'INLINE'=>'picture->pasteFromClipboard ( void )',
-                  );
 
 $result[] = array(
                   'CAPTION'=>t('Return TBitmap object'),
                   'PROP'=>'picture->getBitmap()',
                   'INLINE'=>'TBitmap picture->getBitmap ( void )',
                   );
-
-
 
 $result[] = array(
                   'CAPTION'=>t('setFocus'),

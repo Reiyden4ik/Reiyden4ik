@@ -2,11 +2,11 @@
     /*
     This product includes PHP software, freely available from <http://www.php.net/software/>
     */
-
-	
 if (!defined('IS_APPLICATION_START')){
     
-
+   
+    $tt = microtime(1);
+    
     if (fileExt($_PARAMS[2])=='dvsexe'){
         define_ex('EMULATE_DVS_EXE', true);    
     } else {
@@ -14,6 +14,7 @@ if (!defined('IS_APPLICATION_START')){
     }
     
     $tt = microtime(1);
+    
     
     define('APP_DESIGN_MODE',!EMULATE_DVS_EXE);
     $GLOBALS['APP_DESIGN_MODE'] = !EMULATE_DVS_EXE;
@@ -36,22 +37,22 @@ if (!defined('IS_APPLICATION_START')){
         define('SYSTEM_DIR',DOC_ROOT);
     }
     
-     
+    
+    
     require 'start.php';
-
-
+     
+    
     if (!EMULATE_DVS_EXE){
-        $APPLICATION->title = 'DevelStudio 2012';
-	
+        $APPLICATION->title = 'DevelStudio 2010';
         $fmLogoin = TForm::loadFromFile('dfm\\uLogoin');
         
         c('fmLogoin->Label7')->caption = 'version '.DV_VERSION;
         c('fmLogoin->Label8')->caption = '... '.DV_PREFIX;
-		
         
         $fmLogoin->show();
         
         $GLOBALS['APPLICATION']->processMessages();
+    
         $fmMain = TForm::loadFromFile('dfm\uMain',true);
         
         $fmMain->position = 'poScreenCenter';
@@ -62,16 +63,16 @@ if (!defined('IS_APPLICATION_START')){
     
     
     c('fmLogoin->label2')->show();
-
+    
     $GLOBALS['APPLICATION']->processMessages();
     
     $fmEdit = TForm::loadFromFile('dfm\\uEdit');
-
+    
     c_Alias('fmMain->listObjs','fmObjectInspector->list');
     c_Alias('fmMain','fmComponents');
     c_Alias('fmMain','fmObjectInspector');
     c_Alias('fmMain','fmPropsAndEvents');
-
+    
     //$fmComponents = TForm::loadFromFile('dfm\\uComponents',true);
     //$fmPropEvent  = TForm::loadFromFile('dfm\\uPropsAndEvents', true);
 
@@ -85,9 +86,7 @@ if (!defined('IS_APPLICATION_START')){
     
         TForm::loadFromFile('dfm\uFindDialog',true);
         TForm::loadFromFile('dfm\uRunDebug',true);
-        TForm::loadFromFile('dfm\uInspect',true);
-	TForm::loadFromFile('dfm\uRegistration',true);
-	
+        
         TForm::loadFromFile('dfm\uPHPEditor', true);
         TForm::loadFromFile('dfm\uPHPEditor', true);
         TForm::loadFromFile('dfm\uMSBCreator',true);
@@ -96,34 +95,30 @@ if (!defined('IS_APPLICATION_START')){
         TForm::loadFromFile('dfm\uImageView');
         TForm::loadFromFile('dfm\uNewProject',true);
         TForm::loadFromFile('dfm\uMenuEditor',true);
-
+        
         
         TForm::loadFromFile('dfm\uFormProperties');
         TForm::loadFromFile('dfm\uPHPModules');
-        TForm::loadFromFile('dfm\uBuildProgram'); 
+        TForm::loadFromFile('dfm\uBuildProgram');
         TForm::loadFromFile('dfm\uBuildCompleted',true);
         TForm::loadFromFile('dfm\uOptionBuild',true);
-         
+        
         TForm::loadFromFile('dfm\uOptions');
         TForm::loadFromFile('dfm\uSizesPosition');
         
         TForm::loadFromFile('dfm\uEasySelectDialog', true);
-
+       
         TForm::loadFromFile('dfm\uFindError', true);
-        TForm::loadFromFile('dfm\uAbout',true);
-		
-		TForm::loadFromFile('dfm\uOpenDVS',true);
-		
+        TForm::loadFromFile('dfm\uAbout');
+        
         //$fmObjInspect = TForm::loadFromFile('dfm\uObjectInspector', true);
     }
     
     if (!EMULATE_DVS_EXE){
     
         c('fmLogoin->label3')->show();
-	
         $GLOBALS['APPLICATION']->processMessages();
     
-
         include 'scripts/consts.php';
         include 'scripts/images.php';
     
@@ -159,25 +154,23 @@ if (!defined('IS_APPLICATION_START')){
             }
             
             pre($co);*/
-			
-		 
+    
         myProject::openLsProject();
-		
-		//gui_message(microtime(1)-$tt);
+    
         $fmLogoin->free();
     }
-   
+    
     if (!EMULATE_DVS_EXE){  
         
+         
         //pre(microtime(1)-$tt);
         evfmMain::loadMainConfig();
-		
         c('fmMain->panelPropEvent')->onChange = 'myProperties::fixSpliterMoved';
         $fmMain->onResize = 'myProperties::fixSpliterMoved';
         $fmMain->show();
         myProperties::fixSpliterMoved(0);
     }
-     
+    
     define('IS_APPLICATION_START',true);
     
     if (!EMULATE_DVS_EXE){  
@@ -195,9 +188,7 @@ if (!defined('IS_APPLICATION_START')){
         ini_set('include_path', DOC_ROOT);
         chdir(DOC_ROOT);
         
-		
         $util = evalProject::open( str_ireplace('.dvsexe','.dvs', $_PARAMS[2]) );
-		
         setMainForm(current($util->forms));
         current($util->forms)->show();
         $APPLICATION->mainFormOnTaskBar = true;        

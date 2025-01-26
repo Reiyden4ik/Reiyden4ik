@@ -28,17 +28,7 @@ class master_Pakages {
     }
     
     static function install($self){
-
-        /*global $fmEdit;
-        $list = $fmEdit->componentList;
-        foreach($list as $c){
-            pre($c->class_name);
-        }
-        return;*/
-        /*$ev = new evalProject;
-        $ev->loadDVS('d:/dd.dvs', true);
-        return;*/
-    
+        
         self::init();
         $dlg = new TOpenDialog;
         $dlg->filter = 'All DS Packages|*.dspak;*.zipdspak|DS Packages (*.dspak)|*.dspak|ZIP DS Packages (*.zipdspak)|*.zipdspak';

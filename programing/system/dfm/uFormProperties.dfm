@@ -3,7 +3,7 @@ object fmFormProperties: TfmFormProperties
   Top = 163
   BorderStyle = bsDialog
   Caption = '{Form Properties}'
-  ClientHeight = 491
+  ClientHeight = 461
   ClientWidth = 401
   Color = clBtnFace
   Font.Charset = RUSSIAN_CHARSET
@@ -16,71 +16,68 @@ object fmFormProperties: TfmFormProperties
   Position = poScreenCenter
   DesignSize = (
     401
-    491)
+    461)
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtn1: TBitBtn
     Left = 297
-    Top = 458
+    Top = 428
     Width = 99
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = '{ok}'
     ModalResult = 1
     TabOrder = 0
-    ExplicitTop = 428
   end
   object BitBtn2: TBitBtn
     Left = 192
-    Top = 458
+    Top = 428
     Width = 99
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = '{cancel}'
     ModalResult = 2
     TabOrder = 1
-    ExplicitTop = 428
   end
   object GroupBox1: TGroupBox
     Left = 8
     Top = 8
     Width = 385
-    Height = 444
+    Height = 414
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = '{Properties}'
     TabOrder = 2
-    ExplicitHeight = 414
     object Label1: TLabel
       Left = 24
-      Top = 70
+      Top = 32
       Width = 47
       Height = 13
       Caption = '{Position}'
     end
     object Label6: TLabel
       Left = 24
-      Top = 110
+      Top = 72
       Width = 77
       Height = 13
       Caption = '{Window State}'
     end
     object Label7: TLabel
       Left = 24
-      Top = 150
+      Top = 112
       Width = 61
       Height = 13
       Caption = '{Form Style}'
     end
     object Label8: TLabel
       Left = 24
-      Top = 190
+      Top = 152
       Width = 69
       Height = 13
       Caption = '{Border Style}'
     end
     object c_position: TComboBox
       Left = 24
-      Top = 86
+      Top = 48
       Width = 337
       Height = 21
       Style = csDropDownList
@@ -100,7 +97,7 @@ object fmFormProperties: TfmFormProperties
     end
     object GroupBox2: TGroupBox
       Left = 24
-      Top = 241
+      Top = 203
       Width = 337
       Height = 121
       Caption = '{Constraints}'
@@ -168,7 +165,7 @@ object fmFormProperties: TfmFormProperties
     end
     object c_windowstate: TComboBox
       Left = 24
-      Top = 126
+      Top = 88
       Width = 337
       Height = 21
       Style = csDropDownList
@@ -183,7 +180,7 @@ object fmFormProperties: TfmFormProperties
     end
     object c_formstyle: TComboBox
       Left = 24
-      Top = 166
+      Top = 128
       Width = 337
       Height = 21
       Style = csDropDownList
@@ -198,16 +195,17 @@ object fmFormProperties: TfmFormProperties
         'fsStayOnTop')
     end
     object c_visible: TCheckBox
-      Left = 24
+      Left = 184
       Top = 24
-      Width = 337
+      Width = 177
       Height = 17
+      Alignment = taLeftJustify
       Caption = '{Show form on startup}'
       TabOrder = 4
     end
     object GroupBox3: TGroupBox
       Left = 24
-      Top = 368
+      Top = 330
       Width = 337
       Height = 57
       Caption = '{Border Icons}'
@@ -239,7 +237,7 @@ object fmFormProperties: TfmFormProperties
     end
     object c_borderstyle: TComboBox
       Left = 24
-      Top = 206
+      Top = 168
       Width = 337
       Height = 21
       Style = csDropDownList
@@ -254,14 +252,6 @@ object fmFormProperties: TfmFormProperties
         'bsDialog'
         'bsToolWindow'
         'bsSizeToolWin')
-    end
-    object c_noload: TCheckBox
-      Left = 24
-      Top = 39
-      Width = 337
-      Height = 17
-      Caption = '{Do not load the form at the start}'
-      TabOrder = 7
     end
   end
 end

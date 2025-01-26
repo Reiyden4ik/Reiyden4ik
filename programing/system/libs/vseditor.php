@@ -25,27 +25,24 @@ class TNextInspector extends TControl {
     }
     
     public function unFocus(){
+	
 	vs_inspector_unfocus($this->self);
     }
     
     public function get_selectedIndex(){
-		return vs_inspector_selectedIndex($this->self,null);
+	return vs_inspector_selectedIndex($this->self,null);
     }
     
     public function set_selectedIndex($v){
-		vs_inspector_selectedIndex($this->self,$v);
+	vs_inspector_selectedIndex($this->self,$v);
     }
     
     public function set_onVSChange($v){
-        $this->onChange = $v;
+        $this->ONVSINSPECTORCHANGE = $v;
     }
     
     public function set_onVSEdit($v){
-        $this->onEdit = $v;
-    }
-    
-    public function set_onVSToolbarClick($v){
-	$this->onToolbarClick = $v;
+        $this->ONVSINSPECTOREDIT = $v;
     }
 }
 

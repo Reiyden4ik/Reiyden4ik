@@ -7,7 +7,7 @@ class myModules {
     
     static function getAll(){
         
-        $modules = findFiles(SYSTEM_DIR . '/../ext/','dll');
+        $modules = findFiles(SYSTEM_DIR . '/../php/modules/','dll');
         return $modules;
     }
     
@@ -102,32 +102,29 @@ class myModules {
         if (!$file)
             $file = $projectFile;
             
-        $dir = replaceSl(dirname(EXE_NAME)).'/';
+        $dir = replaceSl(dirname(EXE_NAME)).'/php/';
         self::getNeed();
         
-       // $myProject->config['modules'][] = 'php_bcompiler.dll';
+        $myProject->config['modules'][] = 'php_bcompiler.dll';
+        $myProject->config['modules'][] = 'php_bz2.dll';
         $myProject->config['modules'] = array_unique($myProject->config['modules']);
-        $real = array();
+        
         foreach ((array)$myProject->config['modules'] as $mod){
             
-             
-
             // копируем сам модуль, если не скопирован
-            //if (!file_exists(dirname($file).'/ext/'.$mod)){
+            //if (!file_exists(dirname($file).'/php/modules/'.$mod)){
                 if (!$attach_dll){
                     $md5_1 = $md5_2 = false;
                     
-                    if ( is_file($dir.'ext/'.$mod) ){
-                        $md5_1 = md5_file($dir.'ext/'.$mod);
-                        $real[] = $mod;
-                    }
-                    if ( is_file(dirname($file).'/ext/'.$mod) )
-                        $md5_2 = md5_file(dirname($file).'/ext/'.$mod);
+                    if ( is_file($dir.'modules/'.$mod) )
+                        $md5_1 = md5_file($dir.'modules/'.$mod);
+                    if ( is_file(dirname($file).'/php/modules/'.$mod) )
+                        $md5_2 = md5_file(dirname($file).'/php/modules/'.$mod);
                     
                     
                     if (!$md5_2 || ($md5_1!=$md5_2)){
                         
-                        x_copy($dir.'ext/'.$mod, dirname($file).'/ext/'.$mod);
+                        x_copy($dir.'modules/'.$mod, dirname($file).'/php/modules/'.$mod);
                     }
                 }
             //}
@@ -135,13 +132,11 @@ class myModules {
             // копируем зависимые dll-ки модуля...
             foreach ((array)$GLOBALS['MODULES_INFO'][$mod] as $dll){
                 
-                    if (is_file($dir . $dll))
+                    if (is_file($dir.'/../'.$dll))
                     if (!file_exists(dirname($file).'/'.$dll))
-                        copy($dir . $dll, dirname($file).'/'.$dll);
+                        copy($dir.'/../'.$dll, dirname($file).'/'.$dll);
             }
         }
-       
-        $myProject->config['modules'] = $real;
 		
 		global $componentClasses, $componentClassesEx;
 		
@@ -149,31 +144,23 @@ class myModules {
 			foreach($componentClasses as $item)
 				$componentClassesEx[ $item['CLASS'] ] = $item;
 		}
-		
+        
         $forms = myProject::getFormsObjects();
-	foreach ($forms as $objs)
+		foreach ($forms as $objs)
         foreach ($objs as $el){
 			
-	    $class = $el['CLASS'];
-	    $info  = $componentClassesEx[ $class ];
-	    
-	    if ( is_array($info['DLLS']) ){
-		    foreach($info['DLLS'] as $dll){
-			    
-			//pre($info);
-			if (file_exists(dirname($file).'/'.$dll))
-			    continue;
-			
-			$xfile = $dir . $dll;
-			
-			if (is_file($xfile)){
-			    copy($xfile, dirname($file).'/'.$dll);
-			} elseif ( is_dir($xfile) ){
-			    dir_copy($xfile, dirname($file).'/'.basename($xfile));
+			$class = $el['CLASS'];
+			$info  = $componentClassesEx[ $class ];
+
+			if ( is_array($info['DLLS']) ){
+				foreach($info['DLLS'] as $dll){
+					
+					if (is_file($dir.'/../'.$dll))
+                    if (!file_exists(dirname($file).'/'.$dll))
+                        copy($dir.'/../'.$dll, dirname($file).'/'.$dll);
+				}
 			}
-		    }
-	    }
-	}
+		}
     }
     
     
@@ -184,13 +171,13 @@ class myModules {
         
         $modules = (array)$myProject->config['modules'];
         $info    = (array)$GLOBALS['MODULES_INFO'];
-        $files   = findFiles(dirname($projectFile).'/ext/','dll');
+        $files   = findFiles(dirname($projectFile).'/php/modules/','dll');
         
         foreach ($files as $file){
             // если файл отсутствует в модулях, удаляем
             if (!in_array($file, $modules)){
                 
-                unlink(dirname($projectFile).'/ext/'.$file);
+                unlink(dirname($projectFile).'/php/modules/'.$file);
                 
                 // удаляем зависимые dll-ки
                 foreach ((array)$info[$file] as $dll)

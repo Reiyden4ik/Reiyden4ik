@@ -7,18 +7,11 @@ $result[] = array(
                   'TYPE'=>'combo',
                   'PROP'=>'align',
                   'VALUES'=>array('alNone', 'alTop', 'alBottom', 'alLeft', 'alRight', 'alClient', 'alCustom'),
-                   'ADD_GROUP'=>true
                   );
 $result[] = array(
                   'CAPTION'=>t('List'),
                   'TYPE'=>'text',
                   'PROP'=>'text',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Align'),
-                  'TYPE'=>'combo',
-                  'PROP'=>'alignment',
-                  'VALUES'=>array('taLeftJustify', 'taRightJustify', 'taCenter'),
                   );
 $result[] = array(
                   'CAPTION'=>t('font'),
@@ -45,11 +38,6 @@ $result[] = array('CAPTION'=>t('Items selected'), 'PROP'=>'items->selected');
 
 
 $result[] = array(
-                  'CAPTION'=>t('Read Only'),
-                  'TYPE'=>'check',
-                  'PROP'=>'readOnly',
-                  );
-$result[] = array(
                   'CAPTION'=>t('Auto Complete'),
                   'TYPE'=>'check',
                   'PROP'=>'autoComplete',
@@ -70,11 +58,6 @@ $result[] = array(
                   'PROP'=>'itemHeight',
                   );
 $result[] = array(
-                  'CAPTION'=>t('Margin Left'),
-                  'TYPE'=>'number',
-                  'PROP'=> 'marginLeft',
-                  );
-$result[] = array(
                   'CAPTION'=>t('Multi Select'),
                   'TYPE'=>'check',
                   'PROP'=>'multiSelect',
@@ -84,21 +67,6 @@ $result[] = array(
                   'CAPTION'=>t('Color'),
                   'TYPE'=>'color',
                   'PROP'=>'color',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Two Color'),
-                  'TYPE'=>'color',
-                  'PROP'=>'twoColor',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Two Font Color'),
-                  'TYPE'=>'color',
-                  'PROP'=>'twoFontColor',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Border Selected'),
-                  'TYPE'=>'check',
-                  'PROP'=>'borderSelected',
                   );
 $result[] = array(
                   'CAPTION'=>t('Columns'),
@@ -116,27 +84,13 @@ $result[] = array(
                   'TYPE'=>'number',
                   'PROP'=>'scrollWidth',
                   );
-$result[] = array(
-                  'CAPTION'=>t('Border Style'),
-                  'TYPE'=>'combo',
-                  'PROP'=>'borderStyle',
-                  'VALUES'=>array('bsNone', 'bsSingle'),
-                  );
+
 $result[] = array(
                   'CAPTION'=>t('Hint'),
                   'TYPE'=>'text',
                   'PROP'=>'hint',
                   );
-$result[] = array(
-                  'CAPTION'=>t('Tab Order'),
-                  'TYPE'=>'number',
-                  'PROP'=>'tabOrder',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Tab Stop'),
-                  'TYPE'=>'check',
-                  'PROP'=>'tabStop',
-                  );
+
 $result[] = array(
                   'CAPTION'=>t('Cursor'),
                   'TYPE'=>'combo',

@@ -7,6 +7,7 @@ class TPopupMenuEx extends __TNoVisual{
     
     public function __construct($onwer=nil,$init=true,$self=nil){
         parent::__construct($onwer, $init, $self);
+        
     }
     
     public function __initComponentInfo(){
@@ -16,7 +17,6 @@ class TPopupMenuEx extends __TNoVisual{
 	$obj = new TPopupMenu(_c($this->owner));
         
 	$list = array();
-	
 	$data = explode(_BR_,$this->data);
 	$list[0] = $obj;
 	
@@ -54,7 +54,6 @@ class TPopupMenuEx extends __TNoVisual{
 	    $org = $list[$level];
 	    
 	    $x    = new TMenuItem(_c($this->owner));
-	    
 	    $x->caption = t($text);
 	    $x->shortCut = $scut;
 	    $x->loadPicture($img);
@@ -88,7 +87,6 @@ class TPopupMenuEx extends __TNoVisual{
             if (strtolower($owner->name) == strtolower($el))
                 $owner->popupMenu = $obj;
             else {
-		if ( $el )
 		DSApi::reg_startFunc('c("'.$el.'")->popupMenu = c('.$obj->self.')');
             }
         }

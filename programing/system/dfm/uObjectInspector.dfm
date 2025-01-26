@@ -27,10 +27,8 @@ object fmObjectInspector: TfmObjectInspector
     Cursor = crHandPoint
     Align = alClient
     Columns = <>
-    IconOptions.AutoArrange = True
     MultiSelect = True
     TabOrder = 0
-    ExplicitLeft = -8
   end
   object status: TStatusBar
     Left = 0

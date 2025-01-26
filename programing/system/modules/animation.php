@@ -201,9 +201,8 @@ class animate {
         if (!is_object($obj))
             $obj = toObject($obj);
         
-        if (!isset($GLOBALS['__VIEW'])){
-            Timer::setInterval('animate::toView', 10);
-        }
+        if (!isset($GLOBALS['__VIEW']))
+            setTimer(10, 'animate::toView()');
         
         if (!$obj){
             unset($GLOBALS['__VIEW']);
@@ -232,7 +231,7 @@ class animate {
     }
 }
 
-if (!$GLOBALS['APP_DESIGN_MODE'] && !$GLOBALS['THREAD_SELF']){
-   Timer::setInterval('animate::toSpeed', 30);
+if (!$GLOBALS['APP_DESIGN_MODE'] && IS_THREAD!==true){
+    setTimer(30, 'animate::toSpeed()');
 }
 ?>

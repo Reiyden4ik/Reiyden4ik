@@ -9,33 +9,20 @@ class app {
 
     static function hide(){
         
-        //thread::func('application_minimize');
-        if ( sync('app::hide') ) return;
-        
-        application_minimize();
+        thread::func('application_minimize');
+        //application_minimize();
     }
 
     static function close(){
-        
-        if ( sync('app::close') ) return;
-        
-        global $mainForm;
-        if ( $mainForm )
-            $mainForm->close();
-        else
-            application_terminate();
+        thread::func('application_terminate');
     }
     
     static function restore(){
-        //thread::func('application_restore');
-        if ( sync('app::restore') ) return;
-        
-        application_restore();
+        thread::func('application_restore');
+        //application_restore();
     }
     
     static function title($value = null){
-        
-        if ( sync('app::title', func_get_args()) ) return;
         
         global $APPLICATION;
         if ($value == null)
@@ -47,9 +34,8 @@ class app {
 
 function run($command, $wait = false){
     
-    if ( sync(__FUNCTION__, func_get_args()) ) return;    
-    
     $command = getFileName($command);
+    
     $command = replaceSr($command);
     
     if ($wait)
@@ -59,8 +45,6 @@ function run($command, $wait = false){
 }
 
 function runWith($file, $program){
-    
-    if ( sync(__FUNCTION__, func_get_args()) ) return;        
     
     $program = getFileName($program);
     $file    = getFileName($file);
@@ -76,21 +60,12 @@ $_c->setConstList(array('LD_NONE','LD_XY','LD_XYWH'), 0);
 
 function loadForm($name, $mode = LD_XY){
     
-    if ( sync(__FUNCTION__, func_get_args()) ) return;    
-    
-    global $SCREEN, $LOADER;
+    global $SCREEN;
                
         $forms = $SCREEN->formList();
         $aform = $SCREEN->activeForm;
         
-        if ( is_string($name) )
-            $form = c($name);
-        else if ( !$name->valid() )
-            $form = $LOADER->LoadForm($name->nameParam);
-        else
-            $form = $name;
-        
-        if ( !$form || !$form->valid() ) return;
+        $form = toObject($name);
         
         if ($mode == LD_XY || $mode == LD_XYWH){
             
@@ -106,7 +81,7 @@ function loadForm($name, $mode = LD_XY){
         
         // делаем форму главной, чтобы приложенние корректно сворачивалось
         $title = $GLOBALS['APPLICATION']->title;
-        $LOADER->SetMainForm($form);
+        setMainForm($form);
         $form->show();
         
         foreach ($forms as $el){
@@ -122,20 +97,11 @@ function loadForm($name, $mode = LD_XY){
 
 $_c->SW_SHOWMODAL = 15;
 function showForm($name, $mode = SW_SHOW){
-    
-    if ( sync(__FUNCTION__, func_get_args()) ) return;    
-    global $LOADER;
-    
-    if ( is_string($name) )
-        $form = c($name);
-    else if ( !$name->valid() )
-        $form = $LOADER->LoadForm($name->nameParam);
-    else
-        $form = $name;
         
-    if ( $form && $form->valid() )
+    $form = toObject($name);
+        
     if ($mode == SW_SHOW){
-        
+        $form->setFocus();
         $form->show();
         $form->toFront();
     } else {
@@ -144,26 +110,14 @@ function showForm($name, $mode = SW_SHOW){
 }
 
 function hideForm($name, $mode = SW_SHOW){
-    
-    if ( sync(__FUNCTION__, func_get_args()) ) return;    
         
     $form = toObject($name);
         
-    if ( $form && $form->valid() )
     if ($mode == SW_SHOW){
         $form->hide();
     } else {
         $form->close();
     }
-}
-
-function cloneForm($name, $load_events = true){
-    
-    global $LOADER;
-    if ( !$name || !$name->valid() )
-        $name = $name->nameParam;
-        
-    return $LOADER->CreateForm((string)$name);
 }
 
 // запись в реестр...

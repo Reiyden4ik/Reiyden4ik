@@ -51,13 +51,13 @@ $result[] = array(
                   'TYPE'=>'',
                   'PROP'=>'max',
                   );
-/*
+
 $result[] = array(
                   'CAPTION'=>t('Error'),
                   'TYPE'=>'',
                   'PROP'=>'error',
                   );
-*/
+
 $result[] = array(
                   'CAPTION'=>t('Set value of object'),
                   'TYPE'=>'components',

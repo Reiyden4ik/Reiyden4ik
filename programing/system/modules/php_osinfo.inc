@@ -23,25 +23,3 @@ function osinfo_diskserial($disc){}
 
 // возвращает true если программа запущена под админом
 function osinfo_isadmin(){}
-
-// возвращает размер диска в байтах
-function osinfo_disktotal($disc){}
-
-// возвращает количество свободного места на диске в байтах
-function osinfo_diskfree($disc){}
-
-// возвращает тип диска int
-function osinfo_drivetype($disc){}
-
-// возвращает сетевое имя компьютера
-function osinfo_computername(){}
-
-// возвращает имя пользователя
-function osinfo_username(){}
-
-// возвращает код системного языка
-function osinfo_syslang(){}
-
-// вовзращает mac-адресс компьютера
-function osinfo_macaddress(){}
-

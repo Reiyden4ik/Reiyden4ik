@@ -5,25 +5,6 @@
 class myComplete {
     
     
-    static function updateComponentList(){
-        
-        $combo = c('fmPHPEditor->c_component');
-        $text = array();
-        
-        $forms = myProject::getFormsObjects();
-        foreach($forms as $form=>$list){
-            
-            $text[] = $form;
-            
-            foreach($list as $obj){
-                $text[] = '...' . $obj['NAME'];
-            }
-        }
-        
-        $combo->text = $text;
-    }
-    
-    
     static function init(){
         
         global $myComplete, $synComplete, $synHint, $phpMemo, $completeList,
@@ -58,7 +39,7 @@ class myComplete {
                 
                 $class = 'complete_' . $code;
                 if (method_exists($class, 'init'))
-                    call_user_func($class . '::init');
+                    call_user_method('init', $class);
             }
             
             $completeList[] = $info;
@@ -69,7 +50,7 @@ class myComplete {
         
        // $completeList =& $completes;
         //setThreadTimer(2000, 'myComplete::checkSyntax();');
-        Timer::setInterval('myComplete::checkInline', 200);
+        setTimer(200, 'myComplete::checkInline()');
     }
     
     static function saveCode(){
@@ -81,7 +62,7 @@ class myComplete {
             
             $class = 'complete_'.$complete['CODE'];
             if (method_exists($class, 'saveCode'))
-                call_user_func($class . '::saveCode', $code);
+                call_user_method('saveCode', $class, $code);
         }
     }
     
@@ -264,8 +245,7 @@ class myComplete {
     
     static function checkInline(){
         
-        
-        if (!c('fmPHPEditor')->visible) return;
+        if (!c('fmPHPEditor',1)->visible) return;
         
         $synComplete = c('fmPHPEditor->synComplete',1);
         

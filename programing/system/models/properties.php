@@ -51,12 +51,12 @@ class myProperties {
                 if ($el->link_self) $el = _c($el->link_self);
                 $el->$prop->assign($bitmap);
             }
-            
+        
             if ($param['UPDATE']) $myProperties->setProps();
             
-            if (!$bitmap->isEmpty()){
+            if (!$bitmap->isEmpty())
                 $obj->value = '(' . t('image') . ')';
-            } else
+            else
                 $obj->value = '(' . t('None') . ')';
                 
             $_sc->update();  // fix bug
@@ -178,8 +178,7 @@ class myProperties {
         
         if ($dlg->execute()){
             
-            $value = $dlg->value;
-            c($self)->value = $value;
+            c($self)->value = $dlg->value;
             
             $targets = count($_sc->targets_ex) ? $_sc->targets_ex : array($fmEdit);
             myHistory::add($targets, $prop);
@@ -353,7 +352,6 @@ class myProperties {
         $borderStyle  = $form->findComponent('c_borderstyle')->items->selected;
         
         $visible      = $form->findComponent('c_visible')->checked;
-        $noload       = $form->findComponent('c_noload')->checked;
         $i_close      = $form->findComponent('c_close')->checked;
         $i_min        = $form->findComponent('c_min')->checked;
         $i_max        = $form->findComponent('c_max')->checked;
@@ -374,7 +372,6 @@ class myProperties {
         $info['formStyle']   = $formStyle;
         $info['borderStyle'] = $borderStyle;
         $info['visible']     = $visible;
-        $info['noload']      = $noload;
         $info['i_close']     = $i_close;
         $info['i_min']       = $i_min;
         $info['i_max']       = $i_max;
@@ -393,7 +390,6 @@ class myProperties {
         $c_borderstyle= $form->findComponent('c_borderstyle');
         
         $c_visible    = $form->findComponent('c_visible');
-        $c_noload     = $form->findComponent('c_noload');
         $i_close      = $form->findComponent('c_close');
         $i_min        = $form->findComponent('c_min');
         $i_max        = $form->findComponent('c_max');
@@ -422,7 +418,6 @@ class myProperties {
             $c_borderstyle->items->selected   = $info['borderStyle'];
             
             $c_visible->checked      = (bool)$info['visible'];
-            $c_noload->checked       = (bool)$info['noload'];
             $i_close->checked        = $info['i_close'];
             $i_max->checked          = $info['i_max'];
             $i_min->checked          = $info['i_min'];
@@ -431,7 +426,6 @@ class myProperties {
             $c_windowState->items->selected = 'wsNormal';
             $c_formstyle->items->selected   = 'fsNormal';
             $c_visible->checked = false;
-            $c_noload->checked = false;
             $i_close->checked   = true;
             $i_max->checked     = true;
             $i_min->checked     = true;
@@ -600,7 +594,7 @@ class myProperties {
             
             } else {
                 //$obj->text = $this->selObj->$prop;
-                $obj->value = (string)$this->selObj->$prop;
+                $obj->value = $this->selObj->$prop;
             }
             
         }
@@ -928,24 +922,22 @@ class myProperties {
         } else
             $class = rtii_class($self);
         
-
         if (!is_object($this->selObj) || $this->last_class != $class){
-           
+            
             $this->selObj = toObject($self);
             $this->panel  = $panel;    
-           
+            
             if (!isset($this->panels[$class])){
                 if (is_array($componentProps[$class])){
-                    
-					
+                                    
                     $this->generateClass($class, 0);                    
-                         
+                        
                     if ($this->panels[$this->last_class]['PANEL']){
                         $this->panels[$class]['PANEL']->splitterPosition = $this->panels[$this->last_class]['PANEL']->splitterPosition;
                         $GLOBALS['dsg_cfg']->panelLeft->splitterW = $this->panels[$this->last_class]['PANEL']->splitterPosition;
                     }
                     else {
-					    //gui_propSet($this->panels[$class]['PANEL']->self, 'splitterPosition', $GLOBALS['dsg_cfg']->panelLeft->splitterW);
+                       
                         $this->panels[$class]['PANEL']->splitterPosition = $GLOBALS['dsg_cfg']->panelLeft->splitterW;
                     }
                     
@@ -961,7 +953,6 @@ class myProperties {
                 }
                 
                 $panel = $this->panels[$class]['PANEL'];
-
                 $panel->show();
                 $panel->toFront();
             }

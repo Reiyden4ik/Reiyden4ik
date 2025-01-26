@@ -27,7 +27,6 @@ class TTrayIcon extends __TNoVisual {
         
         parent::__initComponentInfo();
         $tray = new TCoolTrayIcon(_c($this->owner));
-        
         $tray->iconFile = $this->aiconFile;
         $tray->iconVisible = $this->aiconVisible;
         $tray->showHint = $this->ashowHint;
@@ -43,7 +42,7 @@ class TTrayIcon extends __TNoVisual {
         $tmp = $this->name;
         $this->name = '';
         $tray->name = $tmp;
-        //eventEngine::updateIndex($tray);
+        eventEngine::updateIndex($tray);
     }
 }
 

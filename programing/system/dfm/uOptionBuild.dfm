@@ -36,10 +36,6 @@ object fmProjectOptions: TfmProjectOptions
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = '{General}'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label1: TLabel
         Left = 16
         Top = 13
@@ -133,8 +129,6 @@ object fmProjectOptions: TfmProjectOptions
       ImageIndex = 1
       ExplicitLeft = 0
       ExplicitTop = 31
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         433
         285)
@@ -171,6 +165,31 @@ object fmProjectOptions: TfmProjectOptions
         Height = 233
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 1
+        object mod_desc: THTMLViewer
+          Left = 1
+          Top = 1
+          Width = 240
+          Height = 231
+          Cursor = crDefault
+          TabOrder = 0
+          Align = alClient
+          DefBackground = clWindow
+          BorderStyle = htNone
+          HistoryMaxCount = 0
+          DefFontName = 'Tahoma'
+          DefPreFontName = 'Courier New'
+          DefFontSize = 8
+          DefOverLinkColor = 16744448
+          NoSelect = True
+          ScrollBars = ssVertical
+          CharSet = DEFAULT_CHARSET
+          ServerRoot = './'
+          PrintMarginLeft = 2.000000000000000000
+          PrintMarginRight = 2.000000000000000000
+          PrintMarginTop = 2.000000000000000000
+          PrintMarginBottom = 2.000000000000000000
+          PrintScale = 1.000000000000000000
+        end
       end
     end
   end

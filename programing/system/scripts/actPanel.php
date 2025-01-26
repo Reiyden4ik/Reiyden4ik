@@ -6,7 +6,7 @@ c('fmMain->btn_saveProject')->onClick = 'myProject::saveAsDVSDialog';
 c('fmMain->btn_stop')->onClick = 'myUtils::stop';
 c('fmMain->btn_run')->onClick  = 'myUtils::run';
 c('fmMain->btn_newForm')->onClick = 'myUtils::newForm';
-//c('fmMain->btn_formList')->onClick = 'myUtils::formList';
+c('fmMain->btn_formList')->onClick = 'myUtils::formList';
 c('fmMain->btn_delForm')->onClick = 'myUtils::deleteForm';
 
 c('fmMain->fp_delete')->onClick = 'myUtils::deleteForm';
@@ -29,10 +29,7 @@ c('fmMain->hd_rightform')->onClick = 'myUtils::rightForm';
 
 c('fmMain->it_new')->onClick = 'myProject::newProjectDialog';
 c('fmMain->it_open')->onClick= 'myProject::openFromFileDialog';
-c('fmMain->it_save')->onClick= function(){
-    message_beep(66); 
-    myUtils::saveForm();
-};
+c('fmMain->it_save')->onClick= 'message_beep(66); myUtils::saveForm';
 c('fmMain->it_saveas')->onClick = 'myProject::saveAsDVSDialog';
 
 c('fmMain->it_undo')->onClick = 'myHistory::undo';

@@ -203,25 +203,18 @@ class __exEvents {
         
     }
     
-    static function getEventInfo($self){
-        
-        return $GLOBALS['__exEvents'][$self]['obj_name'];
-    }
-    
     static function setEventInfo($self, $event){
         
         global $__eventInfo;
-    
         $__eventInfo['obj_name'] = $GLOBALS['__exEvents'][$self]['obj_name'];
         $__eventInfo['name']     = $event;
-        $__eventInfo['self']     = $self;
         
         $GLOBALS['__ownerComponent_last'][] = $GLOBALS['__ownerComponent'];
         
-        if (gui_is($self, 'TForm'))
+        if (__rtii_class($self)=='TForm')
             $GLOBALS['__ownerComponent'] = $self;
         else
-            $GLOBALS['__ownerComponent'] = gui_owner($self);
+            $GLOBALS['__ownerComponent'] = cntr_owner($self);
         
         ob_start();
     }
@@ -237,7 +230,7 @@ class __exEvents {
         if ($controller)
         if (is_object($controller)){
             
-            if ($controller instanceof TChromium)
+            if ($controller instanceof TWebBrowser)
                 $controller->html = $str;
             else
                 $controller->text = $str;
@@ -245,7 +238,7 @@ class __exEvents {
         } elseif (is_string($controller) && function_exists($controller)){
             
             if ($str)
-                $controller($str);
+            $controller($str);
         }
         
         $GLOBALS['__ownerComponent'] = $GLOBALS['__ownerComponent_last'][count($GLOBALS['__ownerComponent_last'])-1];
@@ -259,7 +252,7 @@ class __exEvents {
         
        // $mode = $GLOBALS['__config']['config']['debug_mode'];
         
-        /*if (defined('DEBUG_OWNER_WINDOW')){
+        if (defined('DEBUG_OWNER_WINDOW')){
             $file = $GLOBALS['__exEvents'][$self]['obj_name'].'.'.$GLOBALS['__eventInfo']['name'];
             $file = str_replace('->','.',$file);
             $dir  = dirname(replaceSl(EXE_NAME));
@@ -273,9 +266,9 @@ class __exEvents {
                 file_put_contents($file, ('<?php '.enc_getValue('__incCode'). $code));
             }
             return include($file);            
-        } else {*/
+        } else {
             return eval( enc_getValue('__incCode') . $code);
-        //}
+        }
     }
     
     static function runCodeEx($script){
@@ -285,184 +278,170 @@ class __exEvents {
     
     static function getEvent($self, $name){
         
-        
-        if ((defined('EMULATE_DVS_EXE') && EMULATE_DVS_EXE===true) || defined('APP_DESIGN_MODE')){
+        if ((defined('EMULATE_DVS_EXE') && EMULATE_DVS_EXE===true) || defined('APP_DESIGN_MODE'))
             return $GLOBALS['__exEvents'][$self]['events'][strtolower($name)];
-        }
         else {
             return ___getEvent($self, strtolower($name));
         }
     }
     
-    static function callFileName($_self, $_eventName){
+    static function callCode($self, $name){
         
-        //pre($_eventName);
-            
-        $_file = $GLOBALS['__exEvents'][$_self]['obj_name'].'.'.$_eventName;
-        $_file = str_replace('->','.',$_file);
-        $_file = dirname(replaceSl(EXE_NAME)) . '/debug/' . $_file . '.php';
+        global $__config;
         
-        if (!is_dir(dirname($_file)))
-            mkdir(dirname($_file), 0777, true);
+        $script = self::getEvent($self,$name);
         
-        if (!file_exists($_file) ||
-            (md5('<?php ' . self::getEvent($_self,$_eventName))!=md5_file($_file))){
-            file_put_contents($_file, ('<?php '.self::getEvent($_self,$_eventName)."\n"));
-        }        
-        
-        return $_file;
+            self::setEventInfo($self, $name);
+            self::runCode(enc_getValue('__incCode') . ('$self=_c('.$self.');') . $script, $self);
+            self::freeEventInfo();
     }
     
-    static function callCode($_self, $_eventName){
+    static function callCodeKey($self, $key, $shift, $name){
         
-        $self   = c($_self);
+        $script = self::getEvent($self,$name);
         
-        self::setEventInfo($_self, $_eventName);
-        eval( enc_getValue('__incCode') );
+        $code  = '';
+        $code .= '$self=_c('.$self.'); $key='.addslashes($key).'; $shift=explode(",","'.$shift.'");';
+        $code .= $script;
+        $code .= '; __setVarEx(intval($key));';
         
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
-            
-            
+        self::setEventInfo($self, $name);
+        self::runCode($code, $self);
         self::freeEventInfo();
     }
     
-    static function callCodeKey($_self, &$key, $shift, $_eventName){
+    static function callCodeKeyPress($self, $key, $shift, $name){
         
-        $self   = c($_self); $shift  = explode(',', $shift);
+        $script = self::getEvent($self,$name);
         
-        self::setEventInfo($_self, $_eventName);
-
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
+        $code  = '';
+        $code .= '$self=_c('.$self.'); $key=chr('.ord($key).');';
+        $code .= $script;
+        $code .= '; __setVarEx(chr(ord($key)));';
         
+        self::setEventInfo($self, $name);
+        self::runCode($code, $self);
         self::freeEventInfo();
     }
     
-    static function callCodeKeyPress($_self, &$key, $shift, $_eventName){
+    static function callCodeCloseQuery($self, $canClose, $name){
         
-        $self   = c($_self); $shift  = explode(',', $shift);
+        $script = self::getEvent($self,$name);
         
-        self::setEventInfo($_self, $_eventName);
-        
-        eval( enc_getValue('__incCode') );
-        
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
-            
-        self::freeEventInfo();
-    }
+        $code  = '';
+        $code .= '$self=_c('.$self.'); $canClose='.$canClose.';';
+        $code .= $script;
     
-    static function callCodeCloseQuery($_self, &$canClose, $_eventName){
+        $code .= '; __setVarEx($canClose);';
         
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, $_eventName);
-        eval( enc_getValue('__incCode') );
-        
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
+        self::setEventInfo($self, $name);
+        self::runCode($code, $self);
         self::freeEventInfo();
     }
     
     
-    static function callCodeSelect($self, $value, $_eventName){
+    static function callCodeSelect($self, $value, $name){
         
-        $self   = c($_self);
+        $script = self::getEvent($self,$name);
         
-        self::setEventInfo($_self, $_eventName);
-        eval( enc_getValue('__incCode') );
+        $code  = '';
+        $code .= '$self=_c('.$self.'); $value=\''.addslashes($value).'\';';
+        $code .= $script;
         
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
+        self::setEventInfo($self, $name);
+        self::runCode($code, $self);
         self::freeEventInfo();
     }
     
-    static function callCodeScroll($self, $scrollCode, &$scrollPos, $_eventName){
+    static function callCodeScroll($self, $scrollCode, $scrollPos, $name){
         
-        $self   = c($_self);
+        $script = self::getEvent($self,$name);
         
-        self::setEventInfo($_self, $_eventName);
-        eval( enc_getValue('__incCode') );
+        $code  = '';
+        $code .= '$self=_c('.$self.'); $scrollPos='.$scrollPos.'; $scrollCode='.$scrollCode.';';
+        $code .= $script;
+    
+        $code .= '; __setVarEx($scrollPos);';
         
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
+        
+        self::setEventInfo($self, $name);
+        self::runCode($code, $self);
         self::freeEventInfo();
     }
     
-    static function callCodeMouse($_self, $button, $shift, $x, $y, $_eventName){
+    static function callCodeMouse($self, $button, $shift, $x, $y, $name){
         
-        $self   = c($_self); $shift  = explode(',', $shift);
+        $script = self::getEvent($self,$name);
         
-        self::setEventInfo($_self, $_eventName);
-        eval( enc_getValue('__incCode') );
+        $code  = '';
+        $code .= '$self=_c('.$self.'); $shift="'.$shift.'"; $x='.$x.'; $y='.$y.'; $button='.$button.';';
+        $code .= $script . ';';
         
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
+        self::setEventInfo($self, $name);
+        self::runCode($code, $self);
         self::freeEventInfo();
     }
     
-    static function callCodeMouseMove($_self, $shift, $x, $y, $_eventName){
+    static function callCodeMouseMove($self, $shift, $x, $y, $name){
         
-        $self   = c($_self); $shift  = explode(',', $shift);
+        $script = self::getEvent($self,$name);
         
-        self::setEventInfo($_self, $_eventName);
-        eval( enc_getValue('__incCode') );
+        $code  = '';
+        $code .= '$self=_c('.$self.'); $shift="'.$shift.'"; $x='.$x.'; $y='.$y.';';
+        $code .= $script . ';';
         
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
+        self::setEventInfo($self, $name);
+        self::runCode($code, $self);
         self::freeEventInfo();
     }
     
-    static function callEventEx($_self, $_params, $_eventName){
+    static function callEventEx($self, $params, $name){
         
-        foreach($_params as $_x_name => $_value){
-            $$_x_name = $_value;
+        $script = self::getEvent($self,$name);
+		
+        
+        $rnd = rand();
+        $set_name = '';
+        $code  = '';
+        $code .= '$self=_c('.$self.');';
+        foreach((array)$params as $x_name=>$value){
+            if ($x_name=='%var'){
+                $set_name = $value;
+            } else {
+                $GLOBALS[__FUNCTION__][$rnd][$x_name] = $value; 
+                $code .= '$'.$x_name.'=$GLOBALS['.__FUNCTION__.']['.$rnd.']["'.$x_name.'"];';
+            }
+        }
+		
+        $code .= $script . ';';
+        
+        if ($set_name){
+            $code .= ' __setVarEx($'.$set_name.');';
         }
         
-        $self = _c($_self);
-        self::setEventInfo($_self, $_eventName);
-        eval( enc_getValue('__incCode') );
-        
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
+        self::setEventInfo($self, $name);
+        self::runCode($code, $self);
         self::freeEventInfo();
+        
+        
+        unset($GLOBALS[__FUNCTION__][$rnd]);
     }
     
-    static function callEventVars($_self, &$_params, $_eventName){
+    static function callEventThread($self,$name){
         
-        foreach($_params as $_x_name => &$_value){
-            $$_x_name =& $_value;
-        }
-        
-        $self = _c($_self);
-        self::setEventInfo($_self, $_eventName);
-        eval( enc_getValue('__incCode') );
-        
-        if (defined('DEBUG_OWNER_WINDOW'))            
-            include self::callFileName($_self, $_eventName);
-        else 
-            eval( self::getEvent($_self,$_eventName) );
-        self::freeEventInfo();
+        $params = v('params_'.$self);
+        self::callEventEx($self, $params, $name);
     }
+    
+    
+    static function callThreadFunc($self, $name){
+        
+        if (function_exists($name)){
+            $params = v('params_'.$self);
+            call_user_func($name, $params);
+        }
+    }
+    
     
     static function OnExecute($__self, $__names){
         
@@ -482,14 +461,7 @@ class __exEvents {
         $__script = self::getEvent($__self,'OnExecute');
         
         self::setEventInfo($__self, $__name);
-        
-            eval( enc_getValue('__incCode') );
-            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, $_eventName);
-            else 
-                $res = eval( self::getEvent($_self,$_eventName) );
-            
+            $res = eval((enc_getValue('__incCode') . $__script));
         self::freeEventInfo();
             
         return $res;
@@ -497,7 +469,6 @@ class __exEvents {
     
     static function OnActivate($self){ self::callCode($self, __FUNCTION__); }
     static function OnDeactivate($self){ self::callCode($self, __FUNCTION__); }
-    static function OnChromiumLibLoad($self){ self::callCode($self, __FUNCTION__); }
     
     static function OnStartTrack($self){ self::callCode($self, __FUNCTION__); }
     static function OnEndTrack($self){ self::callCode($self, __FUNCTION__); }
@@ -514,13 +485,10 @@ class __exEvents {
     static function OnShow($self){ self::callCode($self, __FUNCTION__); }
     static function OnSetCursor($self){ self::callCode($self, __FUNCTION__); }
     static function OnSelect($self){ self::callCode($self, __FUNCTION__); }
-
-    static function OnFocus($self){ self::callCode($self, __FUNCTION__); }
-    static function OnBlur($self){ self::callCode($self, __FUNCTION__); }
     
-    static function OnCloseQuery($self, &$canClose){ self::callCodeCloseQuery($self, $canClose, __FUNCTION__); }
+    static function OnCloseQuery($self, $canClose){ self::callCodeCloseQuery($self, $canClose, __FUNCTION__); }
     
-    static function OnScroll($self, $scrollCode, &$scrollPos){ self::callCodeScroll($self, $scrollCode, $scrollPos, __FUNCTION__); }
+    static function OnScroll($self, $scrollCode, $scrollPos){ self::callCodeScroll($self, $scrollCode, $scrollPos, __FUNCTION__); }
     
     static function OnSelectDialog($self, $value){
         self::callCodeSelect($self, $value, __FUNCTION__);
@@ -529,15 +497,15 @@ class __exEvents {
     static function OnMouseEnter($self){ self::callCode($self, __FUNCTION__); }
     static function OnMouseLeave($self){ self::callCode($self, __FUNCTION__); }
     
-    static function OnKeyDown($self, &$key, $shift){
+    static function OnKeyDown($self, $key, $shift){
         self::callCodeKey($self, $key, $shift, __FUNCTION__);
     }
     
-    static function OnKeyUp($self, &$key, $shift){
+    static function OnKeyUp($self, $key, $shift){
         self::callCodeKey($self, $key, $shift, __FUNCTION__);
     }
     
-    static function OnKeyPress($self, &$key){
+    static function OnKeyPress($self, $key){
         self::callCodeKeyPress($self, $key, 0, __FUNCTION__);
     }
     
@@ -553,247 +521,27 @@ class __exEvents {
         self::callCodeMouseMove($self, $shift, $x, $y, __FUNCTION__);
     }
     
-    static function OnBeforeBrowse($_self, $url, $method, $navType, $isRedirect, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );
-            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnBeforePopup($_self, $url, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );
-            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnBeforeMenu($_self, $x, $y, $linkUrl, $imageUrl, $pageUrl, $frameUrl, $selectText, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );
-            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnAuthCredentials($_self, $isProxy,$port,$host,$realm,$scheme,$username,$password,&$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnGetDownloadHandler($_self, $url, $mimeType, $fileName, $contentLength, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnConsoleMessage($_self, $message, $source, $line, &$continue){
-        
-        $self   = c($_self);
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnLoadStart($_self){
-        
-        self::callCode($_self, __FUNCTION__);
-    }
-    
-    static function OnLoadEnd($_self, $httpStatus, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnLoadError($_self, $errorCode, $failedUrl, $errorText, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnStatusMessage($_self, $value, $status, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnAddressChange($_self, $url){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnTitleChange($_self, $title, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnTooltip($_self, $text, &$continue){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-    
-    static function OnContentsSizeChange($_self, $width, $height){
-        
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
-
-    static function OnDropFiles($_self, $files, $x, $y){
-        
-        $files  = explode(chr(10), $files);
-        $self   = c($_self);
-        
-        self::setEventInfo($_self, __FUNCTION__);
-            eval( enc_getValue('__incCode') );            
-            if (defined('DEBUG_OWNER_WINDOW'))            
-                $res = include self::callFileName($_self, __FUNCTION__);
-            else 
-                $res = eval( self::getEvent($_self,__FUNCTION__) );
-        self::freeEventInfo();
-    }
 }
 
-function ___getEvent($self, $name){
-    
-    
-    $name= strtolower($name);
-    /*$crc = $GLOBALS['__exEvents'][$self]['crc'][$name];
-    $len = $GLOBALS['__exEvents'][$self]['len'][$name];
-
-    if ($len === strlen($GLOBALS['__exEvents'][$self]['events'][$name])
-        && crc32($GLOBALS['__exEvents'][$self]['events'][$name]) == $crc)*/
-        $result = ($GLOBALS['__exEvents'][$self]['events'][$name]);
-    /*else
-        $result = '';*/
-    return $result;
+function ___getEvent($self, $name){$name= strtolower($name);
+            $crc = $GLOBALS['__exEvents'][$self]['crc'][$name];
+            $len = $GLOBALS['__exEvents'][$self]['len'][$name];
+			
+            if ($len === strlen($GLOBALS['__exEvents'][$self]['events'][$name])
+                && crc32($GLOBALS['__exEvents'][$self]['events'][$name]) == $crc)
+                $result = ($GLOBALS['__exEvents'][$self]['events'][$name]);
+            else
+                $result = '';
+		
+			return $result;
 }
 
 
-DSApi::reg_eventParams('onKeyUp',array('self','&key','shift'));
-DSApi::reg_eventParams('onKeyDown',array('self','&key','shift'));
-DSApi::reg_eventParams('onKeyPress',array('self','&key'));
+DSApi::reg_eventParams('onKeyUp',array('self','key','shift'));
+DSApi::reg_eventParams('onKeyDown',array('self','key','shift'));
+DSApi::reg_eventParams('onKeyPress',array('self','key'));
 DSApi::reg_eventParams('onMouseDown',array('self','button','shift','x','y'));
 DSApi::reg_eventParams('onMouseUp',array('self','button','shift','x','y'));
 DSApi::reg_eventParams('onMouseMove',array('self','shift','x','y'));
-DSApi::reg_eventParams('onMouseWheel',array('self','shift', 'wheelDelta', 'x', 'y', '&handled'));
-DSApi::reg_eventParams('onCloseQuery',array('self','&canClose'));
-DSApi::reg_eventParams('onScroll',array('self','scrollCode', '&scrollPos'));
-
-
-DSApi::reg_eventParams('onBeforePopup', array('self', 'url', '&continue'));
-DSApi::reg_eventParams('onBeforeBrowse', array('self', 'url', 'method', 'navType', 'isRedirect', '&continue'));
-DSApi::reg_eventParams('onBeforeMenu', array('self', 'x', 'y', 'linkUrl', 'imageUrl', 'pageUrl', 'frameUrl', 'selectText', '&continue'));
-
-DSApi::reg_eventParams('OnAuthCredentials',
-    array('isProxy', 'port', 'host', 'realm', 'scheme', 'username', 'password', '&continue'));
-
-DSApi::reg_eventParams('OnGetDownloadHandler',
-    array('url', 'mimeType', 'fileName', 'contentLength', '&continue'));
-
-DSApi::reg_eventParams('OnConsoleMessage',
-    array('message', 'source', 'line', '&continue'));
-
-DSApi::reg_eventParams('OnLoadStart',array());
-DSApi::reg_eventParams('OnLoadEnd',array('httpStatus', '&continue'));
-DSApi::reg_eventParams('OnLoadError',array('errorCode', 'failedUrl', 'errorText', '&continue'));
-DSApi::reg_eventParams('OnStatusMessage',array('value', 'status', '&continue'));
-
-DSApi::reg_eventParams('OnAddressChange',array('url'));
-DSApi::reg_eventParams('OnTitleChange',array('title', '&continue'));
-DSApi::reg_eventParams('OnTooltip',array('text', '&continue'));
-
-DSApi::reg_eventParams('OnContentsSizeChange',array('width', 'height'));
-
-DSApi::reg_eventParams('onDropFiles',array('self','files', 'x', 'y'));
+DSApi::reg_eventParams('onCloseQuery',array('self','canClose'));
 ?>

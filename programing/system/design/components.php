@@ -47,19 +47,19 @@ if (EMULATE_DVS_EXE) return;
     foreach ($files as $file){
         $componentMethods[basenameNoExt($file)] = include($dir_n . '/components/methods/' . $file);
     }
-	
+
     $files = findFiles($dir_n . '/components/modifers/','php');
     foreach ($files as $file){
-        require($dir_n . '/components/modifers/' . $file);
+        include($dir_n . '/components/modifers/' . $file);
     }
-	
+
     BlockData::sortList($_components, 'SORT');
     
     
     $files = findFiles($dir_n . '/editor_types/','php');
     foreach ($files as $file)
         require $dir_n . '/editor_types/' . $file;
-	
+    
     ////// создаем панель компонентов /////////
     global $fmComponents;
     /*$cp = new TComponentPanel($fmComponents);
@@ -79,8 +79,7 @@ if (EMULATE_DVS_EXE) return;
             foreach ((array)$c['MODULES'] as $mod){
                 
                 if ( ! extension_loaded(str_ireplace('php_','',basenameNoExt($mod))) ){
-					gui_Message(t('Пропишите %s модуль в /core/php.ini в секцию extensions', $mod));
-					//dl($mod);
+                    dl($mod);
                 }
             }
             

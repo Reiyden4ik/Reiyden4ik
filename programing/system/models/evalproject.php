@@ -16,7 +16,7 @@ class evalProject {
     
     public function __construct(){
         
-        $this->rand = rand(0, 9999999999);
+        $this->rand = random(9999999999);
         $this->dvs_dir = TEMP_DIR .'/devels/'. $this->rand . '/';
     }
     
@@ -24,7 +24,6 @@ class evalProject {
         
         $tt = microtime(1);
         $GLOBALS['APP_DESIGN_MODE'] = false;
-        
         
         if (EMULATE_DVS_EXE)
         if (!is_file($file))
@@ -49,6 +48,12 @@ class evalProject {
         $this->config    = $result['CONFIG'];
         $this->formsInfo = $result['formsInfo'];
         
+        /*foreach ($this->config['modules'] as $mod){
+            
+            if (!extension_loaded(str_ireplace('php_','',basenameNoExt($mod)))){
+                dl($mod);
+            }
+        }*/
         
         $last_DATA = eventEngine::$DATA;
         eventEngine::$DATA = $result['eventDATA'];
@@ -73,7 +78,8 @@ class evalProject {
         }
         
         eventEngine::$DATA = $last_DATA;
-       
+        
+        DSApi::initForThread();        
         DSApi::__doStartFunc();
             
         //pre(microtime(1)-$tt);
@@ -118,7 +124,7 @@ class evalProject {
         
         eventEngine::$DATA = $last_DATA;
             
-        
+        DSApi::initForThread();
         //pre($this->formsInfo);
         if ($to_show)
             $this->showModal();
@@ -142,9 +148,7 @@ class evalProject {
     
     public function loadFormStr($str, $name){
         
-        if (c($name)->valid()){         
-            error_msg('Form "'.$name.'" is exists!');
-        }
+        if (c($name)) error_msg('Form "'.$name.'" is exists!');
         
         $str  = str_ireplace('fsMDIChild','fsNormal',$str);
         
@@ -153,7 +157,7 @@ class evalProject {
         // загружаем опции формы
         $this->initFormCfg($this->forms[$name], $name);
         
-        DSApi::initEvent($this->forms[$name], false, true);
+        DSApi::initEvent($this->forms[$name], true);
         Localization::localForm($this->forms[$name]);
         
         return $this->forms[$name];
@@ -163,7 +167,7 @@ class evalProject {
         
         $name = basenameNoExt($dfm_file);
         
-        if (c($name)->valid()) error_msg('Form "'.$name.'" is exists!');
+        if (c($name)) error_msg('Form "'.$name.'" is exists!');
         
         $str  = file_get_contents($dfm_file);
         $str  = str_ireplace('fsMDIChild','fsNormal',$str);
@@ -191,7 +195,6 @@ class evalProject {
         
         global $msp_projects_utils;
         
-        
         $util =& $msp_projects_utils[$msp_project];
         
         if ($update && $util){
@@ -200,6 +203,7 @@ class evalProject {
             return $util;
             
             $util = new evalProject;
+            
             if (fileExt($msp_project)=='dvs')
                 $util->loadDVS($msp_project);    
             else
@@ -212,7 +216,7 @@ class evalProject {
     
     static function openAsExe($project){
         
-        $fileExe = dirname(EXE_NAME).'/DevelStudio.exe';
+        $fileExe = dirname(EXE_NAME).'/DevelStudio2010.exe';
         
         if (file_exists($fileExe)){
             if (fileExt($project)!='dvsexe')

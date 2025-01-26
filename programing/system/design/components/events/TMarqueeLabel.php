@@ -1,4 +1,0 @@
-<?
-$result = array();
-
-return $result;

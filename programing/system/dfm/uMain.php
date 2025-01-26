@@ -1,43 +1,43 @@
 <?
 
+$GLOBALS['checkVer_timer'] = setTimer(10000, 'evfmMain::checkVer()');
+
 class evfmMain {
     
-    static function checkVer($file_info, $last_ver){
+    static function checkVer(){
         
         global $dsg_cfg;
+        $last_ver = c("fmMain")->lastVer;
         if ($last_ver){
             
             if ($dsg_cfg->main->lastVer!=$last_ver && compareVer($last_ver, DV_VERSION)===1){
                 
+                
                 $dsg_cfg->main->lastVer = $last_ver;
                 
                 if (messageBox(t("Доступна новая версия: %s\nОбновить программу?",$last_ver), t('.: Мастер обновления :.'), MB_YESNO)==mrYes){
-                    
-                    ev_it_masterupdate::onClick();
-                    //run(dirname(EXE_NAME).'/update.exe');
+                    run(dirname(EXE_NAME).'/update.exe');
                 }
             }
-        }
-    }
-    
-    static function getLastVer(){
-        
-		/*
-        err_no();
-        $file_info = file("http://develstudio.ru/upd/last.txt");
-        $last_ver = $file_info[3];
             
-        sync('evfmMain::checkVer', array($file_info, $last_ver));
-		*/
+            $GLOBALS['checkVer_timer']->free();
+        }
     }
     
     static function onShow(){
         
-        $th = new TThread('evfmMain::getLastVer');
-        Timer::setTimeout(function() use ($th) {
+        $t = new Thread;
+        $t->code = '
             
-            $th->resume();
-        }, 5000);
+            err_no();
+            $file_info = file("http://develstudio.ru/upd/last.txt");
+            $last_ver = $file_info[3];
+            
+                c("fmMain")->lastVer  = $last_ver;
+                c("fmMain")->fileInfo = $file_info;
+        ';
+
+        $t->start();
     }
     
     // сохранение настроек программы...
@@ -124,9 +124,9 @@ class evfmMain {
         return false;
     }
     
-    static function panelStartDock($self, &$drag){
+    static function panelStartDock($self){
         
-        $drag = control_dragobject($self);
+        __setVarEx( control_dragobject($self) );
     }
     
     static function loadMainConfig(){
@@ -138,12 +138,11 @@ class evfmMain {
         if (c('fmPHPEditor->panelActions')->width < 5)
             c('fmPHPEditor->panelActions')->width = 5;
         
-		
         myOptions::getXYWH('rundebug', c('fmRunDebug'));
         
         c('fmMain->pDockRight')->w = myOptions::get('pDockRight','width',200);
         c('fmMain->pDockLeft')->w = myOptions::get('pDockLeft','width',220);
-        c('fmMain->pDockBottom')->h = myOptions::get('pDockBottom','height',220);
+        c('fmMain->pDockBottom')->h = myOptions::get('pDockBottom','height',170);
         
         c('fmMain->list')->selectedList = explode(',',myOptions::get('components','groups', 'main'));
         c('fmMain->list')->smallIcons   = myOptions::get('components','smallIcons',false);
@@ -196,42 +195,18 @@ class evfmMain {
             c('fmMain->it_debuginfo')->checked = c('fmMain->pDebugWindow')->visible;
         }
         
-            $obj  = new TComboBox( c('fmMain') );
-            $list = c('fmObjectInspector->list');
-            
-            $obj->parent = $list->parent;
-            $obj->align  = alTop;
-            $obj->style  = csDropDownList;
-            $obj->text   = array(t('Большие иконки'), t('Маленькие иконки'));
-
-            $smallIcons = myOptions::get('inspector', 'smallIcons', 0);
-            
-            $list->viewStyle = (int)$smallIcons;
-            $obj->itemIndex = $smallIcons;
-
-            $obj->onChange = function() use ($obj, $list){
-                    $list->viewStyle = $obj->itemIndex;
-                    myOptions::set('inspector', 'smallIcons', $obj->itemIndex);
-            };
-            
-            c('fmPropsAndEvents->eventList')->onDblClick = 'myEvents::phpEditorShow';
-            c('fmPropsAndEvents->btn_editEvent')->onClick = 'myEvents::phpEditorShow';
-            c('fmPropsAndEvents->btn_delEvent')->onClick  = 'myEvents::deleteEvent';
-            c('fmPropsAndEvents->btn_changeEvent')->onClick = 'myEvents::changeEvent';
-            
-            gui_propSet(c("fmObjectInspector->list")->IconOptions, 'AutoArrange', 1);
     }
     
-    static function onCloseQuery($self, &$canClose){
+    static function onCloseQuery($self, $canClose){
         
         
         if (!defined('IS_APPLICATION_START')) return false;
-        $res = messageBox(t("Все данные будут утеряны.\nВы хотите сохранить проект перед выходом?"),t('Closing Devel Studio'),MB_YESNOCANCEL);
+        $res = messageBox(t("Все данные будут утерены.\nВы хотите сохранить проект перед выходом?"),t('Closing Devel Studio'),MB_YESNOCANCEL);
         
         if ($res == mrYes){
             
             if (!myProject::saveAsDVSDialog()){
-                $canClose = false;
+                __setVarEx(false);
                 return false;
             }
             
@@ -241,7 +216,7 @@ class evfmMain {
             self::saveMainConfig();
         } elseif ($res == mrCancel) {
             
-            $canClose = false;
+            __setVarEx(false);
         }
         
     }
@@ -330,30 +305,28 @@ class ev_it_siteprogram {
     
     static function onClick(){
         
-        shell_execute(0,'open','http://develstudioce.ru/','','',SW_SHOW);
+        shell_execute(0,'open','http://develstudio.ru/','','',SW_SHOW);
     }
 }
 
 class ev_fmMain_it_phphelp {
     
     static function onClick(){
-        run('http://www.youtube.com/watch?v=83m2mJSSnCA&list=PLn1gnC6qqLU2A2ocxejGZ96j4Yry1sBoH&index=1');
+        run('http://php.su/learnphp/');
     }
 }
 
 class ev_it_helpbook {
     
-	/*
     static function onClick() {
         
-        return shell_execute(0,'open','http://www.youtube.com/playlist?list=PLn1gnC6qqLU2A2ocxejGZ96j4Yry1sBoH','','',SW_SHOW);
+        return shell_execute(0,'open','http://help.develstudio.ru/Vvedenie-16.html','','',SW_SHOW);
         
         if (!file_exists(DOC_ROOT . '/lang/' . LANG_ID . '/help.chm'))
             error_message(t('Help book not found for this language'));
         else
             shell_execute(0,'open', DOC_ROOT . '/lang/' . LANG_ID . '/help.chm');
     }
-	*/
 }
 
 class ev_it_aboutprogram {
@@ -371,14 +344,6 @@ class ev_it_exit {
     }
 }
 
-class ev_fmMain_it_registration {
-    
-    static function onClick(){
-        c('fmRegistration')->showModal();
-    }
-}
-
-
 
 class ev_it_masterupdate {
     
@@ -387,13 +352,6 @@ class ev_it_masterupdate {
         //run(dirname(EXE_NAME).'/update.exe');
         evalProject::openAsExe( dirname(EXE_NAME).'/update.dvsexe' );
     }
-}
-
-class ev_it_makebackup {
-
-	static function onClick(){
-		myBackup::doInterval();
-	}
 }
 
 class ev_statusBar {
@@ -433,8 +391,8 @@ class ev_fmMain_pDockLeft {
 
 class ev_fmMain_pDockRight {
     
-    function onDockDrop($self, $source){
-        ev_fmMain_pDockLeft::onDockDrop($self, $source);
+    function onDockDrop($self){
+        ev_fmMain_pDockLeft::onDockDrop($self);
     }
     
     function onUndock($self, $count = 1){
@@ -497,7 +455,7 @@ class ev_fmMain_pDockMain {
         global $_sc, $fmEdit;
         
         myDesign::formProps();
-        form_parent($fmEdit->self, c('fmMain->pDockMain')->self);
+        form_parent($fmEdit, c('fmMain->pDockMain')->self);
         $_sc->clearTargets();
     }
     
@@ -571,7 +529,7 @@ class ev_fmMain_shapeSize {
         $maxH = $fmEdit->constraints->maxHeight;
         $aSize= $fmEdit->autoSize;
         $gridSize = myOptions::get('sc','gridSize',8);
-
+        
         if ($shapeSize){
         
             if ($fW<0 || $fH<0) return;
@@ -588,20 +546,22 @@ class ev_fmMain_shapeSize {
             $new_w = $new_w - $new_w% $gridSize;
             
             if ($curType==crSizeWE || $curType==crSizeNWSE){
-                if ((($new_w-($gridSize * 2)-1 < $maxW) || $maxW==0) && (($new_w-($gridSize * 2)-1 > $minW) || $minW==0)){
-                    c('fmMain->shapeSize',1)->w = $new_w < 1 ? $gridSize * 2 : ($new_w - $gridSize * 2) + 17;
-                    $fmEdit->w = $new_w-$gridSize * 2;
+                if ((($new_w-17 < $maxW) || $maxW==0) && (($new_w-17 > $minW) || $minW==0)){
+                    c('fmMain->shapeSize',1)->w = $new_w < 1 ? 16 : $new_w+1;
+                    $fmEdit->w = $new_w-16;
                 }
+                /*c('fmMain->shapeSize',1)->w = $new_w;
+                $fmEdit->w = $new_w-17;*/
             }
             
             $new_h = $y+1 + $_preY;
-            $new_h = $new_h - ($new_h % $gridSize );
+            $new_h = $new_h - ($new_h% $gridSize );
             
             if ($curType==crSizeNS || $curType==crSizeNWSE){
                 
-                if ((($new_h-($gridSize * 2)-1 < $maxH) || $maxH==0) && (($new_h-($gridSize * 2)-1 > $minH) || $minH==0)){
-                    c('fmMain->shapeSize',1)->h = $new_h < 1 ? $gridSize * 2 : ($new_h - $gridSize * 2) + 17;
-                    $fmEdit->h = $new_h - $gridSize * 2;
+                if ((($new_h-17 < $maxH) || $maxH==0) && (($new_h-17 > $minH) || $minH==0)){
+                    c('fmMain->shapeSize',1)->h = $new_h < 1 ? 16 : $new_h+1;
+                    $fmEdit->h = $new_h-16;
                 }
                
             }
@@ -620,62 +580,4 @@ class ev_fmMain_shapeSize {
         global $shapeSize;
         $shapeSize = false;
     }
-}
-
-
-class ev_fmMain_rtcExec {
-
-	function onClick($self){
-		eval( c("fmMain->runtimeCode")->text );
-	}
-}
-
-class ev_fmMain_btn_addvar {
-	
-	function onClick($self){
-		global $currentArr;
-		if ($arr = inputText("Сканирование массива", "Введите массив переменных среды", '$GLOBALS', true)){
-			c("VariablesPath")->text = $arr;
-			eval ('foreach (array_keys(' . c("VariablesPath")->text . ') as $key){
-					$list .= $key . "\n";
-			    }
-				c("fmMain->VariablesTree")->text = $list;
-			');
-		}
-	}
-}
-
-class ev_fmMain_VariablesTree {
-	
-	function onDblclick($self){
-		
-		eval ('
-			if (is_array(' . c("VariablesPath")->text . '[' . c("VariablesTree")->itemSelected . '])){
-				foreach (array_keys(' . c("VariablesPath")->text . '[' . c("VariablesTree")->itemSelected . ']) as $key){
-					$list .= $key . "\n";
-			    }
-				c("fmMain->VariablesPath")->text .= "[" . ' . c("VariablesTree")->itemSelected . ' . "]";
-				c("fmMain->VariablesTree")->text = $list;
-			} else {
-				c("fmMain->VariablesEdit")->text = ' . c("VariablesPath")->text . '[' . c("VariablesTree")->itemSelected . '];
-			}
-		');
-	}
-}
-
-class ev_fmMain_it_fullscreen {
-	
-	function onClick($self){
-		global $fullscreen, $SCREEN;
-		if (!$fullscreen){
-			c("fmMain")->borderStyle = bsNone;
-			c("fmMain")->x = c("fmMain")->y = 0;
-			c("fmMain")->w = $SCREEN->width;
-			c("fmMain")->h = $SCREEN->height;
-			$fullscreen = true;
-		} else {
-			c("fmMain")->borderStyle = bsSingle;
-			$fullscreen = false;
-		}
-	}
 }

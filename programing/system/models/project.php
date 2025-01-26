@@ -9,11 +9,11 @@ class myProject {
     static function registerFileType(){
         
         $_e = err_status(false);
-        registerFileType('dvs', dirname(EXE_NAME).'/DevelStudio.exe');
-        registerFileType('msppr', dirname(EXE_NAME).'/DevelStudio.exe');
-        registerFileType('dspak', dirname(EXE_NAME).'/DevelStudio.exe');
-        registerFileType('zipdspak', dirname(EXE_NAME).'/DevelStudio.exe');
-        registerFileType('dvsexe', dirname(EXE_NAME).'/DevelStudio.exe');
+        registerFileType('dvs', dirname(EXE_NAME).'/DevelStudio2010.exe');
+        registerFileType('msppr', dirname(EXE_NAME).'/DevelStudio2010.exe');
+        registerFileType('dspak', dirname(EXE_NAME).'/DevelStudio2010.exe');
+        registerFileType('zipdspak', dirname(EXE_NAME).'/DevelStudio2010.exe');
+        registerFileType('dvsexe', dirname(EXE_NAME).'/DevelStudio2010.exe');
         err_status($_e);
     }
     
@@ -28,7 +28,7 @@ class myProject {
         $fileName = replaceSl($_PARAMS[2]);
         //pre($fileName);
         if (file_exists($fileName)){
-
+        
             if (fileExt($fileName)=='dvs'){
                 if (!self::openFromDVS($fileName)){
                     myProject::open( $projectFile );
@@ -44,11 +44,10 @@ class myProject {
             }
             
         } elseif ( is_file($projectFile) ){
-
+            
             myProject::open( $projectFile );
-			
         } else {
-
+            
         }
     }
     
@@ -96,10 +95,8 @@ class myProject {
         global $_FORMS;
         
         c('fmMain->tabForms')->tabs->clear();
-		 
-        foreach ($_FORMS as $form){
+        foreach ($_FORMS as $form)
             c('fmMain->tabForms')->addPage($form);
-	}
     }
     
     static function getFormsObjects( $classes = false ){
@@ -195,7 +192,7 @@ class myProject {
         
         $props = array('autoScroll','autoSize','alphaBlend','alphaBlendValue','screenSnap','clientWidth','clientHeight',
                         'snapBuffer','transparentColor','transparentColorValue','borderWidth');
-
+        
         $fmEdit->constraints->maxwidth = $info['maxwidth'];
         $fmEdit->constraints->minwidth = $info['minwidth'];
         $fmEdit->constraints->maxheight= $info['maxheight'];
@@ -203,7 +200,7 @@ class myProject {
         
         foreach ($props as $p){
             $fmEdit->$p = $info[$p];
-        } 
+        }
     }
     
     static function setPropForm($prop, $value){
@@ -288,7 +285,7 @@ class myProject {
             }
             
         $lastFiles = array_values($lastFiles);
-        file_put_contents(DS_USERDIR . 'last.lst', serialize($lastFiles));
+        file_put_contents(winLocalPath(CSIDL_PERSONAL).'/DevelStudio/last.lst', serialize($lastFiles));
         
             $objLast = c('fmMain->it_lastprojects');
             
@@ -361,10 +358,13 @@ class myProject {
         $GLOBALS['IS_OLD_PROJECT'] = false;
         if (self::cfg('DV_VERSION')=='' || self::cfg('DV_VERSION')=='2.0.0.0'){
         //if (true){  
-            //$GLOBALS['IS_OLD_PROJECT'] = true;
+            $GLOBALS['IS_OLD_PROJECT'] = true;
             // конвертируем старый формат событий...
-            alert(t("Вы пытаетесь загрузить проект старого формата. Данный формат больше не поддерживается"));
-            return false;
+            if ( !confirm(
+                t("Вы пытаетесь загрузить проект старого формата, он будет автоматически конвертирован. Продолжить?"))
+               ){
+                return false;
+            }
             
             global $_FORMS, $fmEdit;
             
@@ -451,17 +451,16 @@ class myProject {
         } else {
             
         }
-
+        
         self::clearProject();
-
+        
         myVars::set($file, 'projectFile');
         myVars::set($forms,'_FORMS');
         myVars::set(0, 'formSelected');
-
-        myUtils::loadForm($forms[0], true);
-		
+        
+        myUtils::loadForm($forms[0]);
         self::genTabs();
-
+        
         if (!self::checkOldFormat()){
             self::open($last_project);
             return;
@@ -519,7 +518,7 @@ class myProject {
         if (!is_writable(dirname($file)))
             return false;
         
-
+        
         myUtils::saveForm();
         
         global $projectFile, $_FORMS, $myProject;
@@ -564,11 +563,9 @@ class myProject {
     
     static function clearProject(){
         
-	global $_sc;
         foreach (myUtils::$forms as $form)
             $form->free();
-        
-	$_sc = false;
+            
         myUtils::$forms = array();
     }
     
@@ -589,145 +586,81 @@ class myProject {
         
         if ($dir){
             $projectFile = $dir .'/'. basenameNoExt($file) . '.msppr';
-			
-			$_e = err_status(false);
-			
-				$result = file_get_contents($file);
-				$x = unserialize(base64_decode(gzuncompress($result)));
-				
-				if (!$x)
-					$result = unserialize(base64_decode($result));
-				else
-					$result = $x;
-				
-				unset($x);
-			
-			err_status($_e);
-			
-			$myProject->config    = $result['CONFIG'];
-			$myProject->formsInfo = $result['formsInfo'];
-			$myProject->add_info  = $result['add_info'];
-			eventEngine::$DATA    = $result['eventDATA'];
-			
-			
-			foreach((array)$result['scripts'] as $x_file=>$data)
-				file_p_contents(dirname($projectFile).'/scripts/'.$x_file, $data );
-			
-			foreach((array)$result['data'] as $x_file=>$x_data){
-			
-				$x_file = dirname($projectFile) .'/'. $myProject->config['data_dir'] .'/'. $x_file;
-			
-				if (!is_dir(dirname($x_file)))
-					mkdir( dirname($x_file), 0777, true);
-				
-				file_put_contents($x_file, gzuncompress($x_data) );
-			}
-		
-			$_FORMS = array();
-			
-			foreach ($result['DFM'] as $form=>$data){
-				
-				$dfm_file = dirname($projectFile) .'/'.$form.'.dfm';
-				//($dfm_file)){
-					$_FORMS[] = $form;
-					file_put_contents($dfm_file, $data);
-				//}
-			}
-			
-			if (!self::checkOldFormat()){
-				self::open($last_project);
-				return;
-			}
-			
-			self::genTabs();
-			$formSelected = 0;
-			myUtils::loadForm($_FORMS[0], true);
-			myUtils::saveProject();
-			return true;
-			
-			
         } else {
-          
-            self::DVSDialog(replaceSr(dirname($file)) .'\\'. basenameNoExt($file) .'\project.msppr', $file);
             
+            $path = self::projectDialog(replaceSr(dirname($file)) .'\\'. basenameNoExt($file) .'\project.msppr');
+            
+            if ($path){
+                        
+                self::clearProject();
+                $projectFile = replaceSl($path['PATH']);
+                self::initLastFiles($projectFile);
+                
+                if (!is_dir(dirname($projectFile)))
+                    mkdir(dirname($projectFile),0777,true);
+                
+                if ($path['DEL_ALL_FILES'])
+                    deleteDir(dirname($projectFile), false);
+                    
+            } else
+                return false;
         }
-		
+         
+        $_e = err_status(false);
+        
+            $result = file_get_contents($file);
+            $x = unserialize(base64_decode(gzuncompress($result)));
+            
+            if (!$x)
+                $result = unserialize(base64_decode($result));
+            else
+                $result = $x;
+            
+            unset($x);
+        
+        err_status($_e);
+        
+        $myProject->config    = $result['CONFIG'];
+        $myProject->formsInfo = $result['formsInfo'];
+        $myProject->add_info  = $result['add_info'];
+        eventEngine::$DATA    = $result['eventDATA'];
+        
+        
+        foreach((array)$result['scripts'] as $x_file=>$data)
+            file_p_contents(dirname($projectFile).'/scripts/'.$x_file, $data );
+        
+        foreach((array)$result['data'] as $x_file=>$x_data){
+        
+            $x_file = dirname($projectFile) .'/'. $myProject->config['data_dir'] .'/'. $x_file;
+        
+            if (!is_dir(dirname($x_file)))
+                mkdir( dirname($x_file), 0777, true);
+            
+            file_put_contents($x_file, gzuncompress($x_data) );
+        }
+    
+        $_FORMS = array();
+        
+        foreach ($result['DFM'] as $form=>$data){
+            
+            $dfm_file = dirname($projectFile) .'/'.$form.'.dfm';
+            //($dfm_file)){
+                $_FORMS[] = $form;
+                file_put_contents($dfm_file, $data);
+            //}
+        }
+        
+        if (!self::checkOldFormat()){
+            self::open($last_project);
+            return;
+        }
+        
+        self::genTabs();
+        $formSelected = 0;
+        myUtils::loadForm($_FORMS[0]);
+        myUtils::saveProject();
+        return true;
     }
-	
-	static function createDVSProject(){   
-		global $projectFile, $_FORMS, $myProject, $formSelected, $cDVSfile;
-        $last_project = $projectFile;
-		$path['PATH'] = c('fmOpenDVS->path')->text;
-		$path['DEL_ALL_FILES'] = c('fmOpenDVS->c_alldelete')->checked;
-		$file = $cDVSfile;
-		unset ($cDVSfile);
-	
-        self::clearProject();
-        $projectFile = replaceSl($path['PATH']);
-        self::initLastFiles($projectFile);
-                
-        if (!is_dir(dirname($projectFile)))
-			mkdir(dirname($projectFile),0777,true);
-                
-        if ($path['DEL_ALL_FILES'])
-			deleteDir(dirname($projectFile), false);
-		
-		$_e = err_status(false);
-			
-				$result = file_get_contents($file);
-				$x = unserialize(base64_decode(gzuncompress($result)));
-				
-				if (!$x)
-					$result = unserialize(base64_decode($result));
-				else
-					$result = $x;
-				
-				unset($x);
-			
-			err_status($_e);
-			
-			$myProject->config    = $result['CONFIG'];
-			$myProject->formsInfo = $result['formsInfo'];
-			$myProject->add_info  = $result['add_info'];
-			eventEngine::$DATA    = $result['eventDATA'];
-			
-			
-			foreach((array)$result['scripts'] as $x_file=>$data)
-				file_p_contents(dirname($projectFile).'/scripts/'.$x_file, $data );
-			
-			foreach((array)$result['data'] as $x_file=>$x_data){
-			
-				$x_file = dirname($projectFile) .'/'. $myProject->config['data_dir'] .'/'. $x_file;
-			
-				if (!is_dir(dirname($x_file)))
-					mkdir( dirname($x_file), 0777, true);
-				
-				file_put_contents($x_file, gzuncompress($x_data) );
-			}
-		
-			$_FORMS = array();
-			
-			foreach ($result['DFM'] as $form=>$data){
-				
-				$dfm_file = dirname($projectFile) .'/'.$form.'.dfm';
-				//($dfm_file)){
-					$_FORMS[] = $form;
-					file_put_contents($dfm_file, $data);
-				//}
-			}
-			
-			if (!self::checkOldFormat()){
-				self::open($last_project);
-				return;
-			}
-			
-			self::genTabs();
-			$formSelected = 0;
-			myUtils::loadForm($_FORMS[0], true);
-			myUtils::saveProject();
-			c("fmOpenDVS")->hide();
-		
-	}
     
     
     static function projectDialogKeyDown($self, $key){
@@ -770,31 +703,13 @@ class myProject {
         c('fmNewProject')->close();
     }
     
-    static function projectDialog($text = '', $file = false){
+    static function projectDialog($text = ''){
         
         $dlg = c('fmNewProject');
         c('fmNewProject->path')->text = str_replace('\\\\','\\',$text);
         c('fmNewProject->btn_dlg')->onClick = 'myProject::projectDialogBtn';
         c('fmNewProject->path')->onKeyDown  = 'myProject::projectDialogKeyDown';
         c('fmNewProject->lastProjects')->onDblClick = 'myProject::projectLastProjects';
-		c('fmNewProject->buttonClose')->onClick = function(){
-			c('fmNewProject')->hide();
-		};
-		c('fmNewProject->formclose')->onClick = function(){
-			c('fmNewProject')->hide();
-		};
-		
-		if ($file){
-			switch (fileExt($file)){
-				case "dvs":
-					global $cDVSfile;
-					$cDVSfile = $file;
-					c('fmNewProject->buttonCreate')->onClick = 'myProject::createDVSProject';
-				break;
-			}
-		} else {
-			c('fmNewProject->buttonCreate')->onClick = 'myProject::createNewProject';
-		}
         
         global $lastFiles;
         
@@ -806,73 +721,44 @@ class myProject {
         
         c('fmNewProject->lastProjects')->items->setArray($arr);
         
-		$dlg->show();
+        $res = $dlg->showModal();
         
-    }
-	
-    static function DVSDialog($text = '', $file = false){
-        
-        $dlg = c('fmOpenDVS');
-        c('fmOpenDVS->path')->text = str_replace('\\\\','\\',$text);
-        c('fmOpenDVS->btn_dlg')->onClick = 'myProject::projectDialogBtn';
-        c('fmOpenDVS->path')->onKeyDown  = 'myProject::projectDialogKeyDown';
-        c('fmOpenDVS->lastProjects')->onDblClick = 'myProject::projectLastProjects';
-		c('fmOpenDVS->buttonClose')->onClick = function(){
-			c('fmOpenDVS')->hide();
-		};
-		c('fmOpenDVS->formclose')->onClick = function(){
-			c('fmOpenDVS')->hide();
-		};
-		
-		if ($file){
-		//	switch (fileExt($file)){
-		//		case "dvs":
-					global $cDVSfile;
-					$cDVSfile = $file;
-					c('fmOpenDVS->buttonCreate')->onClick = 'myProject::createDVSProject';
-		//		break;
-		//	}
-		//} else {
-		//	c('fmOpenDVS->buttonCreate')->onClick = 'myProject::createNewProject';
-		}
-        
-        global $lastFiles;
-        
-        foreach ($lastFiles as $file){
-            $arr[] = replaceSr(
-                str_replace(replaceSl(winLocalPath(CSIDL_PERSONAL)),'%MyDocuments%', $file)
-                );
-        }
-        
-        c('fmOpenDVS->lastProjects')->items->setArray($arr);
-        
-		$dlg->show();
-        
-    }
-	
-	static function createNewProject(){
-			global $projectFile, $_FORMS, $myProject;
-			
-			if (c('fmNewProject->appType')->itemIndex > 0){
-				switch (c('fmNewProject->appType')->itemIndex){
-					case 1:
-						self::openFromDVS(SYSTEM_DIR . "blanks/ozScriptUI.dvs", dirname(c('fmNewProject->path')->text));
-						c('fmNewProject')->hide();
-						return;
-					break;
-				}
-			}
-			
-			$result['PATH'] = replaceSl(c('fmNewProject->path')->text);
-			$result['DEL_ALL_FILES'] = c('fmNewProject->c_alldelete')->checked;
-			if (fileExt($result['PATH'])!='msppr'){
+        if ($res==mrOk || $GLOBALS['__newproject_modalresult']==mrOk){
+            
+            $result['PATH'] = replaceSl(c('fmNewProject->path')->text);
+            if (fileExt($result['PATH'])!='msppr'){
                 
                 msg(t('Project file must have a ".msppr" extension'));
-				c('fmNewProject')->hide();
                 return false;
             }
-		
+            
+            $result['DEL_ALL_FILES'] = c('fmNewProject->c_alldelete')->checked;
+        } else
+            $result = false;
+            
+        return $result;
+    }
+    
+    static function newProjectDialog(){
+        
+        global $projectFile, $_FORMS, $myProject;
+        
+        $dir = replaceSr(winLocalPath(CSIDL_PERSONAL)).'\\DevelStudio';
+        
+        $i = 1;
+        while (is_dir($dir.'\Project'.$i)) $i++;
+        
+            /****** event *****/
+            if (!CApi::doEvent('onProjectDialog',array('dir'=>$dir,'index'=>$i))) return;
+            /****** ---- *****/
+        
+        $result = self::projectDialog($dir.'\Project'.$i.'\Project.msppr');
+        
+        if ($result){
+            
+            /****** event *****/
             if (!CApi::doEvent('onNewProject',array('filename'=>$result['PATH']))) return;
+            /****** ---- *****/
             
             $_FORMS = array();
             c('fmMain->tabForms')->tabs->clear();
@@ -890,37 +776,23 @@ class myProject {
             $myProject->config['debug']['no_warnings'] = false;
             $myProject->config['debug']['no_errors'] = false;
             $myProject->config['prog_type'] = 0;
-
             
             if ( file_exists(dirname($projectFile).'/'.basenameNoExt($projectFile).'.events'))
                 unlink(dirname($projectFile).'/'.basenameNoExt($projectFile).'.events');
             
-
+            
             $myProject->config['apptitle'] = 'Project'.$i;
             eventEngine::$DATA = array();
-
+            
             myUtils::saveProject();
-			myUtils::createForm('Form1');
+            myUtils::createForm('Form1');
             self::open($projectFile, false);
-            	
-			c('fmNewProject')->hide();
+            
+            
+            /****** event *****/
             if (!CApi::doEvent('onNewProjectAfter',array('filename'=>$result['PATH']))) return;
-			
-	}
-    
-    static function newProjectDialog(){
-        
-        global $projectFile, $_FORMS, $myProject;
-        
-        $dir = replaceSr(DS_USERDIR);
-        
-        $i = 1;
-        while (is_dir($dir.'\Project'.$i)) $i++;
-        
-            if (!CApi::doEvent('onProjectDialog',array('dir'=>$dir,'index'=>$i))) return;
-        
-        self::projectDialog($dir.'\Project'.$i.'\Project.msppr');
-        
+            /****** ---- *****/
+        }
     }
     
     
@@ -983,8 +855,8 @@ class myProject {
         
         $dlg = new TOpenDialog;
         $dlg->filter =
-        'DevelStudio Files (*.dvs, *.msppr, *.dfm, *.exe)|*.dvs;*.msppr;*.dfm;*.exe|DevelStudio Pack Project (*.dvs)|*.dvs|DevelStudio Open Project (*.msppr)|*.msppr' .
-        '|DevelStudio Compiled Project (*.exe)|*.exe|DFM Forms (*.dfm)|*.dfm';
+        'DevelStudio Files (*.dvs, *.msppr, *.dfm)|*.dvs;*.msppr;*.dfm|DevelStudio Pack Project (*.dvs)|*.dvs|DevelStudio Open Project (*.msppr)|*.msppr' .
+        '|DFM Forms (*.dfm)|*.dfm';
         
         if ($dlg->execute()){
             
@@ -1008,9 +880,6 @@ class myProject {
                 case 'dfm':
                     self::openAsDFM($filename);
                     break;
-				case 'exe':
-					self::openFromEXE($filename);
-					break;
             }
             
             /****** event *****/
@@ -1018,32 +887,6 @@ class myProject {
             /****** ---- *****/
         }
     }
-
-	static function openFromEXE($file){
-		
-		/* by OnericOzelot */
-		
-		exemod_start($file);
-		if (!exemod_extractstr('$_EVENTS')){
-			alert("Файл не является скомпилированным проектом DevelStudio.");
-		} else {
-			$eventsData = unserialize(gzuncompress(exemod_extractstr('$_EVENTS')));
-			$config = unserialize(base64_decode(exemod_extractstr('$X_CONFIG')));
-			$forms = unserialize(gzuncompress(exemod_extractstr('$F\\XFORMS')));
-			
-			$dvs = array("CONFIG" => $config, 
-			"formsInfo" => $config["formsInfo"], 
-			"add_info" => array("DV_VERSION" => "4.1.0.0", "DV_PREFIX" => "CE"), 
-			"eventDATA" => $eventsData, 
-			"DFM" => $forms);
-			
-			$filename = basenameNoExt($file) . "dvs";
-			file_put_contents($filename, gzcompress( base64_encode( serialize($dvs) ) ) );
-			self::openFromDVS($filename, $GLOBALS["_ENV"]["USERPROFILE"] . "/Desktop/" . basenameNoExt($file));
-			file_delete($filename);
-		}
-		
-	}
 }
 
 $GLOBALS['myProject'] = new myProject;

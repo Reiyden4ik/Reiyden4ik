@@ -49,7 +49,7 @@ class myCopyer {
         
         if ($object->name){
             $lines = explode(_BR_, $str);
-            $lines[0] = eregi_replace('object ([\_a-z0-9]+)\: ','object '.$object->name.': ',$lines[0]);
+            $lines[0] = eregi_replace('object ([a-z0-9]+)\: ','object '.$object->name.': ',$lines[0]);
             $str = implode(_BR_,$lines);
         }
         
@@ -124,18 +124,15 @@ class myCopyer {
     
     function changeNameInBuffer(&$buffer, $old_name, $name){
         
-        
-        foreach ($buffer as &$component){
-            
-            if ( !$component ) continue;
+        foreach ($buffer as $x=>$component){
             
             if (strcmp($component['info']['name'], $old_name)==0)
-                $component['info']['name'] = $name;
+                $buffer[$x]['info']['name'] = $name;
             
-            foreach ($component['childs'] as $y=>&$child){
+            foreach ($component['childs'] as $y=>$child){
                 
                 if (strcmp($child['parent'], $old_name)==0)
-                    $child['parent'] = $name;
+                    $buffer[$x]['childs'][$y]['parent'] = $name;
             }
         }
         
@@ -149,7 +146,6 @@ class myCopyer {
         
         if ($form->findComponent($name)){
             $old_name = $name;
-            
             $name = myDesign::getNoExistsName($class);
             self::changeNameInBuffer($buffer, $old_name, $name);
         }

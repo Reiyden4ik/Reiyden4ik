@@ -10,7 +10,7 @@ class TFunction extends __TNoVisual {
     
     public function __inspectProperties(){
 	
-	return array('parameters','description','toRegister','workBackground','priority','isSync');
+	return array('parameters','description','toRegister','workBackground','priority');
     }
     
     public function __initComponentInfo(){
@@ -19,8 +19,6 @@ class TFunction extends __TNoVisual {
 	
         if ($this->callOnStart)
             $GLOBALS['___startFunctions'][] = 'c('.$this->self.')->call();';
-	    
-	define('USER_FUNCTION_SELF_'.strtolower($this->name), $this->self);
     }
     
     public function __construct($onwer=nil,$init=true,$self=nil){
@@ -57,6 +55,27 @@ class TFunction extends __TNoVisual {
 	    return eval('return '.$this->onExecute . '('.implode(',',$names).');');
     }
     
+    function stop(){
+	
+	$t =& $GLOBALS['TFunction']['thread'][$this->self];
+	
+	if ($t){
+	    $code = $t->code;
+	    $priority = $t->priority;
+	    $t->suspend();
+	    $t = new Thread;
+	    $t->code = $code;
+	    $t->priority = $priority;
+	}
+    }
+    
+    function isWorking(){
+	
+	$t =& $GLOBALS[__CLASS__]['thread'][$this->self];
+	if ($t)
+	    return $t->isWorking();
+    }
+    
     // универсальный метод
     function __register($form_name, $name, $info, $eventList){
 	
@@ -65,52 +84,52 @@ class TFunction extends __TNoVisual {
 	    $names = $prs;
 	else
 	    $names = implode(',',explode(_BR_,$info['parameters']));
-
+	
+	//$names_a = "'" . str_replace(',',"','", $names) . "'";
+	
 	if (!$name) $name = $this->name;
 	
         if ($info['workBackground']){
-	    
-	    $code = /*_BR_.*/'function ___thread_'.$name.'($self){ eval(enc_getValue("__incCode"));';
-	    $code.= ' $_thread = TThread::get($self); extract( $_thread->args ); ';
-	    $code.= ' __exEvents::setEventInfo($self, "onexecute");';
-	    
-	    $code .= 'if ( defined("DEBUG_OWNER_WINDOW") ){
-			    include $_thread->__file;
-			}';
-	    $code .= 'else {';
-	    if (is_array($eventList))
-		$code.= $eventList['onexecute'];
-	    else
-		$code.= $eventList;
-	    $code .= "\n".'}';
-		
-	    $code .= "\n".';__exEvents::freeEventInfo();';
-	    $code.= _BR_.'}';
-	    
-	    
-	    
-	    
-	    $code .= _BR_.'function '.$name.'('.$names.'){';
-	    
-	    $code .= '$self = (int)USER_FUNCTION_SELF_'.strtolower($name).';
-	              $args = array("self"=>$self);';
-	    $x_names = explode(',',$names);
-	    foreach ($x_names as $x_name){
-		if ($x_name!='')
-		$code .= '$args["'.str_replace('$','',trim($x_name)).'"] = '.trim($x_name).';';
-	    }
-	    
-	    $code .= '$th = new TThread("___thread_'.$name.'");'.
-		    '$th->priority = '.(int)$info['priority'].';'.
-		    '$th->args = $args;'.
-		    'if(defined("DEBUG_OWNER_WINDOW")){
-			$th->__file = __exEvents::callFileName($self, "onexecute");;
-		    }'.
-		    '$th->resume();';
+		    $code = _BR_.'function ___thread_'.$name.'('.$names.'){ eval(enc_getValue("__incCode"));';
+		    if (is_array($eventList))
+		        $code.= $eventList['onexecute'];
+		    else
+		        $code.= $eventList;
 		    
-	    $code .= _BR_.' return $th; }';
-	    
+                    $code.= _BR_.'}';
+                    
+                    $code .= _BR_.'function '.$name.'('.$names.'){';
+                    
+		    if (!$form_name)
+			$code .= '$self = '.$this->self.';';
+		    else
+			$code .= '$self = c("'.$form_name.'->'.$name.'")->self;';
+			
+		    $code .= ' __exEvents::setEventInfo($self, "onexecute");';
+                    $code .= ' if (!isset($GLOBALS["TFunction"]["thread"][$self])) ';
+		    $code .= '$GLOBALS["TFunction"]["thread"][$self] = new Thread;';
 		    
+		    $code .= '$arr = array();';
+		    $x_names = explode(',',$names);
+		    foreach ($x_names as $x_name){
+			if ($x_name!='')
+			$code .= '$arr["'.str_replace('$','',trim($x_name)).'"] = '.trim($x_name).';';
+		    }
+		    
+		    $code .= 'v("params_".$self, $arr); unset($arr); ';
+		    $code .= ' $t =& $GLOBALS["TFunction"]["thread"][$self];';
+		    $code .= ' $t->priority = ' . (int)$info['priority'] . ';';
+		    
+		    $code .= ' $t->code =
+		    \'__exEvents::setEventInfo(\'.$self.\', "onexecute");
+		        if (function_exists("___thread_'.$name.'"))
+			    call_user_func_array("___thread_'.$name.'", v("params_\'.$self.\'"));
+		    __exEvents::freeEventInfo();\';';
+			
+		    $code .= ' $t->start();';
+                    
+                    $code.= '__exEvents::freeEventInfo(); }';
+		        
 	} else {
             
 	    $real_names = explode(',', trim($names));
@@ -122,44 +141,28 @@ class TFunction extends __TNoVisual {
 	    if (!$form_name)
 		$code .= '$self = '.$this->self.';';
 	    else	
-		$code .= '$self = (int)USER_FUNCTION_SELF_'.strtolower($name).';';
+		$code .= '$self = c("'.$form_name.'->'.$name.'")->self;';
 	    
 	    $code.= ' __exEvents::setEventInfo($self, "onexecute");';
-            
-	    $code .= 'if ( defined("DEBUG_OWNER_WINDOW") ){
-			    $__file = syncEx("__exEvents::callFileName", array($self, "onexecute"));
-	                    return include($__file); }';
-	    $code .= ' else {';
-	    if (is_array($eventList))
-		$code.= $eventList['onexecute'];
-	    else
-		$code.= $eventList;
-	    $code .= "\n".'}
-	    
-		__exEvents::freeEventInfo();
-	    }';
+            if (is_array($eventList))
+		$code.= $eventList['onexecute'] . _BR_;
+            else
+		$code.= $eventList . _BR_;
+		
+	    $code.= '; }';
 	    
 	    // обязательно надо делать так, иначе если у ф-ии будет ретурн, то пространство формы не высвободится
 	    // и получится глюк при обращении к коротким именам компонентов, вот так вот :(
-	    $code .= _BR_.' function '.$name.'('.$names.'){';
-	    
-	    if ( $info['isSync'] )
-		$code .= 'if ($GLOBALS["THREAD_SELF"]) {
-			$result = syncEx("'.$name.'", array('.implode(',',$real_names).'));
-		    } else {
-			$result = _______'.$name.'('.implode(',',$real_names).');
-		    }';
-	    else
-		$code .= '$result = _______'.$name.'('.implode(',',$real_names).');';
-	    
-	    $code .= '
-		return $result;
-	    }' ;
-	    
-	    //pre($code);
+	    $code .= _BR_.' function '.$name.'('.$names.'){
+		 $result = _______'.$name.'('.implode(',',$real_names).');
+		 __exEvents::freeEventInfo();
+		 return $result;
+		}' ;
         }
 	
+	
 	return $code;
+        
     }
     
     function register($name = false){
@@ -176,6 +179,7 @@ class TFunction extends __TNoVisual {
 		$info['priority']   = $this->priority;
 		
 		$code = $this->__register('',$name,$info,$code);
+		Thread::addCode($code);
 		eval ($code);
 	}
     }

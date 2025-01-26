@@ -75,4 +75,4 @@ function initEditorHotKeys(){
 
 
 // запускаем таймер для проверки позиции курсора...
-Timer::setInterval('initEditorHotKeys', 250);
+setTimer(250,'initEditorHotKeys()');

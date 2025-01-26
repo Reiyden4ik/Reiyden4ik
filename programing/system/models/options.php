@@ -77,8 +77,9 @@ class myOptions {
         $list = c('fmPHPModules->list');
         $list->clear();
         
-        $modules = findFiles(SYSTEM_DIR . '/../ext/','dll');
-        //unset($modules[array_search('php_bcompiler.dll',$modules)]);
+        $modules = findFiles(SYSTEM_DIR . '/../php/modules/','dll');
+        unset($modules[array_search('php_bcompiler.dll',$modules)]);
+        unset($modules[array_search('php_bz2.dll',$modules)]);
         
         $list->items->setArray($modules);
         $list->checkedItems = (array)$myProject->config['modules'];   
@@ -111,8 +112,9 @@ class myOptions {
         $list = c('fmProjectOptions->list');
         $list->clear();
         
-        $modules = findFiles(SYSTEM_DIR . '/../ext/','dll');
-        //unset($modules[array_search('php_bcompiler.dll',$modules)]);
+        $modules = findFiles(SYSTEM_DIR . '/../php/modules/','dll');
+        unset($modules[array_search('php_bcompiler.dll',$modules)]);
+        unset($modules[array_search('php_bz2.dll',$modules)]);
         
         $list->items->setArray($modules);
         $list->checkedItems = (array)$myProject->config['modules'];   
@@ -239,88 +241,67 @@ class myOptions {
     
     static function BuildProgram(){
         
-        c('fmBuildProgram->btn_path')->onClick = 'myOptions::saveExeDialog';
-        c('fmBuildProgram->btn_icon')->onClick = 'myOptions::openIconDialog';
-        c('fmBuildProgram->btn_savesettings')->onClick = function(){
-            myOptions::saveSettings();
-            message_beep(66);
-        };
-		c("fmBuildProgram->buttonBuild")->onClick = 'myOptions::compileStart';
-		c("fmBuildProgram->buttonClose")->onClick = function(){
-			c("fmBuildProgram")->hide();
-		};
-		
+        c('fmBuildProgram->btn_path',1)->onClick = 'myOptions::saveExeDialog';
+        c('fmBuildProgram->btn_icon',1)->onClick = 'myOptions::openIconDialog';
+        c('fmBuildProgram->btn_savesettings',1)->onClick = 'myOptions::saveSettings(); message_beep(66); _empty';
         
-        /****** event *****/
-        if (!CApi::doEvent('onBuildDialog',array())) return;
-        /****** ---- *****/
+            /****** event *****/
+            if (!CApi::doEvent('onBuildDialog',array())) return;
+            /****** ---- *****/
         
         self::loadSettings();
         
-        c('fmBuildProgram',1)->show();
-		
+        if (c('fmBuildProgram',1)->showModal() == mrOk){
+            
+            /*if (!is_writable(replaceSl(c('fmBuildProgram->path')->text))){
+            
+                msg(t('Please, select correct path for your program!'));
+                self::BuildProgram();
+                return;
+            }*/
+            
+            self::saveSettings();
+            
+            /****** event *****/
+            if (!CApi::doEvent('onBuild',array())) return;
+            /****** ---- *****/
+            
+            //err_no();
+            myCompile::adv_start(
+                                 c('fmBuildProgram->path',1)->text,
+                                 c('fmBuildProgram->c_attachphp',1)->checked,
+                                 c('fmBuildProgram->c_attachsoulengine',1)->checked,
+                                 c('fmBuildProgram->c_attachdata',1)->checked,
+                                 c('fmBuildProgram->c_upx',1)->itemIndex,
+                                 c('fmBuildProgram->e_companyname',1)->text,
+                                 c('fmBuildProgram->e_version',1)->text,
+                                 c('fmBuildProgram->e_filedescription',1)->text,
+                                 myVars::get('__iconFile'),
+								 c('fmBuildProgram->use_bcompiler',1)->checked
+                                );
+            
+            if (false && err_msg()){
+            
+                msg(t('Please, select correct path for your program!'));
+                self::BuildProgram();
+                return;
+            }
+            
+            /****** event *****/
+            if (!CApi::doEvent('onBuildAfter',array())) return;
+            /****** ---- *****/
+            
+            //err_yes();
+            
+            message_beep(66);
+            c('fmBuildCompleted->e_filename',1)->text = c('fmBuildProgram->path',1)->text;
+            c('fmBuildCompleted',1)->showModal();
+            
+            //msg(t('Your Program "%s" is build complate!',basename(c('fmBuildProgram->path',1)->text)));
+        }
     }
-	
-	static function compileStart(){
-			
-				/*if (!is_writable(replaceSl(c('fmBuildProgram->path')->text))){
-				
-					msg(t('Please, select correct path for your program!'));
-					self::BuildProgram();
-					return;
-				}*/
-				
-				self::saveSettings();
-				
-				/****** event *****/
-				if (!CApi::doEvent('onBuild',array())) return;
-				/****** ---- *****/
-				
-				//err_no();
-				myCompile::adv_start(
-									 c('fmBuildProgram->path',1)->text,
-									 c('fmBuildProgram->c_attachphp',1)->checked,
-									 c('fmBuildProgram->c_attachsoulengine',1)->checked,
-									 c('fmBuildProgram->c_attachdata',1)->checked,
-									 c('fmBuildProgram->c_upx',1)->itemIndex,
-									 c('fmBuildProgram->e_companyname',1)->text,
-									 c('fmBuildProgram->e_version',1)->text,
-									 c('fmBuildProgram->e_filedescription',1)->text,
-									 myVars::get('__iconFile'),
-									 c('fmBuildProgram->use_bcompiler',1)->checked
-									);
-				
-				if (false && err_msg()){
-				
-					msg(t('Please, select correct path for your program!'));
-					self::BuildProgram();
-					return;
-				}
-				
-				/****** event *****/
-				if (!CApi::doEvent('onBuildAfter',array())) return;
-				/****** ---- *****/
-				
-				//err_yes();
-				
-				message_beep(66);
-				c('fmBuildCompleted->e_filename',1)->text = c('fmBuildProgram->path',1)->text;
-				c('fmBuildCompleted',1)->showModal();
-				c("fmBuildProgram")->hide();
-				
-				//msg(t('Your Program "%s" is build complate!',basename(c('fmBuildProgram->path',1)->text)));
-		
-	}
-	
-	static function compileHTML(){
-		
-		//if (c('fmMain->compileTo')->inText == "HTML"){
-			pre ("It's HTML");
-		//}
-		
-	}
-
-	
+    
+    
     
     static function Options(){
         
@@ -331,19 +312,15 @@ class myOptions {
 		c('fmOptions->backup_dir')->text = myOptions::get('backup','dir','backup');
 		c('fmOptions->backup_count')->text = (int)myOptions::get('backup','count',3);
 		c('fmOptions->backup_interval')->text = (int)myOptions::get('backup','interval',2);
-		c('fmOptions->BitBtn1')->onClick = 'myOptions::updateOptions';
 		
             /****** event *****/
-            //if (!CApi::doEvent('onOptionsDialog',array())) return;
+            if (!CApi::doEvent('onOptionsDialog',array())) return;
             /****** ---- *****/
         
-        c('fmOptions')->show();
+        if (c('fmOptions')->showModal() == mrOk){
             
-    }
-	
-	static function updateOptions(){
             /****** event *****/
-            //if (!CApi::doEvent('onOptions',array())) return;
+            if (!CApi::doEvent('onOptions',array())) return;
             /****** ---- *****/
             
             myOptions::set('sc','showGrid', c('fmOptions->c_showgrid')->checked);
@@ -367,12 +344,12 @@ class myOptions {
             }
             
             c('fmEdit')->repaint();
-			c('fmOptions')->hide();
             
             /****** event *****/
-            //if (!CApi::doEvent('onOptionsAfter',array())) return;
+            if (!CApi::doEvent('onOptionsAfter',array())) return;
             /****** ---- *****/
-	}
+        }
+    }
 }
 
 class myBackup {
@@ -392,18 +369,18 @@ class myBackup {
 		if ( !is_dir($dir) )
 			mkdir($dir,0777,true);
 			
-		$file = basenameNoExt($projectFile) . date('(h.i d.m.Y)');
-		/*$from = 0;
-		while ( is_file( $dir . $file . $from . '.dvs' ) ) $from++;   */
+		$file = basenameNoExt($projectFile);
+		$from = 0;
+		while ( is_file( $dir . $file . $from . '.dvs' ) ) $from++;
 		
 		$src = $dir . $file . $from . '.dvs';
-		myCompile::setStatus('Backup', t('Создание резервной копии - ').'"'.self::$dir.'/'. $file . $from . '.dvs"');
+		myCompile::setStatus('Backup','['.date('h:i d.m.Y').'] ' . t('Создание резервной копии - ').'"'.self::$dir.'/'. $file . $from . '.dvs"');
 		myProject::saveAsDVS($src);
 		
 		$check = $dir . $file .($from - self::$count - 1) . '.dvs';
 		
 		if ( is_file( $check ) ){
-		    unlink( $check );
+			unlink( $check );
 		}
 	}
 	
@@ -412,17 +389,17 @@ class myBackup {
 		if ( $min < 1 )
 			$min = 1;
 		
-		c(self::$timer)->interval = $min * 60000;
+		self::$timer->interval = $min * 60000;
 	}
 	
 	static function setActive($active){
-		c(self::$timer)->enable = (bool)$active;
+		self::$timer->enable = (bool)$active;
 	}
 	
 	static function updateSettings(){
 		
 		self::setActive( myOptions::get('backup','active',true) );
-		self::setInterval( (int)c('fmOptions->backup_interval')->text );
+		self::setInterval( myOptions::get('backup','interval',2) );
 		self::$dir = myOptions::get('backup','dir','backup');
 		self::$count = myOptions::get('backup','count',3);
 		if ( myOptions::get('backup','active',true) )
@@ -430,8 +407,7 @@ class myBackup {
 	}
 	
 	static function init(){
-		self::$timer = Timer::setInterval('myBackup::doInterval', 60000 * 2);
-                
+		self::$timer = setTimer(60000 * 2, 'myBackup::doInterval()');
 	}
 }
 

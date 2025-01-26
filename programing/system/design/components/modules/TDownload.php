@@ -4,7 +4,6 @@ DSApi::reg_eventType('oncomplete','TDownload::callComplete',array('self','html')
 DSApi::reg_eventType('onerror','TDownload::callError',array('self','error'),'TDownload');
 DSApi::reg_eventType('ondownload','TDownload::callDownload',array('self','pos','max'),'TDownload');
 
-
 class TDownload extends __TNoVisual {
     
     public $class_name_ex = __CLASS__;
@@ -25,7 +24,6 @@ class TDownload extends __TNoVisual {
     }
     
     static function callComplete($self, $html){
-	
         DSApi::callEvent($self, array('html'=>$html), 'OnComplete');
     }
     
@@ -61,49 +59,32 @@ class TDownload extends __TNoVisual {
                 
         return $result;
     }
-
-    static function loadForObject($self, $filename, $to_del = false, $th = false){
+    
+    function loadForObject($self, $filename, $to_del = false){
 	
-	if ( $th ){
-	    sync('TDownload::loadForObject', array($self, $filename, $to_del));
-	    return;
-	}
-	
-	$self = c($self);
 	$obj = $self->setObject;
 	if ($obj){
 	    $obj = c($obj);
 	    if ($obj instanceof TImage){
-		$obj->picture->loadFromFile($filename);
+		$obj->loadPicture($filename);
 	    } else {
 		if ($obj instanceof TDataVar)
-		    $obj->value = $data;
+		    $obj->value = file_get_contents($filename);
 		else
-		    $obj->text = $data;
+		    $obj->text = file_get_contents($filename);
 	    }
+	    
+	    if ($to_del)
+		unlink($filename);
 	}
     }
-
-    static function loadForProgress($self, $progress, $pos, $max, $th = false){
-	
+    
+    function loadForProgress($self, $progress, $pos, $max){
 	
 	if (!$progress) return;
 	
-        
-	if ( $th ){
-	    sync('TDownload::loadForProgress', array($self, $progress, $pos, $max));
-	    //return $th->syncFull('', $self, $progress, $pos, $max);
-            return;
-	}
-
-	$self = _c($self);
-	
-	if (function_exists($progress))
-	    ;
-	else
-	    $progress = c($progress, 1);
-	    
 	if (is_object($progress)){
+	    
 	    $progress->max      = $max;
 	    $progress->position = $pos;
 	} elseif (function_exists($progress)){
@@ -112,129 +93,150 @@ class TDownload extends __TNoVisual {
 	}
     }
     
-    static function _endDownload($self){
-	
-	$obj = c($self);
-	$obj->isStop = false;
-	$obj->isBusy = false;
-    }
-    
-    static function _start($self = false, $props = array(), $th = false){
+    function _start($self = false){
         
         $st_err = err_status(false);
         
-        $obj = c($self,0);
-        $url = $props['url'];	
-        $path     = $props['path'];
-        $buffer   = $props['buffer'];
+        if ($self)
+            $obj = c($self);
+        else
+            $obj =& $this;
+        
+        $props = TComponent::__getPropExArray($obj->self);
+        
+        $filename = $obj->url;
+        $path     = $obj->path;
+        $buffer   = $obj->buffer;
 	
 	
 	if (!trim($path)){
 	    $path = TEMP_DIR.'/devels/';
 	}
         
-        $url = trim($url);	
-	$fh = fopen($url, "r");
+        $filename = trim($filename);	
+	$fh = fopen($filename, "r");
 	
 	if (err_last()){
             
             if ($props['onerror']){
                 $err = err_msg();
-		syncEx($props['onerror'], array($self, $err));
+                eval($props['onerror'].'($obj->self, $err);');
             }
             
             err_status($st_err);
-	    syncEx('TDownload::_endDownload', array($self));
             return;
         }
         
-	$info = self::fileInfo($fh);        
+	$info = self::fileInfo($fh);
         
-        if (!$info['location']) $info['location'] = basename($url);
+        $obj->size = $info['size'];
+        $obj->pos  = 0;
         
-        $filename = replaceSl( $path . basename($info['location']) );
+        if (!$info['location']) $info['location'] = basename($filename);
         
-        if (!is_dir(dirname($filename)))
-            mkdir( dirname($filename), 0777, true );
-	    
-	$obj->fileName = $filename;
+        $obj->fileName = replaceSl( $path . basename($info['location']) );
         
-        $fs = fopen( trim($filename), "w");
-        $pos = 0;	
+        if (!is_dir(dirname($obj->fileName)))
+            mkdir( dirname($obj->fileName), 0777, true );
+        
+        $fs = fopen( trim($obj->fileName), "w");
+        
+        $GLOBALS['fs'] =& $fs;
+        $pos = 0;
+        
+	$progress = $obj->setProgress;
+	if ($progress){
+	    if (function_exists($progress))
+	    ;
+	    else
+		$progress = c($progress);
+	}
+	
+        $obj->isStop = false;
 	
         while(($str = fread($fh, (int)$buffer)) != null){
             
             $pos += strlen($str);
+            $obj->pos = $pos;
             
             if ($pos>$info['size']){
                 $pos = $info['size'];
             }    
             
-	    TDownload::loadForProgress($self, $props['setprogress'], $pos, $info['size'], $th);
+	    self::loadForProgress($obj, $progress, $pos, $info['size']);
 	    
-            if ($props['ondownload'])
-		syncEx($props['ondownload'], array($self, $pos, $info['size']));
-		
-            if ($obj->isStop){
-                break;
+            if ($props['ondownload']){
+                eval($props['ondownload'].'($obj->self, $pos, $info["size"]);');
             }
+            
+            if ($obj->isStop)
+                break;
             
             fwrite($fs, $str);
         }
-    
-	err_status($st_err);
-	   
-        if (err_msg() || ($pos!=$info['size'] && !$obj->isStop)){
+        
+       
+        err_status($st_err);
+                
+        if (err_msg() && $pos!=$info['size']){
             
-            if ($props['onerror'])
-		syncEx($props['onerror'], array($self, err_msg() ? err_msg() : 'error donwload'));
-	    
+            if ($props['onerror']){
+                $err = err_msg();
+                eval($props['onerror'].'($obj->self, $err);');
+            }
         } else {
-	    
             $st_err = err_status(false);
             fclose($fs);            
             err_status($st_err);
             
-	    TDownload::loadForObject($self, $filename, !trim($props['path']), $th);
-	    
-	    if ($props['oncomplete'] && !$obj->isStop && $pos>=$info['size'])
-		syncEx($props['oncomplete'], array($self, file_get_contents($filename)));
+	    self::loadForObject($obj, $obj->fileName, !trim($obj->path));
+            if ($props['oncomplete']){
+		
+                eval($props['oncomplete'].'($obj->self,"");');
+            }
         }
-	
-	syncEx('TDownload::_endDownload', array($self));
-    }
-    
-    static function _startThread($self){
-	
-	$th = TThread::get($self);
-	TDownload::_start($th->realSelf, $th->myprops, $th);
     }
     
     function start(){
         
-	if ( $this->isBusy )
-	    return;
-	
-	$this->isStop = false;
-	$this->isBusy = true;
         if ($this->thread){
             
-	    $th = new TThread('TDownload::_startThread');
-	    $this->thread = $th->self;
-	    
-	    $th->realSelf = $this->self;
-	    $th->myprops    = TComponent::__getPropExArray($this->self);
-	    
-	    $th->resume();         
+            $code = ' TDownload::_start('.$this->self.'); ';
+            
+            $tmp = getGlobalVar($this->thread_var);
+            if ($tmp)
+                $t =& $tmp;
+            else {
+                $t = new Thread;
+                $this->thread_var = registerGlobalVar($t);
+            }
+            
+            $t->code = $code;
+            $t->priority = $this->priority;
+            $t->start();
+            
             
         } else {
-            TDownload::_start($this->self, TComponent::__getPropExArray($this->self));
+            $this->_start();
         }
     }
     
+    function pause(){
+        
+        $t = getGlobalVar($this->thread_var);
+        if ($t)
+            $t->suspend();
+    }
+    
     function stop(){
-	if ($this->isBusy)
-	    $this->isStop = true;
+        
+        $t = getGlobalVar($this->thread_var);
+        if ($t){
+            
+            $this->isStop = true;
+            unsetGlobalVar($this->thread_var);
+        }
     }
 }
+
 ?>

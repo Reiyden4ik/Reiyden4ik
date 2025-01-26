@@ -20,11 +20,15 @@ class ev_fmRunDebug_btn_add {
     function onClick(){
         
         $arr['type'] = 'glVars';
+        
         c('edt_inputText')->formStyle = fsStayOnTop;
         $res = inputText('Новая переменная', 'Введите имя глобальной переменной');
         c('edt_inputText')->formStyle = fsNormal;
+        
         $res = str_replace('$','',$res);
+        
         if ($res){
+        
             $arr['name'] = $res;
             $arr['action'] = 'add';
             myDebug::sendMsg($arr);

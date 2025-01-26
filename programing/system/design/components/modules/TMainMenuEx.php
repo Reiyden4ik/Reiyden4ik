@@ -68,7 +68,6 @@ class TMainMenuEx extends __TNoVisual{
 	    if ($name)
                 $x->name = $name;
             
-	   // pre($styled);
 	    if ($styled)
 		styleMenu::addItem($x);
                 
@@ -76,9 +75,9 @@ class TMainMenuEx extends __TNoVisual{
 	}
         
         
-        if ($styled){
+        /*if ($this->styled){
             styleMenu::add($obj);
-        }     
+        }   */   
             
 	$tmp = $this->name;
 	$this->name = '';

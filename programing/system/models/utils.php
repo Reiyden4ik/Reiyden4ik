@@ -98,9 +98,45 @@ class myUtils {
         $str = str_ireplace('bsSingle','bsNone', $str);
         $str = str_ireplace('bsToolWindow','bsNone',$str);
         $str = str_ireplace('bsSizeToolWin','bsNone',$str);
-        		
+        
+        if ($GLOBALS['IS_OLD_PROJECT']){
+            myProject::setPropForm('borderStyle', self::formProp($file, 'BorderStyle','bsSizeable'));
+        
+        
+            $w = self::formProp($file,'Width',null);
+            $h = self::formProp($file,'Height',null);
+            
+            //if (!$w) $w = self::formProp($file,'ClientWidth',null);
+            //if (!$h) $h = self::formProp($file,'ClientHeight',null);
+            
+            if ($w!==null){
+                $w -=  GetSystemMetrics(32)*2;
+                
+                //$str = self::replaceProp($str, 'ClientWidth', '  ClientWidth = '.$w);
+                $str = self::replaceProp($str, 'Width', '  ClientWidth = '.$w);
+            }
+            
+            if ($h!==null){
+                switch (myProject::getPropForm('borderStyle')){
+                    
+                    case 'bsToolWindow':
+                    case 'bsSizeToolWin': $h -= GetSystemMetrics(SM_CYSMCAPTION) + GetSystemMetrics(32); break;
+                    
+                    case 'bsDialog':
+                    case 'bsSizeable':
+                    case 'bsSingle': $h -= GetSystemMetrics(SM_CYCAPTION) + GetSystemMetrics(32)*2; break;
+                }
+                //self::delProp($str,'Height');
+                //$str = self::replaceProp($str, 'ClientHeight', '  ClientHeight = '.$h);
+                $str = self::replaceProp($str, 'Height', '  ClientHeight = '.$h);
+            }
+        }
+        
+        //if ($w) $fmEdit->clientWidth = $w;
+        //if ($h) $fmEdit->clientHeight= $h;
+        
         dfm_read('',$form, $str);
-       
+        
         $form->formStyle   = fsNormal;
         $form->borderStyle = bsNone;
         $form->left = 10;
@@ -145,31 +181,31 @@ class myUtils {
            }
         }
        
-        c('fmMain')->caption = 'DevelStudio '.DV_YEAR.' ['.basenameNoExt($projectFile).']';
+        c('fmMain')->caption = 'DevelStudio 2010 ['.basenameNoExt($projectFile).']';
         c('fmMain->statusBar')->simpleText = replaceSr($projectFile);
+        
        
         form_parent($form->self, c('fmMain->pDockMain')->self);
         $form->show();
+        
     }
-
-    static function loadForCache($form = false, $no_clear_sc = false){
+    
+    static function loadForCache($form = false){
         
         global $_sc;
         
         if (!$form)
             $form = $GLOBALS['fmEdit'];
         
-        
-        if ($_sc && !$no_clear_sc){
+        if ($_sc){
             $_sc->free();
-	    $_sc = false;
         }
         
         $form->onMouseDown = 'myDesign::mouseDown';
         $form->onMouseMove = 'myDesign::mouseMove';
         $form->onMouseUp   = 'myDesign::mouseUp';
-        $form->onCanResize = 'myDesign::lockEditForm';
-        $form->onResize    = 'myDesign::resizeEditForm';
+        $form->onCanResize  = 'myDesign::lockEditForm';
+        $form->onResize     = 'myDesign::resizeEditForm';
         
         
         $_sc = new TSizeCtrl($form);
@@ -208,11 +244,8 @@ class myUtils {
         
         $targets_ex = $_sc->targets_ex;
         
-        if ( $_sc ){
-            $_sc->clearTargets();
-            $_sc->free();
-            $_sc = false;
-        }
+        $_sc->clearTargets();
+        $_sc->free();
         
         //$fmEdit->borderStyle = myProject::getPropForm('borderStyle','bsSizeable');
         dfm_write($file, $fmEdit);
@@ -223,12 +256,12 @@ class myUtils {
             $_sc->addTarget($el);
         }
         
+        
         $str = file_get_contents($file);
         $str = str_replace_once('Visible = True','Visible = False',$str);
         $str = str_replace_once('BorderStyle = bsNone',
                                 'BorderStyle = '.myProject::getPropForm('borderStyle', 'bsSizeable'),
                                 $str);
-        
         if (self::formProp($file,'Width',null)!==null){
             
             $str = self::replaceProp($str,'Width',' ClientWidth = '. $fmEdit->Width );
@@ -240,7 +273,7 @@ class myUtils {
     
     static function loadForm($name){
         
-        global $fmMain, $_sc, $projectFile, $myInspect, $fmEdit, $formSelected, $_FORMS, $myProperties, $myEvents;
+        global $fmMain, $projectFile, $myInspect, $fmEdit, $formSelected, $_FORMS, $myProperties, $myEvents;
         $file = dirname($projectFile) .'/'. $name . '.dfm';
         
             /****** event *****/
@@ -256,14 +289,13 @@ class myUtils {
             }
         
         $myEvents->last_self = ''; // fix bug 
-        $l_name = strtolower($name); // fix bug ...      
         
-        if (self::$forms[$l_name]){
+        if (self::$forms[$name]){
             
             $fmEdit->hide();
             $fmEdit->name = '';
-            self::$forms[$l_name]->show();
-            $fmEdit = self::$forms[$l_name];
+            self::$forms[$name]->show();
+            $fmEdit = self::$forms[$name];
             $cap = $fmEdit->caption;
             $fmEdit->name = 'fmEdit';
             $fmEdit->caption = $cap;
@@ -273,7 +305,6 @@ class myUtils {
             $fmEdit->repaint();
             
         } else {
-            
             
             $fmEdit->hide();
             $fmEdit->name = '';
@@ -288,27 +319,25 @@ class myUtils {
             $fmEdit->x = 10;
             $fmEdit->y = 10;
             
-            self::$forms[$l_name] = $fmEdit;
+            self::$forms[$name] = $fmEdit;
             self::loadForCache($fmEdit);
             
             $fmEdit->repaint();
             $fmEdit->show();
         }
-      
-        myProject::loadFormInfo();
-
-        $myInspect->generate($fmEdit);
-
-        eventEngine::setForm();    
-		
-        myDesign::formProps();
         
-		$myProperties->setProps();
-		
+        myProject::loadFormInfo();
+        
+        $myInspect->generate($fmEdit);
+        eventEngine::setForm();    
+        
+        myDesign::formProps();
+        $myProperties->setProps();
+        
         
         $fmMain->repaint();
         $fmMain->invalidate();
-		
+        
             /****** event *****/
             if (!CApi::doEvent('onLoadFormAfter',array('name'=>$name))) return;
             /****** ---- *****/
@@ -338,7 +367,7 @@ class myUtils {
     }
     
     static function deleteForm($name = false){
-        global $projectFile, $formSelected, $_FORMS, $_sc;
+        global $projectFile, $formSelected, $_FORMS;
         
         if (count($_FORMS)==1) return;
         
@@ -368,12 +397,10 @@ class myUtils {
         
         unset(eventEngine::$DATA[strtolower($name)]);
         
-        $l_name = strtolower($name); // fix bug forms
-        if (self::$forms[$l_name]){
+        if (self::$forms[$name]){
             
-            self::$forms[$l_name]->free();
-            $_sc = false;
-            unset(self::$forms[$l_name]);
+            self::$forms[$name]->free();
+            unset(self::$forms[$name]);
         }
         
         $_FORMS = array_values($_FORMS);
@@ -495,15 +522,8 @@ class myUtils {
         if (!CApi::doEvent('onRun')) return;
         /****** ---- *****/
         
-		switch (c('fmMain->compileTo')->inText){
-			case "EXE":
-				self::stop();
-				myCompile::start();
-			break;
-			case "HTML":
-				HTMLEngine::start();
-			break;
-		}
+        self::stop();
+        myCompile::start();
         
         /****** event *****/
         if (!CApi::doEvent('onRunAfter')) return;
@@ -513,17 +533,13 @@ class myUtils {
     
     static function runDebug(){
         
-		global $projectFile;
-		
         /****** event *****/
         if (!CApi::doEvent('onRunDebug')) return;
         /****** ---- *****/
-		
-		if (c('fmMain->compileTo')->inText == "EXE"){
-			$exefile = dirname($projectFile) . "/" . basenameNoExt($projectFile) . ".exe";
-			self::stop();
-			run($exefile, false);
-		}
+        
+        self::stop();
+        myCompile::start(true, true);
+        c('fmRunDebug')->show();
         
         /****** event *****/
         if (!CApi::doEvent('onRunDebugAfter')) return;
@@ -549,15 +565,15 @@ class myUtils {
         
         global $projectFile, $_FORMS, $myProject;
         
-		if (!file_exists(SYSTEM_DIR . '/blanks/form.dfm'))
-			msg(t('Blank form is not found: /blanks/form.dfm'));
-				
-		if (!file_exists(dirname($projectFile)))
-			mkdir(dirname($projectFile),0777,true);
-			
-			
-		copy(SYSTEM_DIR . '/blanks/form.dfm', dirname($projectFile) .'/'. $name . '.dfm');
-		$_FORMS[] = $name;
+        if (!file_exists(SYSTEM_DIR . '/blanks/form.dfm'))
+            msg(t('Blank form is not found: /blanks/form.dfm'));
+            
+        if (!file_exists(dirname($projectFile)))
+            mkdir(dirname($projectFile),0777,true);
+        
+        
+        copy(SYSTEM_DIR . '/blanks/form.dfm', dirname($projectFile) .'/'. $name . '.dfm');
+        $_FORMS[] = $name;
         
         $info ['position'] = 'poScreenCenter';
         $info ['windowState'] = 'wsNormal';

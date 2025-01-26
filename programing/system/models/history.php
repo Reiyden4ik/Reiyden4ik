@@ -54,8 +54,7 @@ class myHistory {
     
     static function open($arr){
         
-        /*if ( c('fmMain->tmpEdit')->visible )
-            c('fmMain->tmpEdit')->setFocus();*/
+        c('fmMain->tmpEdit')->setFocus();
         
         foreach ((array)$arr as $el){
             

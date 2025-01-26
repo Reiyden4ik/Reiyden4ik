@@ -25,31 +25,31 @@ class TLinkLabel extends TLabel {
     
     function set_onMouseEnter($v){
 	
-	event_set($this->self, 'onMouseEnter', 'TLinkLabel::doMouseEnter');
+	set_event($this->self, 'onMouseEnter', 'TLinkLabel::doMouseEnter');
 	$this->fMouseEnter = $v;
     }
     
     function set_onMouseLeave($v){
 	
-	event_set($this->self, 'onMouseLeave', 'TLinkLabel::doMouseLeave');
+	set_event($this->self, 'onMouseLeave', 'TLinkLabel::doMouseLeave');
 	$this->fMouseLeave = $v;
     }
     
     function set_onClick($v){
-	event_set($this->self, 'onClick', 'TLinkLabel::doClick');
-	$this->fClick = $v;
+	set_event($this->self, 'onClick', 'TLinkLabel::doClick');
+	$this->fMouseLeave = $v;
     }
     
     function __initComponentInfo(){
         
-        $this->fMouseEnter  = event_get($this->self,'onMouseEnter');
-        event_set($this->self, 'onMouseEnter', 'TLinkLabel::doMouseEnter');
+        $this->fMouseEnter  = get_event($this->self,'onMouseEnter');
+        set_event($this->self, 'onMouseEnter', 'TLinkLabel::doMouseEnter');
         
-        $this->fMouseLeave  = event_get($this->self,'onMouseLeave');
-        event_set($this->self, 'onMouseLeave', 'TLinkLabel::doMouseLeave');
+        $this->fMouseLeave  = get_event($this->self,'onMouseLeave');
+        set_event($this->self, 'onMouseLeave', 'TLinkLabel::doMouseLeave');
         
-        $this->fClick     = event_get($this->self,'onClick');
-        event_set($this->self, 'onClick', 'TLinkLabel::doClick');
+        $this->fClick     = get_event($this->self,'onClick');
+        set_event($this->self, 'onClick', 'TLinkLabel::doClick');
     }
     
     function __construct($onwer=nil,$init=true,$self=nil){
@@ -76,8 +76,7 @@ class TLinkLabel extends TLabel {
 	$link= $obj->link;
         if ( $link ){
 	    $x = c($link);
-            
-	    if ($x->valid()){
+	    if ($x){
 		
 		if (method_exists($x,'showModal'))
 		    $x->showModal();
@@ -90,14 +89,13 @@ class TLinkLabel extends TLabel {
 	}
             
         if ( $obj->fClick )
-            call_user_func($obj->fClick, $self);
+            eval($obj->fClick.'('.$self.');');
     }
     
     static function doMouseEnter($self){
         
         $obj = c($self);
        
-        
         $obj->lastFont   = self::fontToArr($obj->font);
         
         $obj->fontColor = $obj->hoverColor;
@@ -108,16 +106,15 @@ class TLinkLabel extends TLabel {
         $obj->font->style = $obj->hoverStyle;
         
         if ( $obj->fMouseEnter )
-            call_user_func($obj->fMouseEnter, $self);
+            eval($obj->fMouseEnter.'('.$self.');');
     }
     
     static function doMouseLeave($self){
         
+	
         $obj = c($self);
         self::arrToFont($obj->font, $obj->lastFont);
-	
-        if ( $obj->fMouseLeave ){
-            call_user_func($obj->fMouseLeave, $self);
-        }
+        if ( $obj->fMouseLeave )
+            eval($obj->fMouseLeave.'('.$self.');');
     }
 }

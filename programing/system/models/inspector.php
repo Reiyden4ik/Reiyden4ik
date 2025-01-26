@@ -4,12 +4,6 @@ class myInspect {
     
     public $objects;
     
-    public function  __construct(){
-        
-        
-    }
-
-
     static function genList($obj){
         
         global $_FORMS, $formSelected;
@@ -154,7 +148,7 @@ class myInspect {
             $arr[] = $x->name;*/
         
         
-        c('fmObjectInspector->list')->onClick = 'myInspect::click';
+        c('fmObjectInspector->list',1)->onClick = 'myInspect::click';
        // c('fmObjectInspector->list',1)->items->selectByCaption($arr);
     }
     
@@ -204,14 +198,14 @@ class myInspect {
         
         global $_FORMS, $formSelected, $fmEdit;
         $text = $_FORMS[$formSelected] . ' [w:'.$fmEdit->w.' h:'.$fmEdit->h.']';
-        //c('fmObjectInspector->status',1)->SimpleText = $text;
+        c('fmObjectInspector->status',1)->SimpleText = $text;
     }
     
     static function selectObject($obj, $dx = false, $dy = false){
         
         
         if (!$obj){
-            //c('fmObjectInspector->status',1)->SimpleText = '';
+            c('fmObjectInspector->status',1)->SimpleText = '';
             return;
         }
         if ($dx)
@@ -219,35 +213,12 @@ class myInspect {
         else
             $text = $obj->name . ' [x:' . $obj->x . ' y:'.$obj->y . ']';
         
-        //c('fmObjectInspector->status',1)->SimpleText = $text;
-        //c('fmObjectInspector->status',1)->onDblClick = 'myInspect::changeNameClick';
+        c('fmObjectInspector->status',1)->SimpleText = $text;
+        c('fmObjectInspector->status',1)->onDblClick = 'myInspect::changeNameClick';
     }
 }
+
+
 
 $GLOBALS['myInspect'] = new myInspect;
-
-
-
-
-
-
-
-
-
-class myDebugInspect {
-    
-    public $frame;
-    
-    public function __construct(TForm $form){
-        
-        $inspect_web = new TChromium( $form );
-        $inspect_web->parent = $form;
-        $inspect_web->align = alClient;
-        
-        $this->frame = $inspect_web;
-    }
-    
-    public function setHtml($html){
-        $this->frame->loadString($html);
-    }
-}
+?>

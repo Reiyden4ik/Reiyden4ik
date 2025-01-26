@@ -70,16 +70,7 @@ $result[] = array(
                   'TYPE'=>'text',
                   'PROP'=>'hint',
                   );
-$result[] = array(
-                  'CAPTION'=>t('Tab Order'),
-                  'TYPE'=>'number',
-                  'PROP'=>'tabOrder',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Tab Stop'),
-                  'TYPE'=>'check',
-                  'PROP'=>'tabStop',
-                  );
+
 $result[] = array(
                   'CAPTION'=>t('Cursor'),
                   'TYPE'=>'combo',

@@ -9,18 +9,6 @@ $result[] = array(
                   'ICON'=>'onclick',
                   );
 $result[] = array(
-                  'CAPTION'=>t('On Focus'),
-                  'EVENT'=>'onfocus',
-                  'INFO'=>'%func%($self)',
-                  'ICON'=>'onfocus',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('On Blur'),
-                  'EVENT'=>'onblur',
-                  'INFO'=>'%func%($self)',
-                  'ICON'=>'onblur',
-                  );
-$result[] = array(
                   'CAPTION'=>t('On Key Up'),
                   'EVENT'=>'onKeyUp',
                   'INFO'=>'%func%($self,$key,$shift)',

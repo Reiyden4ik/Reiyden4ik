@@ -1,12 +1,12 @@
 <?
 
 $result = array();
+
 $result[] = array(
                   'CAPTION'=>t('Align'),
                   'TYPE'=>'combo',
                   'PROP'=>'align',
                   'VALUES'=>array('alNone', 'alTop', 'alBottom', 'alLeft', 'alRight', 'alClient', 'alCustom'),
-                   'ADD_GROUP'=>true
                   );
 
 $result[] = array(
@@ -59,16 +59,7 @@ $result[] = array(
                   'TYPE'=>'text',
                   'PROP'=>'hint',
                   );
-$result[] = array(
-                  'CAPTION'=>t('Tab Order'),
-                  'TYPE'=>'number',
-                  'PROP'=>'tabOrder',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Tab Stop'),
-                  'TYPE'=>'check',
-                  'PROP'=>'tabStop',
-                  );
+
 $result[] = array(
                   'CAPTION'=>t('Cursor'),
                   'TYPE'=>'combo',

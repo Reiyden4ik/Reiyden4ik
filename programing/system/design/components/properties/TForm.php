@@ -74,18 +74,6 @@ $result[] = array(
                   );
 
 $result[] = array(
-                  'CAPTION'=>t('Screen Snap'),
-                  'TYPE'=>'check',
-                  'PROP'=>'screenSnap',
-                  );
-$result[] = array(
-                  'CAPTION'=>t('Snap Buffer'),
-                  'TYPE'=>'number',
-                  'PROP'=>'snapBuffer',
-                  );
-
-
-$result[] = array(
                   'CAPTION'=>t('Cursor'),
                   'TYPE'=>'combo',
                   'PROP'=>'cursor',
@@ -99,7 +87,18 @@ $result[] = array(
                   'REAL_PROP'=>'enabled',
                   'ADD_GROUP'=>true,
                   );
-
+$result[] = array(
+                  'CAPTION'=>t('Screen Snap'),
+                  'TYPE'=>'check',
+                  'PROP'=>'screenSnap',
+                  'ADD_GROUP'=>true,
+                  );
+$result[] = array(
+                  'CAPTION'=>t('Snap Buffer'),
+                  'TYPE'=>'number',
+                  'PROP'=>'snapBuffer',
+                  'ADD_GROUP'=>true,
+                  );
 $result[] = array(
                   'CAPTION'=>t('Transparent Color'),
                   'TYPE'=>'check',

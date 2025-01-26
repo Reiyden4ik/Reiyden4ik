@@ -38,7 +38,6 @@ class myActions {
             Localization::inc($dir . $action . '/lang');
             
             if (!file_exists($dir . $action . '/info.php')){
-				if ( $action != '.svn' )
                 msg(t('Inccorect "%s" action, file "info.php" not found!', $action));
                 continue;
             }
@@ -263,7 +262,7 @@ class myActions {
         $frm = new TForm;
         $frm->tag = 2012;
         $frm->caption = $action['TEXT'];
-        $frm->name = str_replace('.','_', $code) . '_action';
+        $frm->name = $code . '_action';
         $frm->borderStyle = bsDialog;
         $frm->position    = poScreenCenter;
         //$frm->formStyle   = fsStayOnTop;
@@ -281,7 +280,7 @@ class myActions {
         $gb->h      = $frm->h - 10;
         $gb->y      = 5;
         $gb->caption= $action['TEXT'];
-       
+        
         // проходимся по параметрам формы редактора...
         foreach ($data as $editor){
             
@@ -553,7 +552,6 @@ class action_Simple {
             
             $params = array();
             $form   = myActions::createDialog($action['CODE'],$action, $params);
-			
             $arrayActions[$id]['DIALOG'] =& $form;
             $arrayActions[$id]['PARAMS_OBJS'] = $params;
             $action['DIALOG'] =& $form;

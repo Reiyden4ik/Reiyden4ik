@@ -4,8 +4,9 @@ DSApi::reg_startFunc('__startDebugGlobalVars();');
 
 function __startDebugGlobalVars(){
     
-    Timer::setInterval('__doDebugGlobalVars', 500);
+    setTimer(500, '__doDebugGlobalVars()');
     Receiver::send(DEBUG_OWNER_WINDOW, array('RECEIVER_HANDLE'=>receiver_handle()));
+
 }
 
 function __doDebugGlobalVars(){
