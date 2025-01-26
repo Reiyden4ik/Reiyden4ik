@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f7236923-cc72-42e3-96cb-28c4025fa8f3" name="Changes" comment="done">
+      <change beforePath="$PROJECT_DIR$/tryingfiles/Calculator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/btc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/divergensia.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/everlasting_summer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/factorial_with_gamma_function.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/gradient.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/heart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/important.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/integral.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/limits.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/operator_laplasa.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/opred_integral_trapez.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/opredel_integral.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/proisvodnaya.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/rotor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/running_text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/smth.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/theory_of_collapse.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/theory_of_simple_numerous.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tryingfiles/trying_file.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Reiyden4ik"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Reiyden4ik/Reiyden4ik.git",
+    "accountId": "05e388db-34e7-4f9a-b2b2-a342c1e03b57"
+  }
+}]]></component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2oDTjs4jJz7LmKY9pRykMTBT6EC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Reiyden4ik",
+    "last_opened_file_path": "C:/Users/Даниил Иванов/Desktop/RD4K(Git)/Reiyden4ik"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f7236923-cc72-42e3-96cb-28c4025fa8f3" name="Changes" comment="" />
+      <created>1730403284835</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730403284835</updated>
+    </task>
+    <task id="LOCAL-00001" summary="done">
+      <option name="closed" value="true" />
+      <created>1737080929688</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737080929688</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="done" />
+    <option name="LAST_COMMIT_MESSAGE" value="done" />
+  </component>
+</project>
