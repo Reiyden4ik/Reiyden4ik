@@ -55,22 +55,62 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
             padding: 20px 0;
         }
 
-        .gallery img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 5px;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            height: 300px;
         }
 
-        .gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #bf40bf;
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 2px solid #bf40bf;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(191, 64, 191, 0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            text-shadow: 0 0 10px #bf40bf;
         }
 
         footer {
@@ -92,6 +132,10 @@
             .container {
                 padding: 10px;
             }
+
+            .gallery-item {
+                height: 200px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -101,6 +145,14 @@
 
             .personal-info {
                 padding: 20px;
+            }
+
+            .modal-content {
+                max-width: 95%;
+            }
+
+            .gallery-item {
+                height: 250px;
             }
         }
 
@@ -149,18 +201,63 @@
 
         <h2 class="neon-text">Мои фотографии</h2>
         <div class="gallery">
-            <!-- Добавьте 10 ваших фотографий в папку photos -->
-            <img src="photos/photo1.jpg" alt="Моя фотография 1">
-            <img src="photos/photo2.jpg" alt="Моя фотография 2">
-            <img src="photos/photo3.jpg" alt="Моя фотография 3">
-            <img src="photos/photo4.jpg" alt="Моя фотография 4">
-            <img src="photos/photo5.jpg" alt="Моя фотография 5">
-            <img src="photos/photo6.jpg" alt="Моя фотография 6">
+            <!-- Добавьте свои фотографии -->
+            <div class="gallery-item" onclick="openModal('photos/photo1.jpg')">
+                <img src="photos/photo1.jpg" alt="Фото 1">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo2.jpg')">
+                <img src="photos/photo2.jpg" alt="Фото 2">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo3.jpg')">
+                <img src="photos/photo3.jpg" alt="Фото 3">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo4.jpg')">
+                <img src="photos/photo4.jpg" alt="Фото 4">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo5.jpg')">
+                <img src="photos/photo5.jpg" alt="Фото 5">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo6.jpg')">
+                <img src="photos/photo6.jpg" alt="Фото 6">
+            </div>
+
         </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
     </div>
 
     <footer>
         <p>Готов к новым знакомствам! <span class="heart">♥</span></p>
     </footer>
+
+    <script>
+        // Функции для работы модального окна
+        function openModal(src) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Закрытие по клику вне изображения
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
