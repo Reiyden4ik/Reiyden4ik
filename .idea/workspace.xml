@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7236923-cc72-42e3-96cb-28c4025fa8f3" name="Changes" comment="done">
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/photos/photo1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/photos/photo2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/photos/photo3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/photos/photo4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/photos/photo5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/photos/photo6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/programing/soulEngine.exe.small" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +55,11 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Даниил Иванов/Desktop/RD4K(Git)/Reiyden4ik&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Даниил Иванов\Desktop\RD4K(Git)\Reiyden4ik\photos" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -88,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737871837022</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="done">
+      <option name="closed" value="true" />
+      <created>1744470797970</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744470797970</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
