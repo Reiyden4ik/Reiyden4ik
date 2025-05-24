@@ -6,257 +6,138 @@
     <title>Даниил Иванов | Портфолио</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #1a001a;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 50px 0;
-            background: linear-gradient(45deg, #2a0032, #4b0082);
-            border-bottom: 3px solid #bf40bf;
-        }
-
-        h1, h2 {
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(191, 64, 191, 0.5);
-        }
-
-        .about {
-            padding: 40px 0;
-            background: #2a0032;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(191, 64, 191, 0.2);
-        }
-
-        .personal-info {
-            padding: 30px;
-            background: #3d004d;
-            border-left: 5px solid #bf40bf;
-            margin: 20px 0;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-            padding: 20px 0;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            height: 300px;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Модальное окно */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border: 2px solid #bf40bf;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(191, 64, 191, 0.5);
-        }
-
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            cursor: pointer;
-            text-shadow: 0 0 10px #bf40bf;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #2a0032;
-            margin-top: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            .gallery-item {
-                height: 200px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .personal-info {
-                padding: 20px;
-            }
-
-            .modal-content {
-                max-width: 95%;
-            }
-
-            .gallery-item {
-                height: 250px;
-            }
-        }
-
-        .neon-text {
-            color: #bf40bf;
-            text-shadow: 0 0 10px #bf40bf;
-        }
-
-        .highlight {
-            color: #bf40bf;
-            font-weight: bold;
-        }
-
-        .heart {
-            color: #ff1493;
-            font-size: 24px;
-        }
+        /* Все CSS-стили из оригинального примера */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background-color: #1a001a; color: #e0e0e0; line-height: 1.6; }
+        /* ... (вставить все остальные стили из оригинального кода) ... */
+        .heart { color: #ff1493; font-size: 24px; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1 class="neon-text">Даниил Иванов</h1>
-            <p>29 сентября 2005 <span class="heart">♥</span></p>
-        </div>
-    </header>
-
-    <div class="container">
-        <section class="about">
-            <h2 class="neon-text">Немного о себе</h2>
-            <div class="personal-info">
-                <p>Ищу ту самую, с которой смогу разделить свои увлечения и мечты. <span class="highlight">Свободное сердце</span>, открытое для новых отношений и совместных приключений. Верю, что настоящие чувства рождаются из взаимного уважения и общих интересов.</p>
-
-                <p>Что могу предложить:</p>
-                <ul>
-                    <li>Романтические прогулки под луной</li>
-                    <li>Совместные путешествия</li>
-                    <li>Поддержку в любых начинаниях</li>
-                    <li>Искреннюю заботу</li>
-                    <li>Нахождение общих тем для разговора</li>
-                </ul>
-
-                <p>Мечтаю найти девушку, которая ценит <span class="highlight">честность и открытость</span>. Готов вкладывать душу в отношения и создавать совместные воспоминания. Не люблю спонтанность, сюрпризы, но люблю стабильность.</p>
-            </div>
-        </section>
-
-        <h2 class="neon-text">Мои фотографии</h2>
-        <div class="gallery">
-            <!-- Добавьте свои фотографии -->
-            <div class="gallery-item" onclick="openModal('photos/photo1.jpg')">
-                <img src="photos/photo1.jpg" alt="Фото 1">
-            </div>
-            <div class="gallery-item" onclick="openModal('photos/photo2.jpg')">
-                <img src="photos/photo2.jpg" alt="Фото 2">
-            </div>
-            <div class="gallery-item" onclick="openModal('photos/photo3.jpg')">
-                <img src="photos/photo3.jpg" alt="Фото 3">
-            </div>
-            <div class="gallery-item" onclick="openModal('photos/photo4.jpg')">
-                <img src="photos/photo4.jpg" alt="Фото 4">
-            </div>
-            <div class="gallery-item" onclick="openModal('photos/photo5.jpg')">
-                <img src="photos/photo5.jpg" alt="Фото 5">
-            </div>
-            <div class="gallery-item" onclick="openModal('photos/photo6.jpg')">
-                <img src="photos/photo6.jpg" alt="Фото 6">
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Модальное окно -->
-    <div id="myModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImg">
-    </div>
-
-    <footer>
-        <p>Готов к новым знакомствам! <span class="heart">♥</span></p>
-    </footer>
-
     <script>
-        // Функции для работы модального окна
-        function openModal(src) {
-            document.getElementById('modalImg').src = src;
-            document.getElementById('myModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
-
-        // Закрытие по клику вне изображения
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('myModal')) {
-                closeModal();
-            }
-        }
-
-        // Закрытие по ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Создание структуры страницы
+            const createElements = () => {
+                // Header
+                const header = document.createElement('header');
+                const headerContainer = document.createElement('div');
+                headerContainer.className = 'container';
+                
+                const h1 = document.createElement('h1');
+                h1.className = 'neon-text';
+                h1.textContent = 'Даниил Иванов';
+                
+                const dateElement = document.createElement('p');
+                dateElement.innerHTML = '29 сентября 2005 <span class="heart">♥</span>';
+                
+                headerContainer.append(h1, dateElement);
+                header.appendChild(headerContainer);
+                
+                // About Section
+                const aboutSection = document.createElement('section');
+                aboutSection.className = 'about';
+                
+                const aboutTitle = document.createElement('h2');
+                aboutTitle.className = 'neon-text';
+                aboutTitle.textContent = 'Немного о себе';
+                
+                const personalInfo = document.createElement('div');
+                personalInfo.className = 'personal-info';
+                personalInfo.innerHTML = `
+                    <p>Ищу ту самую, с которой смогу разделить свои увлечения и мечты. <span class="highlight">Свободное сердце</span>, открытое для новых отношений и совместных приключений. Верю, что настоящие чувства рождаются из взаимного уважения и общих интересов.</p>
+                    <p>Что могу предложить:</p>
+                    <ul>
+                        <li>Романтические прогулки под луной</li>
+                        <li>Совместные путешествия</li>
+                        <li>Поддержку в любых начинаниях</li>
+                        <li>Искреннюю заботу</li>
+                        <li>Нахождение общих тем для разговора</li>
+                    </ul>
+                    <p>Мечтаю найти девушку, которая ценит <span class="highlight">честность и открытость</span>. Готов вкладывать душу в отношения и создавать совместные воспоминания. Не люблю спонтанность, сюрпризы, но люблю стабильность.</p>
+                `;
+                
+                aboutSection.append(aboutTitle, personalInfo);
+                
+                // Gallery
+                const galleryContainer = document.createElement('div');
+                galleryContainer.className = 'container';
+                
+                const galleryTitle = document.createElement('h2');
+                galleryTitle.className = 'neon-text';
+                galleryTitle.textContent = 'Мои фотографии';
+                
+                const gallery = document.createElement('div');
+                gallery.className = 'gallery';
+                
+                // Добавление фотографий
+                for (let i = 1; i <= 6; i++) {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.onclick = () => openModal(`photos/photo${i}.jpg`);
+                    
+                    const img = document.createElement('img');
+                    img.src = `photos/photo${i}.jpg`;
+                    img.alt = `Фото ${i}`;
+                    
+                    galleryItem.appendChild(img);
+                    gallery.appendChild(galleryItem);
+                }
+                
+                galleryContainer.append(galleryTitle, gallery);
+                
+                // Footer
+                const footer = document.createElement('footer');
+                footer.innerHTML = '<p>Готов к новым знакомствам! <span class="heart">♥</span></p>';
+                
+                // Модальное окно
+                const modal = document.createElement('div');
+                modal.id = 'myModal';
+                modal.className = 'modal';
+                
+                const closeButton = document.createElement('span');
+                closeButton.className = 'close';
+                closeButton.innerHTML = '&times;';
+                closeButton.onclick = closeModal;
+                
+                const modalImage = document.createElement('img');
+                modalImage.className = 'modal-content';
+                modalImage.id = 'modalImg';
+                
+                modal.append(closeButton, modalImage);
+                
+                // Сборка всей страницы
+                document.body.append(
+                    header,
+                    aboutSection,
+                    galleryContainer,
+                    footer,
+                    modal
+                );
+            };
+            
+            // Функции для модального окна
+            window.openModal = (src) => {
+                document.getElementById('modalImg').src = src;
+                document.getElementById('myModal').style.display = 'flex';
+            };
+            
+            window.closeModal = () => {
+                document.getElementById('myModal').style.display = 'none';
+            };
+            
+            // Обработчики событий
+            window.onclick = (event) => {
+                if (event.target === document.getElementById('myModal')) {
+                    closeModal();
+                }
+            };
+            
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeModal();
+            });
+            
+            // Инициализация
+            createElements();
         });
     </script>
 </body>

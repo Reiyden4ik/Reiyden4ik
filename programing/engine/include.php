@@ -1,1 +1,0 @@
-<? global $engineDir; require str_replace("\\","/",$engineDir)."/engine.php"; ?>
