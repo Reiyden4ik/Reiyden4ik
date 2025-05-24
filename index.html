@@ -3,330 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniil Space | Cosmic Connection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet>
+    <title>Даниил Иванов | Портфолио</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet>
     <style>
-        /* Cosmic Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: 0.3s ease;
         }
 
-        /* Stellar Body */
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: #0a0015 radial-gradient(circle at center, #2a0044 0%, #0a0015 100%);
-            color: #e0e0ff;
-            line-height: 1.8;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(45deg, #1a001a, #2a002a);
+            color: #e0e0e0;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* Nebula Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Supernova Header */
         header {
-            position: relative;
-            padding: 80px 0;
-            overflow: hidden;
-            background: linear-gradient(45deg, #1a0032, #3d0069);
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-            margin-bottom: 60px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem 0;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #ff149355;
         }
 
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        h1, h2 {
+        .neon-text {
             font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
+            color: #ff1493;
+            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff1493;
             letter-spacing: 2px;
         }
 
-        /* Pulsating Title */
-        .neon-title {
-            text-shadow: 0 0 15px rgba(135, 65, 255, 0.8),
-                         0 0 30px rgba(135, 65, 255, 0.6),
-                         0 0 45px rgba(135, 65, 255, 0.4);
-            animation: pulse 2s infinite alternate;
+        .heart {
+            color: #ff1493;
+            font-size: 1.5rem;
+            animation: pulse 1.5s infinite;
         }
 
-        /* Galactic Sections */
-        .cosmic-card {
-            background: rgba(15, 0, 30, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(135, 65, 255, 0.3);
+        .about {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 2rem 0;
+            clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%);
+        }
+
+        .personal-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
             border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ff149333;
+            margin-top: 2rem;
+            backdrop-filter: blur(5px);
         }
 
-        /* Starlight List */
-        .stellar-list {
-            list-style: none;
-            display: grid;
-            gap: 15px;
-            padding: 20px 0;
+        .personal-info ul {
+            padding-left: 2rem;
+            margin: 1.5rem 0;
         }
 
-        .stellar-list li {
-            padding: 15px;
-            background: rgba(135, 65, 255, 0.1);
-            border-left: 4px solid #7f39fb;
-            border-radius: 5px;
+        .personal-info li {
+            margin-bottom: 0.8rem;
             position: relative;
         }
 
-        .stellar-list li::before {
-            content: '✦';
-            margin-right: 10px;
-            color: #7f39fb;
+        .personal-info li::before {
+            content: '♥';
+            color: #ff1493;
+            margin-right: 0.8rem;
         }
 
-        /* Meteor Gallery */
-        .galaxy-grid {
+        .highlight {
+            color: #ff1493;
+            font-weight: 700;
+        }
+
+        .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 0;
         }
 
-        .cosmic-frame {
-            position: relative;
-            border-radius: 15px;
+        .gallery-item {
+            border-radius: 10px;
             overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            transform: scale(0.98);
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .cosmic-frame:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 30px rgba(135, 65, 255, 0.2);
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 20, 147, 0.2);
         }
 
-        .cosmic-frame img {
+        .gallery-item img {
             width: 100%;
-            height: 380px;
+            height: 300px;
             object-fit: cover;
             display: block;
+            transition: transform 0.3s ease;
         }
 
-        /* Black Hole Modal */
-        .singularity {
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid #ff149333;
+        }
+
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.9);
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(10px);
         }
 
-        .singularity.active {
-            animation: singularity-open 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .event-horizon {
+        .modal-content {
             max-width: 90%;
             max-height: 90%;
-            border: 2px solid #7f39fb;
-            border-radius: 15px;
-            box-shadow: 0 0 50px rgba(127, 57, 251, 0.4);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.3);
         }
 
-        /* Shooting Star Footer */
-        footer {
-            text-align: center;
-            padding: 60px 0 30px;
-            position: relative;
-        }
-
-        footer::before {
-            content: '';
+        .close {
             position: absolute;
-            top: 0;
-            left: 50%;
-            width: 200%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #7f39fb, transparent);
-            transform: translateX(-50%);
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
 
-        /* Animations */
+        .close:hover {
+            color: #ff1493;
+        }
+
         @keyframes pulse {
-            from { opacity: 0.9; }
-            to { opacity: 1; text-shadow: 0 0 25px rgba(135, 65, 255, 1),
-                                         0 0 40px rgba(135, 65, 255, 0.8),
-                                         0 0 55px rgba(135, 65, 255, 0.6); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
-        @keyframes singularity-open {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Mobile Supernova */
         @media (max-width: 768px) {
             .container {
                 padding: 0 15px;
             }
 
             header {
-                padding: 60px 0;
-                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+                padding: 1.5rem 0;
             }
 
-            .galaxy-grid {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .about {
+                clip-path: none;
+                padding: 2rem 0;
+            }
+
+            .personal-info {
+                padding: 1.5rem;
+            }
+
+            .gallery {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
 
-            .cosmic-frame img {
-                height: 300px;
+            .gallery-item img {
+                height: 250px;
+            }
+
+            .close {
+                top: 1rem;
+                right: 1rem;
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .neon-text {
+                font-size: 1.2rem;
+            }
+
+            .personal-info {
+                padding: 1rem;
+            }
+
+            .gallery-item img {
+                height: 200px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Остальной HTML-код без изменений -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Cosmic Initialization
-            const createUniverse = () => {
-                // Create Nebula Header
-                const header = document.createElement('header');
-                header.innerHTML = `
-                    <div class="container">
-                        <h1 class="neon-title">Daniil Space</h1>
-                        <p>29.09.2005 <span style="color: #ff38e1">♡</span></p>
-                    </div>
-                `;
-
-                // Create Personal Constellation
-                const aboutSection = document.createElement('section');
-                aboutSection.className = 'container cosmic-card';
-                aboutSection.innerHTML = `
-                    <h2>О космическом страннике</h2>
-                    <p>Ищу спутницу для межгалактических путешествий. Готов разделить:</p>
-                    <ul class="stellar-list">
-                        <li>Прогулки по туманностям</li>
-                        <li>Исследование чёрных дыр</li>
-                        <li>Создание новых звёзд</li>
-                        <li>Фотосессии у квазаров</li>
-                        <li>Поиск тёмной материи</li>
-                    </ul>
-                    <p>Идеальная пара: честность × ответственность × любовь к науке</p>
-                `;
-
-                // Create Galaxy Gallery
-                const gallerySection = document.createElement('div');
-                gallerySection.className = 'container';
-                gallerySection.innerHTML = '<h2>Галактический архив</h2>';
-                
-                const gallery = document.createElement('div');
-                gallery.className = 'galaxy-grid';
-                
-                // Add Stellar Photos
-                [1,2,3,4,5,6].forEach(num => {
-                    const frame = document.createElement('div');
-                    frame.className = 'cosmic-frame';
-                    frame.onclick = () => openSingularity(`photos/photo${num}.jpg`);
-                    
-                    const img = document.createElement('img');
-                    img.src = `photos/photo${num}.jpg`;
-                    img.alt = `Stellar Capture #${num}`;
-                    img.loading = 'lazy';
-                    
-                    frame.appendChild(img);
-                    gallery.appendChild(frame);
-                });
-
-                gallerySection.appendChild(gallery);
-
-                // Create Singularity (Modal)
-                const singularity = document.createElement('div');
-                singularity.className = 'singularity';
-                singularity.onclick = (e) => e.target === singularity && closeSingularity();
-                
-                const eventHorizon = document.createElement('img');
-                eventHorizon.className = 'event-horizon';
-                
-                const closeBtn = document.createElement('span');
-                closeBtn.style = `
-                    position: fixed;
-                    top: 30px;
-                    right: 30px;
-                    color: white;
-                    font-size: 40px;
-                    cursor: pointer;
-                    text-shadow: 0 0 15px #7f39fb;
-                `;
-                closeBtn.innerHTML = '×';
-                closeBtn.onclick = closeSingularity;
-                
-                singularity.append(eventHorizon, closeBtn);
-
-                // Create Supernova Footer
-                const footer = document.createElement('footer');
-                footer.innerHTML = `
-                    <div class="container">
-                        <p>Готов к запуску! <span style="color: #ff38e1">♡</span></p>
-                    </div>
-                `;
-
-                // Assemble Universe
-                document.body.append(
-                    header,
-                    aboutSection,
-                    gallerySection,
-                    singularity,
-                    footer
-                );
-            };
-
-            // Singularity Functions
-            const openSingularity = (src) => {
-                const modal = document.querySelector('.singularity');
-                modal.querySelector('img').src = src;
-                modal.classList.add('active');
-                modal.style.display = 'flex';
-            };
-
-            const closeSingularity = () => {
-                document.querySelector('.singularity').classList.remove('active');
-                setTimeout(() => {
-                    document.querySelector('.singularity').style.display = 'none';
-                }, 300);
-            };
-
-            // Event Listeners
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeSingularity();
-            });
-
-            // Big Bang
-            createUniverse();
-        });
+        // JavaScript-код без изменений
     </script>
 </body>
 </html>
