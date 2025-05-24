@@ -6,7 +6,6 @@
     <title>Даниил Иванов | Портфолио</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* Исправленные и оптимизированные стили */
         * {
             margin: 0;
             padding: 0;
@@ -15,36 +14,165 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(45deg, #1a001a, #2a002a);
+            background-color: #1a001a;
             color: #e0e0e0;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
 
         header {
-            padding: 2rem 0;
             text-align: center;
-            border-bottom: 1px solid #ff149355;
+            padding: 50px 0;
+            background: linear-gradient(45deg, #2a0032, #4b0082);
+            border-bottom: 3px solid #bf40bf;
+        }
+
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(191, 64, 191, 0.5);
+        }
+
+        .about {
+            padding: 40px 0;
+            background: #2a0032;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(191, 64, 191, 0.2);
+        }
+
+        .personal-info {
+            padding: 30px;
+            background: #3d004d;
+            border-left: 5px solid #bf40bf;
+            margin: 20px 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            height: 300px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 2px solid #bf40bf;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(191, 64, 191, 0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            text-shadow: 0 0 10px #bf40bf;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #2a0032;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .personal-info {
+                padding: 20px;
+            }
+
+            .modal-content {
+                max-width: 95%;
+            }
+
+            .gallery-item {
+                height: 250px;
+            }
         }
 
         .neon-text {
-            font-family: 'Orbitron', sans-serif;
-            color: #ff1493;
-            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
-            margin-bottom: 1rem;
+            color: #bf40bf;
+            text-shadow: 0 0 10px #bf40bf;
         }
 
-        /* Остальные стили из предыдущего ответа */
-        /* ... */
+        .highlight {
+            color: #bf40bf;
+            font-weight: bold;
+        }
+
+        .heart {
+            color: #ff1493;
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
-    <!-- Явная HTML-разметка вместо генерации через JavaScript -->
     <header>
         <div class="container">
             <h1 class="neon-text">Даниил Иванов</h1>
@@ -52,25 +180,54 @@
         </div>
     </header>
 
-    <section class="about">
-        <div class="container">
+    <div class="container">
+        <section class="about">
             <h2 class="neon-text">Немного о себе</h2>
             <div class="personal-info">
-                <!-- Текстовая информация -->
-            </div>
-        </div>
-    </section>
+                <p>Ищу ту самую, с которой смогу разделить свои увлечения и мечты. <span class="highlight">Свободное сердце</span>, открытое для новых отношений и совместных приключений. Верю, что настоящие чувства рождаются из взаимного уважения и общих интересов.</p>
 
-    <!-- Галерея -->
-    <div class="container">
+                <p>Что могу предложить:</p>
+                <ul>
+                    <li>Романтические прогулки под луной</li>
+                    <li>Совместные путешествия</li>
+                    <li>Поддержку в любых начинаниях</li>
+                    <li>Искреннюю заботу</li>
+                    <li>Нахождение общих тем для разговора</li>
+                </ul>
+
+                <p>Мечтаю найти девушку, которая ценит <span class="highlight">честность и открытость</span>. Готов вкладывать душу в отношения и создавать совместные воспоминания. Не люблю спонтанность, сюрпризы, но люблю стабильность.</p>
+            </div>
+        </section>
+
         <h2 class="neon-text">Мои фотографии</h2>
         <div class="gallery">
-            <!-- Добавьте реальные пути к изображениям -->
-            <div class="gallery-item">
-                <img src="placeholder.jpg" alt="Фото 1">
+            <!-- Добавьте свои фотографии -->
+            <div class="gallery-item" onclick="openModal('photos/photo1.jpg')">
+                <img src="photos/photo1.jpg" alt="Фото 1">
             </div>
-            <!-- ... остальные изображения ... -->
+            <div class="gallery-item" onclick="openModal('photos/photo2.jpg')">
+                <img src="photos/photo2.jpg" alt="Фото 2">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo3.jpg')">
+                <img src="photos/photo3.jpg" alt="Фото 3">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo4.jpg')">
+                <img src="photos/photo4.jpg" alt="Фото 4">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo5.jpg')">
+                <img src="photos/photo5.jpg" alt="Фото 5">
+            </div>
+            <div class="gallery-item" onclick="openModal('photos/photo6.jpg')">
+                <img src="photos/photo6.jpg" alt="Фото 6">
+            </div>
+
         </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
     </div>
 
     <footer>
@@ -78,27 +235,28 @@
     </footer>
 
     <script>
-        // Упрощенный JavaScript для модального окна
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.createElement('div');
-            modal.id = 'modal';
-            modal.innerHTML = `
-                <span class="close">&times;</span>
-                <img class="modal-content" id="modalImage">
-            `;
+        // Функции для работы модального окна
+        function openModal(src) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('myModal').style.display = 'flex';
+        }
 
-            document.body.appendChild(modal);
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
 
-            document.querySelectorAll('.gallery-item img').forEach(img => {
-                img.addEventListener('click', () => {
-                    document.getElementById('modalImage').src = img.src;
-                    modal.style.display = 'block';
-                });
-            });
+        // Закрытие по клику вне изображения
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
 
-            document.querySelector('.close').addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
+        // Закрытие по ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
         });
     </script>
 </body>
