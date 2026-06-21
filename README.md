@@ -17,4 +17,4 @@
 ## Коммуникационные каналы
 
 Для профессионального взаимодействия:  
-[Telegram](https://t.me/Reiyden)
+[VK](https://vk.com/Reiyden4ik)
