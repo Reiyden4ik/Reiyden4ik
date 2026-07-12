@@ -6,6 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="f7236923-cc72-42e3-96cb-28c4025fa8f3" name="Changes" comment="done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/Calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/Calculator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/divergensia.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/divergensia.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/factorial_with_gamma_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/factorial_with_gamma_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/gradient.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/gradient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/important.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/important.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/integral.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/integral.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/limits.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/limits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/operator_laplasa.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/operator_laplasa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/opred_integral_trapez.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/opred_integral_trapez.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/opredel_integral.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/opredel_integral.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/proisvodnaya.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/proisvodnaya.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/theory_of_collapse.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/theory_of_collapse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/theory_of_simple_numerous.py" beforeDir="false" afterPath="$PROJECT_DIR$/RD4K/project_workspace/Math/theory_of_simple_numerous.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RD4K/project_workspace/tryingfiles/trying_file.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,15 +55,26 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Calculator.executor": "Run",
+    "Python.btc.executor": "Run",
+    "Python.divergensia.executor": "Run",
+    "Python.everlasting_summer.executor": "Run",
+    "Python.factorial_with_gamma_function.executor": "Run",
     "Python.heart.executor": "Run",
     "Python.important.executor": "Run",
+    "Python.integral.executor": "Run",
+    "Python.limits.executor": "Run",
+    "Python.proisvodnaya.executor": "Run",
+    "Python.running_text.executor": "Run",
+    "Python.theory_of_collapse.executor": "Run",
+    "Python.theory_of_simple_numerous.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "Reiyden4ik",
     "last_opened_file_path": "C:/Users/Даниил Иванов/Desktop/RD4K(Git)/Reiyden4ik",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -128,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783719679844</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="done">
+      <option name="closed" value="true" />
+      <created>1783720543084</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1783720543084</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

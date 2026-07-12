@@ -14,7 +14,7 @@ def collatz_conjecture():
                 n = n // 2
             k += 1
         print("end")
-        print(k)
+        print('Counts of steps', k)
     except ValueError:
         print("Invalid input. Please enter a positive integer.")
 
